@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from checkers_board import BoardPosition,HexBoard
 class BoardGUI:
     """Tkinter visualization of the hex board and pins."""
     def __init__(self, board: HexBoard, pins):

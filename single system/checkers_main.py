@@ -6,6 +6,7 @@ from checkers_board import BoardPosition,HexBoard
 from checkers_pins import Pin
 from checkers_gui import BoardGUI
 import numpy as np
+import re
 
 running = True
 num_players = 0
@@ -92,6 +93,8 @@ if __name__ == "__main__":
                 helping = True
                 while helping:
                     pin_try_inp = input("Helpmode:Which pin will you move? " )
+                    if pin_try_inp == 'exit':
+                        exit()
                     try_Pin = [pin for pin in boardPins if pin.color==turn[0] and str(pin.id) ==pin_try_inp][0]
                     print("Possible moves:", try_Pin.getPossibleMoves())
                     help_continue = input("Need more help? Yes/No ")
@@ -104,11 +107,19 @@ if __name__ == "__main__":
                         continue
             input_message = 'Enter '+assigned[candidate_turn] +"'s move: (pin_number, dest_axial): "
             continue
-        if "'s turn: " in input_message:
-            pin_num = command.split(',')[0].replace('(','')
-            dest = int(command.split(',')[1].replace(')',''))
-            turn_Pin = [pin for pin in boardPins if pin.color==turn[0] and str(pin.id) ==pin_num][0]
-            turn_success = turn_Pin.placePin(dest)
+        if "'s move: " in input_message:
+            if command == 'exit':
+                exit()
+            regex = r"\(\d+,\d+\)"
+            if not re.match(regex, command):
+                print('Format wrong, needs (pin_number, pin_axialposition)')
+                turn_success = False
+            else:
+                pin_num = command.split(',')[0].replace('(','')
+                dest = int(command.split(',')[1].replace(')',''))
+                turn_Pin = [pin for pin in boardPins if pin.color==turn[0] and str(pin.id) ==pin_num][0]
+                turn_success = turn_Pin.placePin(dest)
+            print(turn_success)
             if turn_success:
                 turn_pins_positions = [(pin.id, pin.axialindex) for pin in boardPins if pin.color==turn[-1]]
                 print(assigned[candidate_turn].upper() +"'s Turn")
@@ -126,6 +137,8 @@ if __name__ == "__main__":
                     helping = True
                     while helping:
                         pin_try_inp = input("Helpmode:Which pin will you move? " )
+                        if pin_try_inp == 'exit':
+                            exit()
                         try_Pin = [pin for pin in boardPins if pin.color==turn[0] and str(pin.id) ==pin_try_inp][0]
                         print("Possible moves:", try_Pin.getPossibleMoves())
                         help_continue = input("Need more help? Yes/No ")
@@ -145,6 +158,8 @@ if __name__ == "__main__":
                     helping = True
                     while helping:
                         pin_try_inp = input("Helpmode:Which pin will you move? " )
+                        if pin_try_inp == 'exit':
+                            exit()
                         try_Pin = [pin for pin in boardPins if pin.color==turn[0] and str(pin.id) ==pin_try_inp][0]
                         print("Possible moves:", try_Pin.getPossibleMoves())
                         help_continue = input("Need more help? Yes/No ")

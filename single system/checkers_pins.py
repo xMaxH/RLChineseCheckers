@@ -1,3 +1,4 @@
+from checkers_board import BoardPosition,HexBoard
 class Pin:
     """Represents a pin placed on the board by index."""
     def __init__(self, board: HexBoard, axialindex: int, id:int, color="red"):
