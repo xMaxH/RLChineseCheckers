@@ -1,0 +1,42 @@
+[2026-03-17 11:28:32] GAME CREATED
+[2026-03-17 11:28:53] PLAYER JOINED: ftu as red
+[2026-03-17 11:28:57] PLAYER JOINED: yg as blue
+[2026-03-17 11:28:57] PLAYER START: yg (blue)
+[2026-03-17 11:28:59] PLAYER START: ftu (red)
+[2026-03-17 11:28:59] GAME START — turn order ['red', 'blue']
+[2026-03-17 11:29:05] MOVE 1: ftu (red) 115->104 [0.15ms]
+[2026-03-17 11:29:05] SCORE ftu (red): Final=94.0, Time=94.0, Moves(1)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:05] SCORE yg (blue): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:15] SCORE ftu (red): Final=94.0, Time=94.0, Moves(1)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:15] SCORE yg (blue): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:15] TURN TIMEOUT: Player with colour blue exceeded 10s at move 1. Turn skipped.
+[2026-03-17 11:29:18] MOVE 2: ftu (red) 116->103 [0.23ms]
+[2026-03-17 11:29:18] SCORE ftu (red): Final=91.0, Time=91.0, Moves(2)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:18] SCORE yg (blue): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:21] MOVE 3: yg (blue) 4->17 [0.22ms]
+[2026-03-17 11:29:21] SCORE ftu (red): Final=91.0, Time=91.0, Moves(2)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:21] SCORE yg (blue): Final=97.6, Time=97.6, Moves(1)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:31] SCORE ftu (red): Final=91.0, Time=91.0, Moves(2)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:31] SCORE yg (blue): Final=97.6, Time=97.6, Moves(1)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:31] TURN TIMEOUT: Player with colour red exceeded 10s at move 3. Turn skipped.
+[2026-03-17 11:29:35] MOVE 4: yg (blue) 1->4 [0.14ms]
+[2026-03-17 11:29:35] SCORE ftu (red): Final=91.0, Time=91.0, Moves(2)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:35] SCORE yg (blue): Final=93.6, Time=93.6, Moves(2)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:40] MOVE 5: ftu (red) 112->116 [0.07ms]
+[2026-03-17 11:29:40] SCORE ftu (red): Final=85.8, Time=85.8, Moves(3)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:40] SCORE yg (blue): Final=93.6, Time=93.6, Moves(2)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:42] MOVE 6: yg (blue) 17->30 [0.13ms]
+[2026-03-17 11:29:42] SCORE ftu (red): Final=85.8, Time=85.8, Moves(3)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:42] SCORE yg (blue): Final=92.1, Time=92.1, Moves(3)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:52] SCORE ftu (red): Final=85.8, Time=85.8, Moves(3)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:52] SCORE yg (blue): Final=92.1, Time=92.1, Moves(3)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:52] TURN TIMEOUT: Player with colour red exceeded 10s at move 6. Turn skipped.
+[2026-03-17 11:29:59] SCORE ftu (red): Final=85.8, Time=85.8, Moves(3)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:59] SCORE yg (blue): Final=92.1, Time=92.1, Moves(3)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:29:59] GAME TIME LIMIT REACHED. Terminating game.
+[2026-03-17 11:30:03] SCORE ftu (red): Final=85.8, Time=85.8, Moves(3)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:30:03] SCORE yg (blue): Final=92.1, Time=92.1, Moves(3)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:30:03] GAME TIME LIMIT REACHED. Terminating game.
+[2026-03-17 11:30:03] SCORE ftu (red): Final=85.8, Time=85.8, Moves(3)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:30:03] SCORE yg (blue): Final=92.1, Time=92.1, Moves(3)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:30:03] GAME TIME LIMIT REACHED. Terminating game.

@@ -1,0 +1,57 @@
+[2026-03-16 13:45:06] GAME CREATED
+[2026-03-16 13:45:14] PLAYER JOINED: rs as red
+[2026-03-16 13:45:19] PLAYER JOINED: ly as blue
+[2026-03-16 13:45:19] PLAYER READY: ly (blue)
+[2026-03-16 13:45:19] PLAYER READY: rs (red)
+[2026-03-16 13:45:19] GAME START: turn order ['red', 'blue']
+[2026-03-16 13:45:29] TURN TIMEOUT: Player with colour red exceeded 10s. Turn skipped.
+[2026-03-16 13:45:37] MOVE #1: ly (blue) 8->16 [0.12ms]
+[2026-03-16 13:45:41] MOVE #2: rs (red) 113->104 [0.16ms]
+[2026-03-16 13:45:45] MOVE #3: ly (blue) 3->14 [0.09ms]
+[2026-03-16 13:45:55] TURN TIMEOUT: Player with colour red exceeded 10s. Turn skipped.
+[2026-03-16 13:45:59] MOVE #4: ly (blue) 7->15 [0.10ms]
+[2026-03-16 13:46:09] MOVE #5: rs (red) 111->103 [0.10ms]
+[2026-03-16 13:46:10] MOVE #6: ly (blue) 0->3 [0.05ms]
+[2026-03-16 13:46:17] MOVE #7: rs (red) 112->113 [0.08ms]
+[2026-03-16 13:46:21] MOVE #8: ly (blue) 2->7 [0.13ms]
+[2026-03-16 13:46:32] TURN TIMEOUT: Player with colour red exceeded 10s. Turn skipped.
+[2026-03-16 13:46:33] MOVE #9: ly (blue) 1->0 [0.08ms]
+[2026-03-16 13:46:43] TURN TIMEOUT: Player with colour red exceeded 10s. Turn skipped.
+[2026-03-16 13:46:53] TURN TIMEOUT: Player with colour blue exceeded 10s. Turn skipped.
+[2026-03-16 13:46:54] MOVE #10: rs (red) 104->91 [0.30ms]
+[2026-03-16 13:46:55] MOVE #11: ly (blue) 5->18 [0.05ms]
+[2026-03-16 13:47:05] MOVE #12: rs (red) 117->79 [0.06ms]
+[2026-03-16 13:47:12] MOVE #13: ly (blue) 7->8 [0.39ms]
+[2026-03-16 13:47:20] MOVE #14: rs (red) 115->104 [0.10ms]
+[2026-03-16 13:47:26] MOVE #15: ly (blue) 8->1 [0.09ms]
+[2026-03-16 13:47:36] TURN TIMEOUT: Player with colour red exceeded 10s. Turn skipped.
+[2026-03-16 13:47:46] TURN TIMEOUT: Player with colour blue exceeded 10s. Turn skipped.
+[2026-03-16 13:47:51] MOVE #16: rs (red) 119->69 [0.14ms]
+[2026-03-16 13:47:55] MOVE #17: ly (blue) 4->5 [0.14ms]
+[2026-03-16 13:48:03] MOVE #18: rs (red) 69->70 [0.07ms]
+[2026-03-16 13:48:04] MOVE #19: ly (blue) 3->7 [0.05ms]
+[2026-03-16 13:48:08] MOVE #20: rs (red) 113->117 [0.21ms]
+[2026-03-16 13:48:15] MOVE #21: ly (blue) 0->3 [0.10ms]
+[2026-03-16 13:48:25] TURN TIMEOUT: Player with colour red exceeded 10s. Turn skipped.
+[2026-03-16 13:48:34] MOVE #22: ly (blue) 14->13 [0.06ms]
+[2026-03-16 13:48:39] MOVE #23: rs (red) 79->80 [0.29ms]
+[2026-03-16 13:48:45] MOVE #24: ly (blue) 6->8 [0.07ms]
+[2026-03-16 13:48:56] TURN TIMEOUT: Player with colour red exceeded 10s. Turn skipped.
+[2026-03-16 13:48:57] MOVE #25: ly (blue) 16->14 [0.28ms]
+[2026-03-16 13:48:57] MOVE #26: rs (red) 118->113 [0.06ms]
+[2026-03-16 13:48:58] MOVE #27: ly (blue) 14->26 [0.07ms]
+[2026-03-16 13:48:59] MOVE #28: rs (red) 104->112 [0.08ms]
+[2026-03-16 13:49:07] MOVE #29: ly (blue) 26->14 [0.26ms]
+[2026-03-16 13:49:08] MOVE #30: rs (red) 91->90 [0.22ms]
+[2026-03-16 13:49:17] MOVE #31: ly (blue) 1->28 [0.19ms]
+[2026-03-16 13:49:25] MOVE #32: rs (red) 120->118 [0.57ms]
+[2026-03-16 13:49:28] MOVE #33: ly (blue) 15->4 [0.05ms]
+[2026-03-16 13:49:35] MOVE #34: rs (red) 112->111 [0.33ms]
+[2026-03-16 13:49:42] MOVE #35: ly (blue) 14->15 [0.09ms]
+[2026-03-16 13:49:47] MOVE #36: rs (red) 111->115 [0.05ms]
+[2026-03-16 13:49:49] MOVE #37: ly (blue) 28->39 [0.33ms]
+[2026-03-16 13:49:54] MOVE #38: rs (red) 103->102 [0.11ms]
+[2026-03-16 13:49:59] MOVE #39: ly (blue) 5->2 [0.51ms]
+[2026-03-16 13:50:03] MOVE #40: rs (red) 115->111 [0.12ms]
+[2026-03-16 13:50:11] MOVE #41: ly (blue) 4->1 [0.07ms]
+[2026-03-16 13:50:20] GAME TIME LIMIT REACHED. Terminating game.

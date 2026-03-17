@@ -1,0 +1,39 @@
+[2026-03-17 09:46:07] GAME CREATED
+[2026-03-17 09:46:13] PLAYER JOINED: bjk as red
+[2026-03-17 09:46:20] PLAYER JOINED: ert as blue
+[2026-03-17 09:46:22] PLAYER START: ert (blue)
+[2026-03-17 09:46:24] PLAYER START: bjk (red)
+[2026-03-17 09:46:24] GAME START — turn order ['red', 'blue']
+[2026-03-17 09:46:32] MOVE 1: bjk (red) 113->104 [0.13ms]
+[2026-03-17 09:46:32] SCORE bjk (red): Final=1805.7, Time=919.7, Moves(1)=495.0, Pins(0)=0.0, Dist=391.0
+[2026-03-17 09:46:32] SCORE ert (blue): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 09:46:33] MOVE 2: ert (blue) 4->15 [0.14ms]
+[2026-03-17 09:46:33] SCORE bjk (red): Final=1805.7, Time=919.7, Moves(1)=495.0, Pins(0)=0.0, Dist=391.0
+[2026-03-17 09:46:33] SCORE ert (blue): Final=1876.1, Time=989.1, Moves(1)=495.0, Pins(0)=0.0, Dist=392.0
+[2026-03-17 09:46:43] MOVE 3: bjk (red) 112->92 [0.22ms]
+[2026-03-17 09:46:43] SCORE bjk (red): Final=1707.9, Time=824.9, Moves(2)=490.0, Pins(0)=0.0, Dist=393.0
+[2026-03-17 09:46:43] SCORE ert (blue): Final=1876.1, Time=989.1, Moves(1)=495.0, Pins(0)=0.0, Dist=392.0
+[2026-03-17 09:46:53] SCORE bjk (red): Final=1707.9, Time=824.9, Moves(2)=490.0, Pins(0)=0.0, Dist=393.0
+[2026-03-17 09:46:53] SCORE ert (blue): Final=1876.1, Time=989.1, Moves(1)=495.0, Pins(0)=0.0, Dist=392.0
+[2026-03-17 09:46:53] TURN TIMEOUT: Player with colour blue exceeded 10s at move 1. Turn skipped.
+[2026-03-17 09:47:03] SCORE bjk (red): Final=1707.9, Time=824.9, Moves(2)=490.0, Pins(0)=0.0, Dist=393.0
+[2026-03-17 09:47:03] SCORE ert (blue): Final=1876.1, Time=989.1, Moves(1)=495.0, Pins(0)=0.0, Dist=392.0
+[2026-03-17 09:47:03] TURN TIMEOUT: Player with colour red exceeded 10s at move 0. Turn skipped.
+[2026-03-17 09:47:13] SCORE bjk (red): Final=1707.9, Time=824.9, Moves(2)=490.0, Pins(0)=0.0, Dist=393.0
+[2026-03-17 09:47:13] SCORE ert (blue): Final=1876.1, Time=989.1, Moves(1)=495.0, Pins(0)=0.0, Dist=392.0
+[2026-03-17 09:47:13] TURN TIMEOUT: Player with colour blue exceeded 10s at move 1. Turn skipped.
+[2026-03-17 09:47:24] SCORE bjk (red): Final=1707.9, Time=824.9, Moves(2)=490.0, Pins(0)=0.0, Dist=393.0
+[2026-03-17 09:47:24] SCORE ert (blue): Final=1876.1, Time=989.1, Moves(1)=495.0, Pins(0)=0.0, Dist=392.0
+[2026-03-17 09:47:24] TURN TIMEOUT: Player with colour red exceeded 10s at move 0. Turn skipped.
+[2026-03-17 09:47:24] SCORE bjk (red): Final=1707.9, Time=824.9, Moves(2)=490.0, Pins(0)=0.0, Dist=393.0
+[2026-03-17 09:47:24] SCORE ert (blue): Final=1876.1, Time=989.1, Moves(1)=495.0, Pins(0)=0.0, Dist=392.0
+[2026-03-17 09:47:24] GAME TIME LIMIT REACHED. Terminating game.
+[2026-03-17 09:47:24] SCORE bjk (red): Final=1707.9, Time=824.9, Moves(2)=490.0, Pins(0)=0.0, Dist=393.0
+[2026-03-17 09:47:24] SCORE ert (blue): Final=1876.1, Time=989.1, Moves(1)=495.0, Pins(0)=0.0, Dist=392.0
+[2026-03-17 09:47:24] GAME TIME LIMIT REACHED. Terminating game.
+[2026-03-17 09:47:26] SCORE bjk (red): Final=1707.9, Time=824.9, Moves(2)=490.0, Pins(0)=0.0, Dist=393.0
+[2026-03-17 09:47:26] SCORE ert (blue): Final=1876.1, Time=989.1, Moves(1)=495.0, Pins(0)=0.0, Dist=392.0
+[2026-03-17 09:47:26] GAME TIME LIMIT REACHED. Terminating game.
+[2026-03-17 09:47:26] SCORE bjk (red): Final=1707.9, Time=824.9, Moves(2)=490.0, Pins(0)=0.0, Dist=393.0
+[2026-03-17 09:47:26] SCORE ert (blue): Final=1876.1, Time=989.1, Moves(1)=495.0, Pins(0)=0.0, Dist=392.0
+[2026-03-17 09:47:26] GAME TIME LIMIT REACHED. Terminating game.

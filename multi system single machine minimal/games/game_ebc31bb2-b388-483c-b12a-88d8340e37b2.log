@@ -1,0 +1,39 @@
+[2026-03-17 11:18:45] GAME CREATED
+[2026-03-17 11:18:49] PLAYER JOINED: dfs as red
+[2026-03-17 11:18:53] PLAYER JOINED: skfn as blue
+[2026-03-17 11:18:54] PLAYER START: skfn (blue)
+[2026-03-17 11:18:56] PLAYER START: dfs (red)
+[2026-03-17 11:18:56] GAME START — turn order ['red', 'blue']
+[2026-03-17 11:18:57] MOVE 1: dfs (red) 117->106 [0.20ms]
+[2026-03-17 11:18:57] SCORE dfs (red): Final=99.0, Time=99.0, Moves(1)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:18:57] SCORE skfn (blue): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:19:08] SCORE dfs (red): Final=99.0, Time=99.0, Moves(1)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:19:08] SCORE skfn (blue): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:19:08] TURN TIMEOUT: Player with colour blue exceeded 10s at move 1. Turn skipped.
+[2026-03-17 11:19:16] MOVE 2: dfs (red) 112->104 [0.27ms]
+[2026-03-17 11:19:16] SCORE dfs (red): Final=90.9, Time=90.9, Moves(2)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:19:16] SCORE skfn (blue): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:19:25] MOVE 3: skfn (blue) 8->16 [0.18ms]
+[2026-03-17 11:19:25] SCORE dfs (red): Final=90.9, Time=90.9, Moves(2)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:19:25] SCORE skfn (blue): Final=90.7, Time=90.7, Moves(1)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:19:35] SCORE dfs (red): Final=90.9, Time=90.9, Moves(2)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:19:35] SCORE skfn (blue): Final=90.7, Time=90.7, Moves(1)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:19:35] TURN TIMEOUT: Player with colour red exceeded 10s at move 3. Turn skipped.
+[2026-03-17 11:19:46] SCORE dfs (red): Final=90.9, Time=90.9, Moves(2)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:19:46] SCORE skfn (blue): Final=90.7, Time=90.7, Moves(1)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:19:46] TURN TIMEOUT: Player with colour blue exceeded 10s at move 3. Turn skipped.
+[2026-03-17 11:19:56] SCORE dfs (red): Final=90.9, Time=90.9, Moves(2)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:19:56] SCORE skfn (blue): Final=90.7, Time=90.7, Moves(1)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:19:56] TURN TIMEOUT: Player with colour red exceeded 10s at move 3. Turn skipped.
+[2026-03-17 11:19:58] SCORE dfs (red): Final=90.9, Time=90.9, Moves(2)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:19:58] SCORE skfn (blue): Final=90.7, Time=90.7, Moves(1)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:19:58] GAME TIME LIMIT REACHED. Terminating game.
+[2026-03-17 11:19:58] SCORE dfs (red): Final=90.9, Time=90.9, Moves(2)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:19:58] SCORE skfn (blue): Final=90.7, Time=90.7, Moves(1)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:19:58] GAME TIME LIMIT REACHED. Terminating game.
+[2026-03-17 11:20:08] SCORE dfs (red): Final=90.9, Time=90.9, Moves(2)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:20:08] SCORE skfn (blue): Final=90.7, Time=90.7, Moves(1)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:20:08] GAME TIME LIMIT REACHED. Terminating game.
+[2026-03-17 11:20:08] SCORE dfs (red): Final=90.9, Time=90.9, Moves(2)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:20:08] SCORE skfn (blue): Final=90.7, Time=90.7, Moves(1)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:20:08] GAME TIME LIMIT REACHED. Terminating game.

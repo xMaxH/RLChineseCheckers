@@ -1,0 +1,42 @@
+[2026-03-16 14:46:22] GAME CREATED
+[2026-03-16 14:46:28] PLAYER JOINED: dsaf as red
+[2026-03-16 14:46:34] PLAYER JOINED: hdrt as blue
+[2026-03-16 14:46:37] PLAYER START: hdrt (blue)
+[2026-03-16 14:46:40] PLAYER START: dsaf (red)
+[2026-03-16 14:46:40] GAME START — turn order ['red', 'blue']
+[2026-03-16 14:46:50] SCORE dsaf (red): Final=1500.0, Time=1000.0, Moves=500.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:46:50] SCORE hdrt (blue): Final=1500.0, Time=1000.0, Moves=500.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:46:50] TURN TIMEOUT: Player with colour red exceeded 10s. Turn skipped.
+[2026-03-16 14:46:59] MOVE 1: hdrt (blue) 6->14 [0.14ms]
+[2026-03-16 14:46:59] SCORE dsaf (red): Final=1500.0, Time=1000.0, Moves=500.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:46:59] SCORE hdrt (blue): Final=1403.7, Time=908.7, Moves=495.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:05] MOVE 2: dsaf (red) 112->103 [0.17ms]
+[2026-03-16 14:47:05] SCORE dsaf (red): Final=1434.8, Time=939.8, Moves=495.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:05] SCORE hdrt (blue): Final=1403.7, Time=908.7, Moves=495.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:15] SCORE dsaf (red): Final=1434.8, Time=939.8, Moves=495.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:15] SCORE hdrt (blue): Final=1403.7, Time=908.7, Moves=495.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:15] TURN TIMEOUT: Player with colour blue exceeded 10s. Turn skipped.
+[2026-03-16 14:47:18] MOVE 3: dsaf (red) 103->90 [0.10ms]
+[2026-03-16 14:47:18] SCORE dsaf (red): Final=1398.7, Time=908.7, Moves=490.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:18] SCORE hdrt (blue): Final=1403.7, Time=908.7, Moves=495.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:26] MOVE 4: hdrt (blue) 7->6 [0.11ms]
+[2026-03-16 14:47:26] SCORE dsaf (red): Final=1398.7, Time=908.7, Moves=490.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:26] SCORE hdrt (blue): Final=1324.1, Time=834.1, Moves=490.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:33] MOVE 5: dsaf (red) 117->106 [0.21ms]
+[2026-03-16 14:47:33] SCORE dsaf (red): Final=1321.2, Time=836.2, Moves=485.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:33] SCORE hdrt (blue): Final=1324.1, Time=834.1, Moves=490.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:34] MOVE 6: hdrt (blue) 14->13 [0.17ms]
+[2026-03-16 14:47:34] SCORE dsaf (red): Final=1321.2, Time=836.2, Moves=485.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:34] SCORE hdrt (blue): Final=1303.8, Time=818.8, Moves=485.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:38] MOVE 7: dsaf (red) 106->93 [0.08ms]
+[2026-03-16 14:47:38] SCORE dsaf (red): Final=1276.1, Time=796.1, Moves=480.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:38] SCORE hdrt (blue): Final=1303.8, Time=818.8, Moves=485.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:40] SCORE dsaf (red): Final=1276.1, Time=796.1, Moves=480.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:40] SCORE hdrt (blue): Final=1303.8, Time=818.8, Moves=485.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:40] GAME TIME LIMIT REACHED. Terminating game.
+[2026-03-16 14:47:42] SCORE dsaf (red): Final=1276.1, Time=796.1, Moves=480.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:42] SCORE hdrt (blue): Final=1303.8, Time=818.8, Moves=485.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:42] GAME TIME LIMIT REACHED. Terminating game.
+[2026-03-16 14:47:42] SCORE dsaf (red): Final=1276.1, Time=796.1, Moves=480.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:42] SCORE hdrt (blue): Final=1303.8, Time=818.8, Moves=485.0, Pins=0.0, Dist=0.0
+[2026-03-16 14:47:42] GAME TIME LIMIT REACHED. Terminating game.

@@ -20,13 +20,13 @@ class Pin:
         that this pin can legally move to in one turn.
 
         Legal moves:
-        • Single-step: to any adjacent empty neighbor (6 axial directions).
-        • Multi-hop: one or more consecutive hops; each hop jumps over one
+        Single-step: to any adjacent empty neighbor (6 axial directions).
+        Multi-hop: one or more consecutive hops; each hop jumps over one
             occupied adjacent cell and lands on the cell immediately beyond,
             which must be empty. Hops may continue from the landing cell.
 
         Notes:
-        • This function only checks board bounds and occupancy; it does not
+        This function only checks board bounds and occupancy; it does not
             enforce end-zone/color restrictions (if any). Use placePin to apply
             additional placement rules.
         """

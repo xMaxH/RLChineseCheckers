@@ -1,0 +1,36 @@
+[2026-03-16 14:54:02] GAME CREATED
+[2026-03-16 14:54:06] PLAYER JOINED: sfg as red
+[2026-03-16 14:54:10] PLAYER JOINED: thtr as blue
+[2026-03-16 14:54:11] PLAYER START: thtr (blue)
+[2026-03-16 14:54:13] PLAYER START: sfg (red)
+[2026-03-16 14:54:13] GAME START — turn order ['red', 'blue']
+[2026-03-16 14:54:24] SCORE sfg (red): Final=1500.0, Time=1000.0, Moves(0)=500.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:54:24] SCORE thtr (blue): Final=1500.0, Time=1000.0, Moves(0)=500.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:54:24] TURN TIMEOUT: Player with colour red exceeded 10s. Turn skipped.
+[2026-03-16 14:54:34] SCORE sfg (red): Final=1500.0, Time=1000.0, Moves(0)=500.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:54:34] SCORE thtr (blue): Final=1500.0, Time=1000.0, Moves(0)=500.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:54:34] TURN TIMEOUT: Player with colour blue exceeded 10s. Turn skipped.
+[2026-03-16 14:54:39] MOVE 1: sfg (red) 116->103 [0.71ms]
+[2026-03-16 14:54:39] SCORE sfg (red): Final=1444.9, Time=949.9, Moves(1)=495.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:54:39] SCORE thtr (blue): Final=1500.0, Time=1000.0, Moves(0)=500.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:54:44] MOVE 2: thtr (blue) 6->15 [0.07ms]
+[2026-03-16 14:54:44] SCORE sfg (red): Final=1444.9, Time=949.9, Moves(1)=495.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:54:44] SCORE thtr (blue): Final=1443.5, Time=948.5, Moves(1)=495.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:54:51] MOVE 3: sfg (red) 111->91 [0.07ms]
+[2026-03-16 14:54:51] SCORE sfg (red): Final=1369.5, Time=879.5, Moves(2)=490.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:54:51] SCORE thtr (blue): Final=1443.5, Time=948.5, Moves(1)=495.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:55:01] SCORE sfg (red): Final=1369.5, Time=879.5, Moves(2)=490.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:55:01] SCORE thtr (blue): Final=1443.5, Time=948.5, Moves(1)=495.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:55:01] TURN TIMEOUT: Player with colour blue exceeded 10s. Turn skipped.
+[2026-03-16 14:55:05] MOVE 4: sfg (red) 119->116 [0.21ms]
+[2026-03-16 14:55:05] SCORE sfg (red): Final=1332.6, Time=847.6, Moves(3)=485.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:55:05] SCORE thtr (blue): Final=1443.5, Time=948.5, Moves(1)=495.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:55:13] MOVE 5: thtr (blue) 9->18 [0.17ms]
+[2026-03-16 14:55:13] SCORE sfg (red): Final=1332.6, Time=847.6, Moves(3)=485.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:55:13] SCORE thtr (blue): Final=1354.6, Time=864.6, Moves(2)=490.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:55:13] SCORE sfg (red): Final=1332.6, Time=847.6, Moves(3)=485.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:55:13] SCORE thtr (blue): Final=1354.6, Time=864.6, Moves(2)=490.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:55:13] GAME TIME LIMIT REACHED. Terminating game.
+[2026-03-16 14:55:13] SCORE sfg (red): Final=1332.6, Time=847.6, Moves(3)=485.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:55:13] SCORE thtr (blue): Final=1354.6, Time=864.6, Moves(2)=490.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 14:55:13] GAME TIME LIMIT REACHED. Terminating game.

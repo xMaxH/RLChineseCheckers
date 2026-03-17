@@ -1,0 +1,11 @@
+[2026-03-17 11:01:03] GAME CREATED
+[2026-03-17 11:01:09] PLAYER JOINED: dsf as red
+[2026-03-17 11:01:18] PLAYER JOINED: oer as blue
+[2026-03-17 11:01:24] PLAYER START: oer (blue)
+[2026-03-17 11:01:26] PLAYER START: dsf (red)
+[2026-03-17 11:01:26] GAME START — turn order ['red', 'blue']
+[2026-03-17 11:01:36] SCORE dsf (red): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:01:36] SCORE oer (blue): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-03-17 11:01:36] TURN TIMEOUT: Player with colour red exceeded 10s at move 0. Turn skipped.
+[2026-03-17 11:01:41] MOVE 1: oer (blue) 7->16 [0.27ms]
+[2026-03-17 11:01:41] SCORE dsf (red): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0

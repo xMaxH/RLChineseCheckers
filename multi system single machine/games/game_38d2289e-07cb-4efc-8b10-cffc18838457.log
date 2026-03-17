@@ -1,0 +1,39 @@
+[2026-03-16 15:03:05] GAME CREATED
+[2026-03-16 15:03:09] PLAYER JOINED: vuy as red
+[2026-03-16 15:03:14] PLAYER JOINED: jhygu as blue
+[2026-03-16 15:03:16] PLAYER START: jhygu (blue)
+[2026-03-16 15:03:17] PLAYER START: vuy (red)
+[2026-03-16 15:03:17] GAME START — turn order ['red', 'blue']
+[2026-03-16 15:03:28] SCORE vuy (red): Final=1500.0, Time=1000.0, Moves(0)=500.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:03:28] SCORE jhygu (blue): Final=1500.0, Time=1000.0, Moves(0)=500.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:03:28] TURN TIMEOUT: Player with colour red exceeded 10s. Turn skipped.
+[2026-03-16 15:03:38] SCORE vuy (red): Final=1500.0, Time=1000.0, Moves(0)=500.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:03:38] SCORE jhygu (blue): Final=1500.0, Time=1000.0, Moves(0)=500.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:03:38] TURN TIMEOUT: Player with colour blue exceeded 10s. Turn skipped.
+[2026-03-16 15:03:44] MOVE 1: vuy (red) 114->105 [0.08ms]
+[2026-03-16 15:03:44] SCORE vuy (red): Final=1435.0, Time=940.0, Moves(1)=495.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:03:44] SCORE jhygu (blue): Final=1500.0, Time=1000.0, Moves(0)=500.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:03:46] MOVE 2: jhygu (blue) 5->18 [0.12ms]
+[2026-03-16 15:03:46] SCORE vuy (red): Final=1435.0, Time=940.0, Moves(1)=495.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:03:46] SCORE jhygu (blue): Final=1472.9, Time=977.9, Moves(1)=495.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:03:56] MOVE 3: vuy (red) 119->114 [0.14ms]
+[2026-03-16 15:03:56] SCORE vuy (red): Final=1336.1, Time=846.1, Moves(2)=490.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:03:56] SCORE jhygu (blue): Final=1472.9, Time=977.9, Moves(1)=495.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:04:06] SCORE vuy (red): Final=1336.1, Time=846.1, Moves(2)=490.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:04:06] SCORE jhygu (blue): Final=1472.9, Time=977.9, Moves(1)=495.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:04:06] TURN TIMEOUT: Player with colour blue exceeded 10s. Turn skipped.
+[2026-03-16 15:04:12] MOVE 4: vuy (red) 120->119 [0.18ms]
+[2026-03-16 15:04:12] SCORE vuy (red): Final=1270.8, Time=785.8, Moves(3)=485.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:04:12] SCORE jhygu (blue): Final=1472.9, Time=977.9, Moves(1)=495.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:04:14] MOVE 5: jhygu (blue) 6->14 [0.14ms]
+[2026-03-16 15:04:14] SCORE vuy (red): Final=1270.8, Time=785.8, Moves(3)=485.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:04:14] SCORE jhygu (blue): Final=1445.2, Time=955.2, Moves(2)=490.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:04:17] SCORE vuy (red): Final=1270.8, Time=785.8, Moves(3)=485.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:04:17] SCORE jhygu (blue): Final=1445.2, Time=955.2, Moves(2)=490.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:04:17] GAME TIME LIMIT REACHED. Terminating game.
+[2026-03-16 15:04:24] SCORE vuy (red): Final=1270.8, Time=785.8, Moves(3)=485.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:04:24] SCORE jhygu (blue): Final=1445.2, Time=955.2, Moves(2)=490.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:04:24] GAME TIME LIMIT REACHED. Terminating game.
+[2026-03-16 15:04:24] SCORE vuy (red): Final=1270.8, Time=785.8, Moves(3)=485.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:04:24] SCORE jhygu (blue): Final=1445.2, Time=955.2, Moves(2)=490.0, Pins(0)=0.0, Dist=0.0
+[2026-03-16 15:04:24] GAME TIME LIMIT REACHED. Terminating game.

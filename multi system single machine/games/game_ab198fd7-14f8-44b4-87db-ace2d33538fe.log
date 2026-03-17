@@ -1,0 +1,9 @@
+[2026-03-16 13:24:39] GAME CREATED
+[2026-03-16 13:24:42] PLAYER JOINED: rs as red
+[2026-03-16 13:24:47] PLAYER JOINED: lk as blue
+[2026-03-16 13:24:47] PLAYER READY: lk (blue)
+[2026-03-16 13:24:48] PLAYER READY: rs (red)
+[2026-03-16 13:24:48] GAME START: turn order ['red', 'blue']
+[2026-03-16 13:24:53] MOVE #1: rs (red) 113->104 [0.08ms]
+[2026-03-16 13:24:55] MOVE #2: lk (blue) 6->15 [0.06ms]
+[2026-03-16 13:25:06] TURN TIMEOUT: Player with colour red exceeded 10s. Turn skipped.
