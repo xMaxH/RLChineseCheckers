@@ -80,11 +80,16 @@ Once you enter 'start_game', you'll see
       - If it was a valid move, see update on Ascii/Tkinter, and control moves to the next player.
       - Else, current player's turn continues
      
-  # Current Limitations/Expected Changes
-  - There is no logic implemented yet for checking if a player has won - Expect changes
-  - Expect changes in Starting a Game/Assigning colours.
-  - There is no logic implemented yet for storing moves made - Expect changes
-  - There is no logic implemented yet to indicate 'Pass' on a turn - Expect changes
-  - There is no logic implemented yet to timeout a players turn - Expect changes
-  - There is no logic implemented yet for scoring - Expect changes (will be based on time taken, total number of moves, number of pins successfully moved to opposite colour)
-  - There is no logic implemented yet for maximum allowable time per game - Expect changes
+  # ~~Current Limitations/Expected Changes~~ Updates
+  - ~~There is no logic implemented yet for checking if a player has won - Expect changes~~ Game terminates when 1 player wins. Game also terminates if all players excpet 1 Draw (have no possible valid moves).
+  - ~~Expect changes in Starting a Game/Assigning colours.~~
+  - ~~There is no logic implemented yet for storing moves made - Expect changes~~ Game moves are stored in game-specific log text file in folder games.
+  - ~~There is no logic implemented yet to indicate 'Pass' on a turn - Expect changes~~ No explicit 'Pass', but timeout implemented for a turn
+  - ~~There is no logic implemented yet to timeout a players turn - Expect changes~~ Timeout for total gameplay implemented
+  - ~~There is no logic implemented yet for scoring - Expect changes (will be based on time taken, total number of moves, number of pins successfully moved to opposite colour)~~ Scoring ::
+    - time score : max(0.0, 100.0 - time_taken_sec) // time_taken_sec is total time taken for all moves made by player, less total time, more time score
+    - move score : math.exp(-((move_count - 45) ** 2) / (2 * ((4 if move_count < 45 else 18) ** 2))) // move_count is total number of moves made by player.assymetrical Gaussian. max score if move_count around 45, penalized both for too few movements and too many movements.
+    - pin score : pins_in_goal * 100.0
+    - distance score :  max(0.0, 200.0 - total_dist) // total_dist is sum of min(distance(pin_not_in_goal, target_colour))
+    - total score : time score + move score + pin score + distance score
+  - ~~There is no logic implemented yet for maximum allowable time per game - Expect changes~~ See above
