@@ -70,6 +70,8 @@ class BoardGUI:
         self.root.mainloop()
 
     def refresh(self, newpins):
+        # Clear previous drawing so refresh is a real "re-render".
         self.pins = newpins
+        self.canvas.delete("all")
         self.draw_board()
         self.draw_pins()
