@@ -2,9 +2,6 @@ __pycache__/
 *.py[cod]
 *.pyd
 
-games/
-**/games/
-
 .ipynb_checkpoints/
 .venv/
 venv/

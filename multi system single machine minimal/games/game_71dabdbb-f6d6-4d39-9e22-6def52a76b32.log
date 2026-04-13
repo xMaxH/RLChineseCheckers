@@ -1,0 +1,39 @@
+[2026-04-13 11:37:41] GAME CREATED
+[2026-04-13 11:37:47] PLAYER JOINED: preben as lawn green
+[2026-04-13 11:37:53] PLAYER JOINED: salim as gray0
+[2026-04-13 11:37:56] PLAYER START: salim (gray0)
+[2026-04-13 11:37:58] PLAYER START: preben (lawn green)
+[2026-04-13 11:37:58] GAME START — turn order ['lawn green', 'gray0']
+[2026-04-13 11:38:08] SCORE preben (lawn green): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-04-13 11:38:08] SCORE salim (gray0): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-04-13 11:38:08] TURN TIMEOUT: Player with colour lawn green exceeded 10s at move 0. Turn skipped.
+[2026-04-13 11:38:13] MOVE 1: salim (gray0) 75->56 [0.03ms]
+[2026-04-13 11:38:13] SCORE preben (lawn green): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-04-13 11:38:13] SCORE salim (gray0): Final=187.8, Time=95.8, Moves(1)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 11:38:17] MOVE 2: preben (lawn green) 32->31 [0.03ms]
+[2026-04-13 11:38:17] SCORE preben (lawn green): Final=186.7, Time=95.7, Moves(1)=0.0, Pins(0)=0.0, Dist=91.0
+[2026-04-13 11:38:17] SCORE salim (gray0): Final=187.8, Time=95.8, Moves(1)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 11:38:27] SCORE preben (lawn green): Final=186.7, Time=95.7, Moves(1)=0.0, Pins(0)=0.0, Dist=91.0
+[2026-04-13 11:38:27] SCORE salim (gray0): Final=187.8, Time=95.8, Moves(1)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 11:38:27] TURN TIMEOUT: Player with colour gray0 exceeded 10s at move 2. Turn skipped.
+[2026-04-13 11:38:37] SCORE preben (lawn green): Final=186.7, Time=95.7, Moves(1)=0.0, Pins(0)=0.0, Dist=91.0
+[2026-04-13 11:38:37] SCORE salim (gray0): Final=187.8, Time=95.8, Moves(1)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 11:38:37] TURN TIMEOUT: Player with colour lawn green exceeded 10s at move 2. Turn skipped.
+[2026-04-13 11:38:47] SCORE preben (lawn green): Final=186.7, Time=95.7, Moves(1)=0.0, Pins(0)=0.0, Dist=91.0
+[2026-04-13 11:38:47] SCORE salim (gray0): Final=187.8, Time=95.8, Moves(1)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 11:38:47] TURN TIMEOUT: Player with colour gray0 exceeded 10s at move 2. Turn skipped.
+[2026-04-13 11:38:58] SCORE preben (lawn green): Final=186.7, Time=95.7, Moves(1)=0.0, Pins(0)=0.0, Dist=91.0
+[2026-04-13 11:38:58] SCORE salim (gray0): Final=187.8, Time=95.8, Moves(1)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 11:38:58] TURN TIMEOUT: Player with colour lawn green exceeded 10s at move 2. Turn skipped.
+[2026-04-13 11:38:58] SCORE preben (lawn green): Final=186.7, Time=95.7, Moves(1)=0.0, Pins(0)=0.0, Dist=91.0
+[2026-04-13 11:38:58] SCORE salim (gray0): Final=187.8, Time=95.8, Moves(1)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 11:38:58] GAME TIME LIMIT REACHED.
+[2026-04-13 11:38:59] SCORE preben (lawn green): Final=186.7, Time=95.7, Moves(1)=0.0, Pins(0)=0.0, Dist=91.0
+[2026-04-13 11:38:59] SCORE salim (gray0): Final=187.8, Time=95.8, Moves(1)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 11:38:59] GAME TIME LIMIT REACHED.
+[2026-04-13 11:39:01] SCORE preben (lawn green): Final=186.7, Time=95.7, Moves(1)=0.0, Pins(0)=0.0, Dist=91.0
+[2026-04-13 11:39:01] SCORE salim (gray0): Final=187.8, Time=95.8, Moves(1)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 11:39:01] GAME TIME LIMIT REACHED.
+[2026-04-13 11:39:01] SCORE preben (lawn green): Final=186.7, Time=95.7, Moves(1)=0.0, Pins(0)=0.0, Dist=91.0
+[2026-04-13 11:39:01] SCORE salim (gray0): Final=187.8, Time=95.8, Moves(1)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 11:39:01] GAME TIME LIMIT REACHED.
