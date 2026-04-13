@@ -14,7 +14,7 @@ Enable network debug output from players:
 ```bash
 ./run_checkers.sh --players 2 --debug
 
-You can also run the Python launcher directly:
+can also run the Python launcher directly:
 
 ```bash
 python3 "multi system single machine minimal/run_game.py" --players 2 --debug
