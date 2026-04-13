@@ -1,0 +1,750 @@
+[2026-04-13 13:47:03] GAME CREATED
+[2026-04-13 13:47:04] PLAYER JOINED: Player1 as lawn green
+[2026-04-13 13:47:04] PLAYER JOINED: Player2 as gray0
+[2026-04-13 13:47:04] PLAYER START: Player1 (lawn green)
+[2026-04-13 13:47:04] PLAYER START: Player2 (gray0)
+[2026-04-13 13:47:04] GAME START — turn order ['lawn green', 'gray0']
+[2026-04-13 13:47:04] MOVE 1: Player1 (lawn green) 33->31 [0.02ms]
+[2026-04-13 13:47:04] SCORE Player1 (lawn green): Final=191.8, Time=99.8, Moves(1)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 13:47:04] SCORE Player2 (gray0): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-04-13 13:47:04] MOVE 2: Player2 (gray0) 76->77 [0.02ms]
+[2026-04-13 13:47:04] SCORE Player1 (lawn green): Final=191.8, Time=99.8, Moves(1)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 13:47:04] SCORE Player2 (gray0): Final=190.8, Time=99.8, Moves(1)=0.0, Pins(0)=0.0, Dist=91.0
+[2026-04-13 13:47:04] MOVE 3: Player1 (lawn green) 19->42 [0.03ms]
+[2026-04-13 13:47:04] SCORE Player1 (lawn green): Final=193.6, Time=99.6, Moves(2)=0.0, Pins(0)=0.0, Dist=94.0
+[2026-04-13 13:47:04] SCORE Player2 (gray0): Final=190.8, Time=99.8, Moves(1)=0.0, Pins(0)=0.0, Dist=91.0
+[2026-04-13 13:47:05] MOVE 4: Player2 (gray0) 65->56 [0.02ms]
+[2026-04-13 13:47:05] SCORE Player1 (lawn green): Final=193.6, Time=99.6, Moves(2)=0.0, Pins(0)=0.0, Dist=94.0
+[2026-04-13 13:47:05] SCORE Player2 (gray0): Final=191.6, Time=99.6, Moves(2)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 13:47:05] MOVE 5: Player1 (lawn green) 31->33 [0.02ms]
+[2026-04-13 13:47:05] SCORE Player1 (lawn green): Final=191.4, Time=99.4, Moves(3)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 13:47:05] SCORE Player2 (gray0): Final=191.6, Time=99.6, Moves(2)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 13:47:05] MOVE 6: Player2 (gray0) 77->89 [0.02ms]
+[2026-04-13 13:47:05] SCORE Player1 (lawn green): Final=191.4, Time=99.4, Moves(3)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 13:47:05] SCORE Player2 (gray0): Final=191.4, Time=99.4, Moves(3)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 13:47:05] MOVE 7: Player1 (lawn green) 32->43 [0.02ms]
+[2026-04-13 13:47:05] SCORE Player1 (lawn green): Final=192.2, Time=99.2, Moves(4)=0.0, Pins(0)=0.0, Dist=93.0
+[2026-04-13 13:47:05] SCORE Player2 (gray0): Final=191.4, Time=99.4, Moves(3)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 13:47:06] MOVE 8: Player2 (gray0) 75->65 [0.02ms]
+[2026-04-13 13:47:06] SCORE Player1 (lawn green): Final=192.2, Time=99.2, Moves(4)=0.0, Pins(0)=0.0, Dist=93.0
+[2026-04-13 13:47:06] SCORE Player2 (gray0): Final=192.2, Time=99.2, Moves(4)=0.0, Pins(0)=0.0, Dist=93.0
+[2026-04-13 13:47:06] MOVE 9: Player1 (lawn green) 20->32 [0.04ms]
+[2026-04-13 13:47:06] SCORE Player1 (lawn green): Final=193.0, Time=99.0, Moves(5)=0.0, Pins(0)=0.0, Dist=94.0
+[2026-04-13 13:47:06] SCORE Player2 (gray0): Final=192.2, Time=99.2, Moves(4)=0.0, Pins(0)=0.0, Dist=93.0
+[2026-04-13 13:47:06] MOVE 10: Player2 (gray0) 87->75 [0.02ms]
+[2026-04-13 13:47:06] SCORE Player1 (lawn green): Final=193.0, Time=99.0, Moves(5)=0.0, Pins(0)=0.0, Dist=94.0
+[2026-04-13 13:47:06] SCORE Player2 (gray0): Final=192.0, Time=99.0, Moves(5)=0.0, Pins(0)=0.0, Dist=93.0
+[2026-04-13 13:47:06] MOVE 11: Player1 (lawn green) 44->19 [0.02ms]
+[2026-04-13 13:47:06] SCORE Player1 (lawn green): Final=192.8, Time=98.8, Moves(6)=0.0, Pins(0)=0.0, Dist=94.0
+[2026-04-13 13:47:06] SCORE Player2 (gray0): Final=192.0, Time=99.0, Moves(5)=0.0, Pins(0)=0.0, Dist=93.0
+[2026-04-13 13:47:06] MOVE 12: Player2 (gray0) 99->87 [0.02ms]
+[2026-04-13 13:47:06] SCORE Player1 (lawn green): Final=192.8, Time=98.8, Moves(6)=0.0, Pins(0)=0.0, Dist=94.0
+[2026-04-13 13:47:06] SCORE Player2 (gray0): Final=192.7, Time=98.7, Moves(6)=0.0, Pins(0)=0.0, Dist=94.0
+[2026-04-13 13:47:07] MOVE 13: Player1 (lawn green) 45->18 [0.02ms]
+[2026-04-13 13:47:07] SCORE Player1 (lawn green): Final=194.6, Time=98.6, Moves(7)=0.0, Pins(0)=0.0, Dist=96.0
+[2026-04-13 13:47:07] SCORE Player2 (gray0): Final=192.7, Time=98.7, Moves(6)=0.0, Pins(0)=0.0, Dist=94.0
+[2026-04-13 13:47:07] MOVE 14: Player2 (gray0) 56->57 [0.02ms]
+[2026-04-13 13:47:07] SCORE Player1 (lawn green): Final=194.6, Time=98.6, Moves(7)=0.0, Pins(0)=0.0, Dist=96.0
+[2026-04-13 13:47:07] SCORE Player2 (gray0): Final=193.6, Time=98.6, Moves(7)=0.0, Pins(0)=0.0, Dist=95.0
+[2026-04-13 13:47:07] MOVE 15: Player1 (lawn green) 32->44 [0.02ms]
+[2026-04-13 13:47:07] SCORE Player1 (lawn green): Final=193.9, Time=97.9, Moves(8)=0.0, Pins(0)=0.0, Dist=96.0
+[2026-04-13 13:47:07] SCORE Player2 (gray0): Final=193.6, Time=98.6, Moves(7)=0.0, Pins(0)=0.0, Dist=95.0
+[2026-04-13 13:47:08] MOVE 16: Player2 (gray0) 86->99 [0.02ms]
+[2026-04-13 13:47:08] SCORE Player1 (lawn green): Final=193.9, Time=97.9, Moves(8)=0.0, Pins(0)=0.0, Dist=96.0
+[2026-04-13 13:47:08] SCORE Player2 (gray0): Final=193.3, Time=98.3, Moves(8)=0.0, Pins(0)=0.0, Dist=95.0
+[2026-04-13 13:47:08] MOVE 17: Player1 (lawn green) 33->52 [0.02ms]
+[2026-04-13 13:47:08] SCORE Player1 (lawn green): Final=197.7, Time=97.7, Moves(9)=0.0, Pins(0)=0.0, Dist=100.0
+[2026-04-13 13:47:08] SCORE Player2 (gray0): Final=193.3, Time=98.3, Moves(8)=0.0, Pins(0)=0.0, Dist=95.0
+[2026-04-13 13:47:08] MOVE 18: Player2 (gray0) 89->90 [0.02ms]
+[2026-04-13 13:47:08] SCORE Player1 (lawn green): Final=197.7, Time=97.7, Moves(9)=0.0, Pins(0)=0.0, Dist=100.0
+[2026-04-13 13:47:08] SCORE Player2 (gray0): Final=194.1, Time=98.1, Moves(9)=0.0, Pins(0)=0.0, Dist=96.0
+[2026-04-13 13:47:08] MOVE 19: Player1 (lawn green) 42->30 [0.02ms]
+[2026-04-13 13:47:08] SCORE Player1 (lawn green): Final=197.5, Time=97.5, Moves(10)=0.0, Pins(0)=0.0, Dist=100.0
+[2026-04-13 13:47:09] SCORE Player2 (gray0): Final=194.1, Time=98.1, Moves(9)=0.0, Pins(0)=0.0, Dist=96.0
+[2026-04-13 13:47:09] MOVE 20: Player2 (gray0) 99->76 [0.02ms]
+[2026-04-13 13:47:09] SCORE Player1 (lawn green): Final=197.5, Time=97.5, Moves(10)=0.0, Pins(0)=0.0, Dist=100.0
+[2026-04-13 13:47:09] SCORE Player2 (gray0): Final=195.9, Time=97.9, Moves(10)=0.0, Pins(0)=0.0, Dist=98.0
+[2026-04-13 13:47:09] MOVE 21: Player1 (lawn green) 44->42 [0.02ms]
+[2026-04-13 13:47:09] SCORE Player1 (lawn green): Final=199.3, Time=97.3, Moves(11)=0.0, Pins(0)=0.0, Dist=102.0
+[2026-04-13 13:47:09] SCORE Player2 (gray0): Final=195.9, Time=97.9, Moves(10)=0.0, Pins(0)=0.0, Dist=98.0
+[2026-04-13 13:47:09] MOVE 22: Player2 (gray0) 87->86 [0.02ms]
+[2026-04-13 13:47:09] SCORE Player1 (lawn green): Final=199.3, Time=97.3, Moves(11)=0.0, Pins(0)=0.0, Dist=102.0
+[2026-04-13 13:47:09] SCORE Player2 (gray0): Final=194.7, Time=97.7, Moves(11)=0.0, Pins(0)=0.0, Dist=97.0
+[2026-04-13 13:47:09] MOVE 23: Player1 (lawn green) 18->9 [0.02ms]
+[2026-04-13 13:47:09] SCORE Player1 (lawn green): Final=199.1, Time=97.1, Moves(12)=0.0, Pins(0)=0.0, Dist=102.0
+[2026-04-13 13:47:09] SCORE Player2 (gray0): Final=194.7, Time=97.7, Moves(11)=0.0, Pins(0)=0.0, Dist=97.0
+[2026-04-13 13:47:10] MOVE 24: Player2 (gray0) 100->77 [0.02ms]
+[2026-04-13 13:47:10] SCORE Player1 (lawn green): Final=199.1, Time=97.1, Moves(12)=0.0, Pins(0)=0.0, Dist=102.0
+[2026-04-13 13:47:10] SCORE Player2 (gray0): Final=196.5, Time=97.5, Moves(12)=0.0, Pins(0)=0.0, Dist=99.0
+[2026-04-13 13:47:10] MOVE 25: Player1 (lawn green) 9->5 [0.04ms]
+[2026-04-13 13:47:10] SCORE Player1 (lawn green): Final=198.9, Time=96.9, Moves(13)=0.0, Pins(0)=0.0, Dist=102.0
+[2026-04-13 13:47:10] SCORE Player2 (gray0): Final=196.5, Time=97.5, Moves(12)=0.0, Pins(0)=0.0, Dist=99.0
+[2026-04-13 13:47:10] MOVE 26: Player2 (gray0) 57->67 [0.03ms]
+[2026-04-13 13:47:10] SCORE Player1 (lawn green): Final=198.9, Time=96.9, Moves(13)=0.0, Pins(0)=0.0, Dist=102.0
+[2026-04-13 13:47:10] SCORE Player2 (gray0): Final=196.2, Time=97.2, Moves(13)=0.0, Pins(0)=0.0, Dist=99.0
+[2026-04-13 13:47:10] MOVE 27: Player1 (lawn green) 30->51 [0.02ms]
+[2026-04-13 13:47:10] SCORE Player1 (lawn green): Final=200.7, Time=96.7, Moves(14)=0.0, Pins(0)=0.0, Dist=104.0
+[2026-04-13 13:47:10] SCORE Player2 (gray0): Final=196.2, Time=97.2, Moves(13)=0.0, Pins(0)=0.0, Dist=99.0
+[2026-04-13 13:47:11] MOVE 28: Player2 (gray0) 90->103 [0.02ms]
+[2026-04-13 13:47:11] SCORE Player1 (lawn green): Final=200.7, Time=96.7, Moves(14)=0.0, Pins(0)=0.0, Dist=104.0
+[2026-04-13 13:47:11] SCORE Player2 (gray0): Final=196.0, Time=97.0, Moves(14)=0.0, Pins(0)=0.0, Dist=99.0
+[2026-04-13 13:47:11] MOVE 29: Player1 (lawn green) 43->41 [0.05ms]
+[2026-04-13 13:47:11] SCORE Player1 (lawn green): Final=202.5, Time=96.5, Moves(15)=0.0, Pins(0)=0.0, Dist=106.0
+[2026-04-13 13:47:11] SCORE Player2 (gray0): Final=196.0, Time=97.0, Moves(14)=0.0, Pins(0)=0.0, Dist=99.0
+[2026-04-13 13:47:11] MOVE 30: Player2 (gray0) 103->111 [0.02ms]
+[2026-04-13 13:47:11] SCORE Player1 (lawn green): Final=202.5, Time=96.5, Moves(15)=0.0, Pins(0)=0.0, Dist=106.0
+[2026-04-13 13:47:11] SCORE Player2 (gray0): Final=194.8, Time=96.8, Moves(15)=0.0, Pins(0)=0.0, Dist=98.0
+[2026-04-13 13:47:11] MOVE 31: Player1 (lawn green) 55->44 [0.02ms]
+[2026-04-13 13:47:11] SCORE Player1 (lawn green): Final=202.3, Time=96.3, Moves(16)=0.0, Pins(0)=0.0, Dist=106.0
+[2026-04-13 13:47:11] SCORE Player2 (gray0): Final=194.8, Time=96.8, Moves(15)=0.0, Pins(0)=0.0, Dist=98.0
+[2026-04-13 13:47:11] MOVE 32: Player2 (gray0) 98->99 [0.02ms]
+[2026-04-13 13:47:11] SCORE Player1 (lawn green): Final=202.3, Time=96.3, Moves(16)=0.0, Pins(0)=0.0, Dist=106.0
+[2026-04-13 13:47:11] SCORE Player2 (gray0): Final=195.6, Time=96.6, Moves(16)=0.0, Pins(0)=0.0, Dist=99.0
+[2026-04-13 13:47:12] MOVE 33: Player1 (lawn green) 52->29 [0.02ms]
+[2026-04-13 13:47:12] SCORE Player1 (lawn green): Final=202.1, Time=96.1, Moves(17)=0.0, Pins(0)=0.0, Dist=106.0
+[2026-04-13 13:47:12] SCORE Player2 (gray0): Final=195.6, Time=96.6, Moves(16)=0.0, Pins(0)=0.0, Dist=99.0
+[2026-04-13 13:47:12] MOVE 34: Player2 (gray0) 101->100 [0.02ms]
+[2026-04-13 13:47:12] SCORE Player1 (lawn green): Final=202.1, Time=96.1, Moves(17)=0.0, Pins(0)=0.0, Dist=106.0
+[2026-04-13 13:47:12] SCORE Player2 (gray0): Final=194.4, Time=96.4, Moves(17)=0.0, Pins(0)=0.0, Dist=98.0
+[2026-04-13 13:47:12] MOVE 35: Player1 (lawn green) 44->54 [0.05ms]
+[2026-04-13 13:47:12] SCORE Player1 (lawn green): Final=202.9, Time=95.9, Moves(18)=0.0, Pins(0)=0.0, Dist=107.0
+[2026-04-13 13:47:12] SCORE Player2 (gray0): Final=194.4, Time=96.4, Moves(17)=0.0, Pins(0)=0.0, Dist=98.0
+[2026-04-13 13:47:12] MOVE 36: Player2 (gray0) 100->101 [0.02ms]
+[2026-04-13 13:47:12] SCORE Player1 (lawn green): Final=202.9, Time=95.9, Moves(18)=0.0, Pins(0)=0.0, Dist=107.0
+[2026-04-13 13:47:12] SCORE Player2 (gray0): Final=195.1, Time=96.1, Moves(18)=0.0, Pins(0)=0.0, Dist=99.0
+[2026-04-13 13:47:12] MOVE 37: Player1 (lawn green) 22->45 [0.02ms]
+[2026-04-13 13:47:13] SCORE Player1 (lawn green): Final=204.7, Time=95.7, Moves(19)=0.0, Pins(0)=0.0, Dist=109.0
+[2026-04-13 13:47:13] SCORE Player2 (gray0): Final=195.1, Time=96.1, Moves(18)=0.0, Pins(0)=0.0, Dist=99.0
+[2026-04-13 13:47:13] MOVE 38: Player2 (gray0) 76->57 [0.02ms]
+[2026-04-13 13:47:13] SCORE Player1 (lawn green): Final=204.7, Time=95.7, Moves(19)=0.0, Pins(0)=0.0, Dist=109.0
+[2026-04-13 13:47:13] SCORE Player2 (gray0): Final=196.9, Time=95.9, Moves(19)=0.0, Pins(0)=0.0, Dist=101.0
+[2026-04-13 13:47:14] MOVE 39: Player1 (lawn green) 21->33 [0.02ms]
+[2026-04-13 13:47:14] SCORE Player1 (lawn green): Final=205.6, Time=95.6, Moves(20)=0.0, Pins(0)=0.0, Dist=110.0
+[2026-04-13 13:47:14] SCORE Player2 (gray0): Final=196.9, Time=95.9, Moves(19)=0.0, Pins(0)=0.0, Dist=101.0
+[2026-04-13 13:47:14] MOVE 40: Player2 (gray0) 99->87 [0.02ms]
+[2026-04-13 13:47:14] SCORE Player1 (lawn green): Final=205.6, Time=95.6, Moves(20)=0.0, Pins(0)=0.0, Dist=110.0
+[2026-04-13 13:47:14] SCORE Player2 (gray0): Final=197.7, Time=95.7, Moves(20)=0.0, Pins(0)=0.0, Dist=102.0
+[2026-04-13 13:47:14] MOVE 41: Player1 (lawn green) 19->31 [0.02ms]
+[2026-04-13 13:47:14] SCORE Player1 (lawn green): Final=206.4, Time=95.4, Moves(21)=0.0, Pins(0)=0.0, Dist=111.0
+[2026-04-13 13:47:14] SCORE Player2 (gray0): Final=197.7, Time=95.7, Moves(20)=0.0, Pins(0)=0.0, Dist=102.0
+[2026-04-13 13:47:14] MOVE 42: Player2 (gray0) 77->78 [0.03ms]
+[2026-04-13 13:47:14] SCORE Player1 (lawn green): Final=206.4, Time=95.4, Moves(21)=0.0, Pins(0)=0.0, Dist=111.0
+[2026-04-13 13:47:14] SCORE Player2 (gray0): Final=198.4, Time=95.4, Moves(21)=0.0, Pins(0)=0.0, Dist=103.0
+[2026-04-13 13:47:15] MOVE 43: Player1 (lawn green) 34->21 [0.02ms]
+[2026-04-13 13:47:15] SCORE Player1 (lawn green): Final=206.1, Time=95.1, Moves(22)=0.0, Pins(0)=0.0, Dist=111.0
+[2026-04-13 13:47:15] SCORE Player2 (gray0): Final=198.4, Time=95.4, Moves(21)=0.0, Pins(0)=0.0, Dist=103.0
+[2026-04-13 13:47:16] MOVE 44: Player2 (gray0) 88->77 [0.03ms]
+[2026-04-13 13:47:16] SCORE Player1 (lawn green): Final=206.1, Time=95.1, Moves(22)=0.0, Pins(0)=0.0, Dist=111.0
+[2026-04-13 13:47:16] SCORE Player2 (gray0): Final=199.2, Time=95.2, Moves(22)=0.0, Pins(0)=0.0, Dist=104.0
+[2026-04-13 13:47:16] MOVE 45: Player1 (lawn green) 21->63 [0.02ms]
+[2026-04-13 13:47:16] SCORE Player1 (lawn green): Final=209.9, Time=94.9, Moves(23)=0.0, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:16] SCORE Player2 (gray0): Final=199.2, Time=95.2, Moves(22)=0.0, Pins(0)=0.0, Dist=104.0
+[2026-04-13 13:47:16] MOVE 46: Player2 (gray0) 87->100 [0.03ms]
+[2026-04-13 13:47:16] SCORE Player1 (lawn green): Final=209.9, Time=94.9, Moves(23)=0.0, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:16] SCORE Player2 (gray0): Final=199.0, Time=95.0, Moves(23)=0.0, Pins(0)=0.0, Dist=104.0
+[2026-04-13 13:47:16] MOVE 47: Player1 (lawn green) 45->44 [0.02ms]
+[2026-04-13 13:47:16] SCORE Player1 (lawn green): Final=210.8, Time=94.8, Moves(24)=0.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:16] SCORE Player2 (gray0): Final=199.0, Time=95.0, Moves(23)=0.0, Pins(0)=0.0, Dist=104.0
+[2026-04-13 13:47:16] MOVE 48: Player2 (gray0) 57->48 [0.02ms]
+[2026-04-13 13:47:16] SCORE Player1 (lawn green): Final=210.8, Time=94.8, Moves(24)=0.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:16] SCORE Player2 (gray0): Final=199.8, Time=94.8, Moves(24)=0.0, Pins(0)=0.0, Dist=105.0
+[2026-04-13 13:47:17] MOVE 49: Player1 (lawn green) 5->4 [0.02ms]
+[2026-04-13 13:47:17] SCORE Player1 (lawn green): Final=211.6, Time=94.6, Moves(25)=0.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:17] SCORE Player2 (gray0): Final=199.8, Time=94.8, Moves(24)=0.0, Pins(0)=0.0, Dist=105.0
+[2026-04-13 13:47:17] MOVE 50: Player2 (gray0) 77->76 [0.02ms]
+[2026-04-13 13:47:17] SCORE Player1 (lawn green): Final=211.6, Time=94.6, Moves(25)=0.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:17] SCORE Player2 (gray0): Final=198.5, Time=94.5, Moves(25)=0.0, Pins(0)=0.0, Dist=104.0
+[2026-04-13 13:47:17] MOVE 51: Player1 (lawn green) 33->34 [0.02ms]
+[2026-04-13 13:47:17] SCORE Player1 (lawn green): Final=210.4, Time=94.4, Moves(26)=0.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:17] SCORE Player2 (gray0): Final=198.5, Time=94.5, Moves(25)=0.0, Pins(0)=0.0, Dist=104.0
+[2026-04-13 13:47:17] MOVE 52: Player2 (gray0) 76->66 [0.02ms]
+[2026-04-13 13:47:17] SCORE Player1 (lawn green): Final=210.4, Time=94.4, Moves(26)=0.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:17] SCORE Player2 (gray0): Final=199.3, Time=94.3, Moves(26)=0.0, Pins(0)=0.0, Dist=105.0
+[2026-04-13 13:47:17] MOVE 53: Player1 (lawn green) 34->33 [0.02ms]
+[2026-04-13 13:47:18] SCORE Player1 (lawn green): Final=211.1, Time=94.1, Moves(27)=0.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:18] SCORE Player2 (gray0): Final=199.3, Time=94.3, Moves(26)=0.0, Pins(0)=0.0, Dist=105.0
+[2026-04-13 13:47:18] MOVE 54: Player2 (gray0) 75->87 [0.03ms]
+[2026-04-13 13:47:18] SCORE Player1 (lawn green): Final=211.1, Time=94.1, Moves(27)=0.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:18] SCORE Player2 (gray0): Final=199.1, Time=94.1, Moves(27)=0.0, Pins(0)=0.0, Dist=105.0
+[2026-04-13 13:47:18] MOVE 55: Player1 (lawn green) 4->3 [0.02ms]
+[2026-04-13 13:47:18] SCORE Player1 (lawn green): Final=212.0, Time=94.0, Moves(28)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:18] SCORE Player2 (gray0): Final=199.1, Time=94.1, Moves(27)=0.0, Pins(0)=0.0, Dist=105.0
+[2026-04-13 13:47:18] MOVE 56: Player2 (gray0) 100->58 [0.04ms]
+[2026-04-13 13:47:18] SCORE Player1 (lawn green): Final=212.0, Time=94.0, Moves(28)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:18] SCORE Player2 (gray0): Final=202.8, Time=93.8, Moves(28)=0.0, Pins(0)=0.0, Dist=109.0
+[2026-04-13 13:47:18] MOVE 57: Player1 (lawn green) 63->73 [0.03ms]
+[2026-04-13 13:47:18] SCORE Player1 (lawn green): Final=211.8, Time=93.8, Moves(29)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:18] SCORE Player2 (gray0): Final=202.8, Time=93.8, Moves(28)=0.0, Pins(0)=0.0, Dist=109.0
+[2026-04-13 13:47:19] MOVE 58: Player2 (gray0) 86->88 [0.02ms]
+[2026-04-13 13:47:19] SCORE Player1 (lawn green): Final=211.8, Time=93.8, Moves(29)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:19] SCORE Player2 (gray0): Final=204.6, Time=93.6, Moves(29)=0.0, Pins(0)=0.0, Dist=111.0
+[2026-04-13 13:47:19] MOVE 59: Player1 (lawn green) 29->52 [0.02ms]
+[2026-04-13 13:47:19] SCORE Player1 (lawn green): Final=211.6, Time=93.6, Moves(30)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:19] SCORE Player2 (gray0): Final=204.6, Time=93.6, Moves(29)=0.0, Pins(0)=0.0, Dist=111.0
+[2026-04-13 13:47:19] MOVE 60: Player2 (gray0) 88->76 [0.02ms]
+[2026-04-13 13:47:19] SCORE Player1 (lawn green): Final=211.6, Time=93.6, Moves(30)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:19] SCORE Player2 (gray0): Final=204.4, Time=93.4, Moves(30)=0.0, Pins(0)=0.0, Dist=111.0
+[2026-04-13 13:47:19] MOVE 61: Player1 (lawn green) 54->63 [0.02ms]
+[2026-04-13 13:47:19] SCORE Player1 (lawn green): Final=212.4, Time=93.4, Moves(31)=0.0, Pins(0)=0.0, Dist=119.0
+[2026-04-13 13:47:19] SCORE Player2 (gray0): Final=204.4, Time=93.4, Moves(30)=0.0, Pins(0)=0.0, Dist=111.0
+[2026-04-13 13:47:19] MOVE 62: Player2 (gray0) 101->102 [0.03ms]
+[2026-04-13 13:47:19] SCORE Player1 (lawn green): Final=212.4, Time=93.4, Moves(31)=0.0, Pins(0)=0.0, Dist=119.0
+[2026-04-13 13:47:19] SCORE Player2 (gray0): Final=205.2, Time=93.2, Moves(31)=0.0, Pins(0)=0.0, Dist=112.0
+[2026-04-13 13:47:20] MOVE 63: Player1 (lawn green) 73->83 [0.02ms]
+[2026-04-13 13:47:20] SCORE Player1 (lawn green): Final=213.2, Time=93.2, Moves(32)=0.0, Pins(0)=0.0, Dist=120.0
+[2026-04-13 13:47:20] SCORE Player2 (gray0): Final=205.2, Time=93.2, Moves(31)=0.0, Pins(0)=0.0, Dist=112.0
+[2026-04-13 13:47:20] MOVE 64: Player2 (gray0) 78->38 [0.02ms]
+[2026-04-13 13:47:20] SCORE Player1 (lawn green): Final=213.2, Time=93.2, Moves(32)=0.0, Pins(0)=0.0, Dist=120.0
+[2026-04-13 13:47:20] SCORE Player2 (gray0): Final=206.9, Time=92.9, Moves(32)=0.0, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:20] MOVE 65: Player1 (lawn green) 31->32 [0.02ms]
+[2026-04-13 13:47:20] SCORE Player1 (lawn green): Final=212.1, Time=93.1, Moves(33)=0.0, Pins(0)=0.0, Dist=119.0
+[2026-04-13 13:47:20] SCORE Player2 (gray0): Final=206.9, Time=92.9, Moves(32)=0.0, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:20] MOVE 66: Player2 (gray0) 66->77 [0.02ms]
+[2026-04-13 13:47:20] SCORE Player1 (lawn green): Final=212.1, Time=93.1, Moves(33)=0.0, Pins(0)=0.0, Dist=119.0
+[2026-04-13 13:47:20] SCORE Player2 (gray0): Final=206.7, Time=92.7, Moves(33)=0.0, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:20] MOVE 67: Player1 (lawn green) 42->43 [0.02ms]
+[2026-04-13 13:47:20] SCORE Player1 (lawn green): Final=211.0, Time=92.9, Moves(34)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:20] SCORE Player2 (gray0): Final=206.7, Time=92.7, Moves(33)=0.0, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:21] MOVE 68: Player2 (gray0) 77->89 [0.02ms]
+[2026-04-13 13:47:21] SCORE Player1 (lawn green): Final=211.0, Time=92.9, Moves(34)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:21] SCORE Player2 (gray0): Final=206.5, Time=92.5, Moves(34)=0.0, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:21] MOVE 69: Player1 (lawn green) 52->62 [0.02ms]
+[2026-04-13 13:47:21] SCORE Player1 (lawn green): Final=210.8, Time=92.7, Moves(35)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:21] SCORE Player2 (gray0): Final=206.5, Time=92.5, Moves(34)=0.0, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:21] MOVE 70: Player2 (gray0) 67->77 [0.02ms]
+[2026-04-13 13:47:21] SCORE Player1 (lawn green): Final=210.8, Time=92.7, Moves(35)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:21] SCORE Player2 (gray0): Final=205.3, Time=92.3, Moves(35)=0.0, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:47:21] MOVE 71: Player1 (lawn green) 44->19 [0.02ms]
+[2026-04-13 13:47:21] SCORE Player1 (lawn green): Final=210.6, Time=92.5, Moves(36)=0.1, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:21] SCORE Player2 (gray0): Final=205.3, Time=92.3, Moves(35)=0.0, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:47:21] MOVE 72: Player2 (gray0) 102->103 [0.02ms]
+[2026-04-13 13:47:21] SCORE Player1 (lawn green): Final=210.6, Time=92.5, Moves(36)=0.1, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:21] SCORE Player2 (gray0): Final=206.1, Time=92.1, Moves(36)=0.1, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:22] MOVE 73: Player1 (lawn green) 63->73 [0.02ms]
+[2026-04-13 13:47:22] SCORE Player1 (lawn green): Final=210.5, Time=92.4, Moves(37)=0.1, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:22] SCORE Player2 (gray0): Final=206.1, Time=92.1, Moves(36)=0.1, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:22] MOVE 74: Player2 (gray0) 48->57 [0.02ms]
+[2026-04-13 13:47:22] SCORE Player1 (lawn green): Final=210.5, Time=92.4, Moves(37)=0.1, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:22] SCORE Player2 (gray0): Final=205.0, Time=91.9, Moves(37)=0.1, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:47:22] MOVE 75: Player1 (lawn green) 32->31 [0.02ms]
+[2026-04-13 13:47:22] SCORE Player1 (lawn green): Final=211.4, Time=92.2, Moves(38)=0.2, Pins(0)=0.0, Dist=119.0
+[2026-04-13 13:47:22] SCORE Player2 (gray0): Final=205.0, Time=91.9, Moves(37)=0.1, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:47:22] MOVE 76: Player2 (gray0) 77->102 [0.02ms]
+[2026-04-13 13:47:22] SCORE Player1 (lawn green): Final=211.4, Time=92.2, Moves(38)=0.2, Pins(0)=0.0, Dist=119.0
+[2026-04-13 13:47:22] SCORE Player2 (gray0): Final=204.9, Time=91.7, Moves(38)=0.2, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:47:22] MOVE 77: Player1 (lawn green) 41->52 [0.02ms]
+[2026-04-13 13:47:22] SCORE Player1 (lawn green): Final=211.2, Time=91.9, Moves(39)=0.3, Pins(0)=0.0, Dist=119.0
+[2026-04-13 13:47:22] SCORE Player2 (gray0): Final=204.9, Time=91.7, Moves(38)=0.2, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:47:23] MOVE 78: Player2 (gray0) 65->112 [0.02ms]
+[2026-04-13 13:47:23] SCORE Player1 (lawn green): Final=211.2, Time=91.9, Moves(39)=0.3, Pins(0)=0.0, Dist=119.0
+[2026-04-13 13:47:23] SCORE Player2 (gray0): Final=206.8, Time=91.5, Moves(39)=0.3, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:23] MOVE 79: Player1 (lawn green) 3->4 [0.02ms]
+[2026-04-13 13:47:23] SCORE Player1 (lawn green): Final=210.2, Time=91.7, Moves(40)=0.5, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:23] SCORE Player2 (gray0): Final=206.8, Time=91.5, Moves(39)=0.3, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:23] MOVE 80: Player2 (gray0) 87->88 [0.02ms]
+[2026-04-13 13:47:23] SCORE Player1 (lawn green): Final=210.2, Time=91.7, Moves(40)=0.5, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:23] SCORE Player2 (gray0): Final=207.7, Time=91.3, Moves(40)=0.5, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:23] MOVE 81: Player1 (lawn green) 62->53 [0.02ms]
+[2026-04-13 13:47:23] SCORE Player1 (lawn green): Final=209.1, Time=91.5, Moves(41)=0.6, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:23] SCORE Player2 (gray0): Final=207.7, Time=91.3, Moves(40)=0.5, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:23] MOVE 82: Player2 (gray0) 76->77 [0.02ms]
+[2026-04-13 13:47:23] SCORE Player1 (lawn green): Final=209.1, Time=91.5, Moves(41)=0.6, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:23] SCORE Player2 (gray0): Final=208.7, Time=91.1, Moves(41)=0.6, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:24] MOVE 83: Player1 (lawn green) 19->21 [0.02ms]
+[2026-04-13 13:47:24] SCORE Player1 (lawn green): Final=207.1, Time=91.4, Moves(42)=0.8, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:24] SCORE Player2 (gray0): Final=208.7, Time=91.1, Moves(41)=0.6, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:24] MOVE 84: Player2 (gray0) 58->49 [0.02ms]
+[2026-04-13 13:47:24] SCORE Player1 (lawn green): Final=207.1, Time=91.4, Moves(42)=0.8, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:24] SCORE Player2 (gray0): Final=209.6, Time=90.9, Moves(42)=0.8, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:24] MOVE 85: Player1 (lawn green) 21->44 [0.02ms]
+[2026-04-13 13:47:24] SCORE Player1 (lawn green): Final=209.0, Time=91.1, Moves(43)=0.9, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:24] SCORE Player2 (gray0): Final=209.6, Time=90.9, Moves(42)=0.8, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:24] MOVE 86: Player2 (gray0) 77->66 [0.02ms]
+[2026-04-13 13:47:24] SCORE Player1 (lawn green): Final=209.0, Time=91.1, Moves(43)=0.9, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:24] SCORE Player2 (gray0): Final=209.6, Time=90.7, Moves(43)=0.9, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:24] MOVE 87: Player1 (lawn green) 31->18 [0.02ms]
+[2026-04-13 13:47:24] SCORE Player1 (lawn green): Final=208.9, Time=90.9, Moves(44)=1.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:24] SCORE Player2 (gray0): Final=209.6, Time=90.7, Moves(43)=0.9, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:25] MOVE 88: Player2 (gray0) 66->48 [0.02ms]
+[2026-04-13 13:47:25] SCORE Player1 (lawn green): Final=208.9, Time=90.9, Moves(44)=1.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:25] SCORE Player2 (gray0): Final=211.5, Time=90.5, Moves(44)=1.0, Pins(0)=0.0, Dist=120.0
+[2026-04-13 13:47:25] MOVE 89: Player1 (lawn green) 44->45 [0.02ms]
+[2026-04-13 13:47:25] SCORE Player1 (lawn green): Final=207.7, Time=90.7, Moves(45)=1.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:25] SCORE Player2 (gray0): Final=211.5, Time=90.5, Moves(44)=1.0, Pins(0)=0.0, Dist=120.0
+[2026-04-13 13:47:25] MOVE 90: Player2 (gray0) 57->67 [0.02ms]
+[2026-04-13 13:47:25] SCORE Player1 (lawn green): Final=207.7, Time=90.7, Moves(45)=1.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:25] SCORE Player2 (gray0): Final=211.4, Time=90.4, Moves(45)=1.0, Pins(0)=0.0, Dist=120.0
+[2026-04-13 13:47:25] MOVE 91: Player1 (lawn green) 45->44 [0.02ms]
+[2026-04-13 13:47:25] SCORE Player1 (lawn green): Final=208.5, Time=90.5, Moves(46)=1.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:25] SCORE Player2 (gray0): Final=211.4, Time=90.4, Moves(45)=1.0, Pins(0)=0.0, Dist=120.0
+[2026-04-13 13:47:25] MOVE 92: Player2 (gray0) 102->104 [0.02ms]
+[2026-04-13 13:47:25] SCORE Player1 (lawn green): Final=208.5, Time=90.5, Moves(46)=1.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:25] SCORE Player2 (gray0): Final=213.2, Time=90.2, Moves(46)=1.0, Pins(0)=0.0, Dist=122.0
+[2026-04-13 13:47:26] MOVE 93: Player1 (lawn green) 4->5 [0.02ms]
+[2026-04-13 13:47:26] SCORE Player1 (lawn green): Final=207.2, Time=90.2, Moves(47)=1.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:26] SCORE Player2 (gray0): Final=213.2, Time=90.2, Moves(46)=1.0, Pins(0)=0.0, Dist=122.0
+[2026-04-13 13:47:27] MOVE 94: Player2 (gray0) 88->101 [0.03ms]
+[2026-04-13 13:47:27] SCORE Player1 (lawn green): Final=207.2, Time=90.2, Moves(47)=1.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:27] SCORE Player2 (gray0): Final=212.2, Time=89.2, Moves(47)=1.0, Pins(0)=0.0, Dist=122.0
+[2026-04-13 13:47:27] MOVE 95: Player1 (lawn green) 51->60 [0.02ms]
+[2026-04-13 13:47:27] SCORE Player1 (lawn green): Final=208.0, Time=90.0, Moves(48)=1.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:27] SCORE Player2 (gray0): Final=212.2, Time=89.2, Moves(47)=1.0, Pins(0)=0.0, Dist=122.0
+[2026-04-13 13:47:27] MOVE 96: Player2 (gray0) 111->113 [0.02ms]
+[2026-04-13 13:47:27] SCORE Player1 (lawn green): Final=208.0, Time=90.0, Moves(48)=1.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:27] SCORE Player2 (gray0): Final=213.9, Time=88.9, Moves(48)=1.0, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:27] MOVE 97: Player1 (lawn green) 52->42 [0.02ms]
+[2026-04-13 13:47:27] SCORE Player1 (lawn green): Final=206.7, Time=89.7, Moves(49)=1.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:28] SCORE Player2 (gray0): Final=213.9, Time=88.9, Moves(48)=1.0, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:28] MOVE 98: Player2 (gray0) 113->105 [0.02ms]
+[2026-04-13 13:47:28] SCORE Player1 (lawn green): Final=206.7, Time=89.7, Moves(49)=1.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:28] SCORE Player2 (gray0): Final=214.7, Time=88.7, Moves(49)=1.0, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:28] MOVE 99: Player1 (lawn green) 83->84 [0.02ms]
+[2026-04-13 13:47:28] SCORE Player1 (lawn green): Final=205.5, Time=89.5, Moves(50)=1.0, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:28] SCORE Player2 (gray0): Final=214.7, Time=88.7, Moves(49)=1.0, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:28] MOVE 100: Player2 (gray0) 101->78 [0.02ms]
+[2026-04-13 13:47:28] SCORE Player1 (lawn green): Final=205.5, Time=89.5, Moves(50)=1.0, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:28] SCORE Player2 (gray0): Final=216.5, Time=88.5, Moves(50)=1.0, Pins(0)=0.0, Dist=127.0
+[2026-04-13 13:47:28] MOVE 101: Player1 (lawn green) 18->19 [0.02ms]
+[2026-04-13 13:47:29] SCORE Player1 (lawn green): Final=204.3, Time=89.3, Moves(51)=0.9, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:29] SCORE Player2 (gray0): Final=216.5, Time=88.5, Moves(50)=1.0, Pins(0)=0.0, Dist=127.0
+[2026-04-13 13:47:29] MOVE 102: Player2 (gray0) 103->90 [0.02ms]
+[2026-04-13 13:47:29] SCORE Player1 (lawn green): Final=204.3, Time=89.3, Moves(51)=0.9, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:29] SCORE Player2 (gray0): Final=216.1, Time=88.2, Moves(51)=0.9, Pins(0)=0.0, Dist=127.0
+[2026-04-13 13:47:29] MOVE 103: Player1 (lawn green) 44->21 [0.02ms]
+[2026-04-13 13:47:29] SCORE Player1 (lawn green): Final=202.1, Time=89.2, Moves(52)=0.9, Pins(0)=0.0, Dist=112.0
+[2026-04-13 13:47:29] SCORE Player2 (gray0): Final=216.1, Time=88.2, Moves(51)=0.9, Pins(0)=0.0, Dist=127.0
+[2026-04-13 13:47:30] MOVE 104: Player2 (gray0) 90->91 [0.02ms]
+[2026-04-13 13:47:30] SCORE Player1 (lawn green): Final=202.1, Time=89.2, Moves(52)=0.9, Pins(0)=0.0, Dist=112.0
+[2026-04-13 13:47:30] SCORE Player2 (gray0): Final=217.0, Time=88.0, Moves(52)=0.9, Pins(0)=0.0, Dist=128.0
+[2026-04-13 13:47:30] MOVE 105: Player1 (lawn green) 43->44 [0.02ms]
+[2026-04-13 13:47:30] SCORE Player1 (lawn green): Final=200.9, Time=89.0, Moves(53)=0.9, Pins(0)=0.0, Dist=111.0
+[2026-04-13 13:47:30] SCORE Player2 (gray0): Final=217.0, Time=88.0, Moves(52)=0.9, Pins(0)=0.0, Dist=128.0
+[2026-04-13 13:47:30] MOVE 106: Player2 (gray0) 89->77 [0.02ms]
+[2026-04-13 13:47:30] SCORE Player1 (lawn green): Final=200.9, Time=89.0, Moves(53)=0.9, Pins(0)=0.0, Dist=111.0
+[2026-04-13 13:47:30] SCORE Player2 (gray0): Final=216.6, Time=87.7, Moves(53)=0.9, Pins(0)=0.0, Dist=128.0
+[2026-04-13 13:47:30] MOVE 107: Player1 (lawn green) 60->59 [0.02ms]
+[2026-04-13 13:47:30] SCORE Player1 (lawn green): Final=201.7, Time=88.8, Moves(54)=0.9, Pins(0)=0.0, Dist=112.0
+[2026-04-13 13:47:30] SCORE Player2 (gray0): Final=216.6, Time=87.7, Moves(53)=0.9, Pins(0)=0.0, Dist=128.0
+[2026-04-13 13:47:31] MOVE 108: Player2 (gray0) 105->116 [0.02ms]
+[2026-04-13 13:47:31] SCORE Player1 (lawn green): Final=201.7, Time=88.8, Moves(54)=0.9, Pins(0)=0.0, Dist=112.0
+[2026-04-13 13:47:31] SCORE Player2 (gray0): Final=214.4, Time=87.5, Moves(54)=0.9, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:32] MOVE 109: Player1 (lawn green) 59->69 [0.02ms]
+[2026-04-13 13:47:32] SCORE Player1 (lawn green): Final=201.5, Time=88.6, Moves(55)=0.9, Pins(0)=0.0, Dist=112.0
+[2026-04-13 13:47:32] SCORE Player2 (gray0): Final=214.4, Time=87.5, Moves(54)=0.9, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:32] MOVE 110: Player2 (gray0) 91->90 [0.02ms]
+[2026-04-13 13:47:32] SCORE Player1 (lawn green): Final=201.5, Time=88.6, Moves(55)=0.9, Pins(0)=0.0, Dist=112.0
+[2026-04-13 13:47:32] SCORE Player2 (gray0): Final=213.1, Time=87.2, Moves(55)=0.9, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:32] MOVE 111: Player1 (lawn green) 19->18 [0.02ms]
+[2026-04-13 13:47:32] SCORE Player1 (lawn green): Final=202.3, Time=88.5, Moves(56)=0.8, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:47:32] SCORE Player2 (gray0): Final=213.1, Time=87.2, Moves(55)=0.9, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:32] MOVE 112: Player2 (gray0) 116->117 [0.02ms]
+[2026-04-13 13:47:32] SCORE Player1 (lawn green): Final=202.3, Time=88.5, Moves(56)=0.8, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:47:32] SCORE Player2 (gray0): Final=213.9, Time=87.0, Moves(56)=0.8, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:32] MOVE 113: Player1 (lawn green) 21->22 [0.02ms]
+[2026-04-13 13:47:32] SCORE Player1 (lawn green): Final=201.1, Time=88.3, Moves(57)=0.8, Pins(0)=0.0, Dist=112.0
+[2026-04-13 13:47:32] SCORE Player2 (gray0): Final=213.9, Time=87.0, Moves(56)=0.8, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:33] MOVE 114: Player2 (gray0) 90->102 [0.02ms]
+[2026-04-13 13:47:33] SCORE Player1 (lawn green): Final=201.1, Time=88.3, Moves(57)=0.8, Pins(0)=0.0, Dist=112.0
+[2026-04-13 13:47:33] SCORE Player2 (gray0): Final=212.6, Time=86.8, Moves(57)=0.8, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:33] MOVE 115: Player1 (lawn green) 53->54 [0.02ms]
+[2026-04-13 13:47:33] SCORE Player1 (lawn green): Final=199.9, Time=88.2, Moves(58)=0.8, Pins(0)=0.0, Dist=111.0
+[2026-04-13 13:47:33] SCORE Player2 (gray0): Final=212.6, Time=86.8, Moves(57)=0.8, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:33] MOVE 116: Player2 (gray0) 77->58 [0.02ms]
+[2026-04-13 13:47:33] SCORE Player1 (lawn green): Final=199.9, Time=88.2, Moves(58)=0.8, Pins(0)=0.0, Dist=111.0
+[2026-04-13 13:47:33] SCORE Player2 (gray0): Final=214.4, Time=86.6, Moves(58)=0.8, Pins(0)=0.0, Dist=127.0
+[2026-04-13 13:47:33] MOVE 117: Player1 (lawn green) 5->4 [0.02ms]
+[2026-04-13 13:47:33] SCORE Player1 (lawn green): Final=200.7, Time=88.0, Moves(59)=0.7, Pins(0)=0.0, Dist=112.0
+[2026-04-13 13:47:33] SCORE Player2 (gray0): Final=214.4, Time=86.6, Moves(58)=0.8, Pins(0)=0.0, Dist=127.0
+[2026-04-13 13:47:33] MOVE 118: Player2 (gray0) 78->77 [0.02ms]
+[2026-04-13 13:47:34] SCORE Player1 (lawn green): Final=200.7, Time=88.0, Moves(59)=0.7, Pins(0)=0.0, Dist=112.0
+[2026-04-13 13:47:34] SCORE Player2 (gray0): Final=213.1, Time=86.3, Moves(59)=0.7, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:34] MOVE 119: Player1 (lawn green) 54->63 [0.02ms]
+[2026-04-13 13:47:34] SCORE Player1 (lawn green): Final=201.5, Time=87.8, Moves(60)=0.7, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:47:34] SCORE Player2 (gray0): Final=213.1, Time=86.3, Moves(59)=0.7, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:35] MOVE 120: Player2 (gray0) 112->116 [0.02ms]
+[2026-04-13 13:47:35] SCORE Player1 (lawn green): Final=201.5, Time=87.8, Moves(60)=0.7, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:47:35] SCORE Player2 (gray0): Final=212.8, Time=86.1, Moves(60)=0.7, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:35] MOVE 121: Player1 (lawn green) 33->32 [0.02ms]
+[2026-04-13 13:47:35] SCORE Player1 (lawn green): Final=202.2, Time=87.5, Moves(61)=0.7, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:35] SCORE Player2 (gray0): Final=212.8, Time=86.1, Moves(60)=0.7, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:35] MOVE 122: Player2 (gray0) 116->115 [0.02ms]
+[2026-04-13 13:47:35] SCORE Player1 (lawn green): Final=202.2, Time=87.5, Moves(61)=0.7, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:35] SCORE Player2 (gray0): Final=211.5, Time=85.9, Moves(61)=0.7, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:35] MOVE 123: Player1 (lawn green) 32->19 [0.02ms]
+[2026-04-13 13:47:35] SCORE Player1 (lawn green): Final=202.0, Time=87.3, Moves(62)=0.6, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:35] SCORE Player2 (gray0): Final=211.5, Time=85.9, Moves(61)=0.7, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:35] MOVE 124: Player2 (gray0) 67->66 [0.02ms]
+[2026-04-13 13:47:35] SCORE Player1 (lawn green): Final=202.0, Time=87.3, Moves(62)=0.6, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:35] SCORE Player2 (gray0): Final=210.4, Time=85.7, Moves(62)=0.6, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:36] MOVE 125: Player1 (lawn green) 63->62 [0.02ms]
+[2026-04-13 13:47:36] SCORE Player1 (lawn green): Final=202.7, Time=87.1, Moves(63)=0.6, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:36] SCORE Player2 (gray0): Final=210.4, Time=85.7, Moves(62)=0.6, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:36] MOVE 126: Player2 (gray0) 49->50 [0.02ms]
+[2026-04-13 13:47:36] SCORE Player1 (lawn green): Final=202.7, Time=87.1, Moves(63)=0.6, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:36] SCORE Player2 (gray0): Final=211.2, Time=85.6, Moves(63)=0.6, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:36] MOVE 127: Player1 (lawn green) 19->32 [0.02ms]
+[2026-04-13 13:47:36] SCORE Player1 (lawn green): Final=202.5, Time=86.9, Moves(64)=0.6, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:36] SCORE Player2 (gray0): Final=211.2, Time=85.6, Moves(63)=0.6, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:36] MOVE 128: Player2 (gray0) 38->37 [0.02ms]
+[2026-04-13 13:47:36] SCORE Player1 (lawn green): Final=202.5, Time=86.9, Moves(64)=0.6, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:36] SCORE Player2 (gray0): Final=210.0, Time=85.4, Moves(64)=0.6, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:36] MOVE 129: Player1 (lawn green) 42->52 [0.02ms]
+[2026-04-13 13:47:36] SCORE Player1 (lawn green): Final=203.2, Time=86.7, Moves(65)=0.5, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:36] SCORE Player2 (gray0): Final=210.0, Time=85.4, Moves(64)=0.6, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:37] MOVE 130: Player2 (gray0) 66->89 [0.02ms]
+[2026-04-13 13:47:37] SCORE Player1 (lawn green): Final=203.2, Time=86.7, Moves(65)=0.5, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:37] SCORE Player2 (gray0): Final=209.8, Time=85.2, Moves(65)=0.5, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:37] MOVE 131: Player1 (lawn green) 69->80 [0.02ms]
+[2026-04-13 13:47:38] SCORE Player1 (lawn green): Final=203.0, Time=86.5, Moves(66)=0.5, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:38] SCORE Player2 (gray0): Final=209.8, Time=85.2, Moves(65)=0.5, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:38] MOVE 132: Player2 (gray0) 77->78 [0.02ms]
+[2026-04-13 13:47:38] SCORE Player1 (lawn green): Final=203.0, Time=86.5, Moves(66)=0.5, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:38] SCORE Player2 (gray0): Final=210.5, Time=85.0, Moves(66)=0.5, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:38] MOVE 133: Player1 (lawn green) 52->51 [0.02ms]
+[2026-04-13 13:47:38] SCORE Player1 (lawn green): Final=203.7, Time=86.3, Moves(67)=0.5, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:38] SCORE Player2 (gray0): Final=210.5, Time=85.0, Moves(66)=0.5, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:38] MOVE 134: Player2 (gray0) 58->49 [0.02ms]
+[2026-04-13 13:47:38] SCORE Player1 (lawn green): Final=203.7, Time=86.3, Moves(67)=0.5, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:38] SCORE Player2 (gray0): Final=211.3, Time=84.8, Moves(67)=0.5, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:38] MOVE 135: Player1 (lawn green) 22->34 [0.07ms]
+[2026-04-13 13:47:39] SCORE Player1 (lawn green): Final=204.5, Time=86.0, Moves(68)=0.4, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:39] SCORE Player2 (gray0): Final=211.3, Time=84.8, Moves(67)=0.5, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:39] MOVE 136: Player2 (gray0) 50->39 [0.02ms]
+[2026-04-13 13:47:39] SCORE Player1 (lawn green): Final=204.5, Time=86.0, Moves(68)=0.4, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:39] SCORE Player2 (gray0): Final=211.0, Time=84.6, Moves(68)=0.4, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:39] MOVE 137: Player1 (lawn green) 4->3 [0.02ms]
+[2026-04-13 13:47:39] SCORE Player1 (lawn green): Final=205.2, Time=85.8, Moves(69)=0.4, Pins(0)=0.0, Dist=119.0
+[2026-04-13 13:47:39] SCORE Player2 (gray0): Final=211.0, Time=84.6, Moves(68)=0.4, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:39] MOVE 138: Player2 (gray0) 49->38 [0.02ms]
+[2026-04-13 13:47:39] SCORE Player1 (lawn green): Final=205.2, Time=85.8, Moves(69)=0.4, Pins(0)=0.0, Dist=119.0
+[2026-04-13 13:47:39] SCORE Player2 (gray0): Final=210.9, Time=84.5, Moves(69)=0.4, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:39] MOVE 139: Player1 (lawn green) 3->1 [0.02ms]
+[2026-04-13 13:47:39] SCORE Player1 (lawn green): Final=203.9, Time=85.5, Moves(70)=0.4, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:39] SCORE Player2 (gray0): Final=210.9, Time=84.5, Moves(69)=0.4, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:39] MOVE 140: Player2 (gray0) 104->112 [0.03ms]
+[2026-04-13 13:47:39] SCORE Player1 (lawn green): Final=203.9, Time=85.5, Moves(70)=0.4, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:39] SCORE Player2 (gray0): Final=209.7, Time=84.3, Moves(70)=0.4, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:40] MOVE 141: Player1 (lawn green) 1->2 [0.02ms]
+[2026-04-13 13:47:40] SCORE Player1 (lawn green): Final=202.7, Time=85.3, Moves(71)=0.4, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:40] SCORE Player2 (gray0): Final=209.7, Time=84.3, Moves(70)=0.4, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:40] MOVE 142: Player2 (gray0) 78->67 [0.02ms]
+[2026-04-13 13:47:40] SCORE Player1 (lawn green): Final=202.7, Time=85.3, Moves(71)=0.4, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:40] SCORE Player2 (gray0): Final=209.5, Time=84.2, Moves(71)=0.4, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:40] MOVE 143: Player1 (lawn green) 62->72 [0.02ms]
+[2026-04-13 13:47:40] SCORE Player1 (lawn green): Final=202.5, Time=85.1, Moves(72)=0.3, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:40] SCORE Player2 (gray0): Final=209.5, Time=84.2, Moves(71)=0.4, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:40] MOVE 144: Player2 (gray0) 112->116 [0.02ms]
+[2026-04-13 13:47:41] SCORE Player1 (lawn green): Final=202.5, Time=85.1, Moves(72)=0.3, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:41] SCORE Player2 (gray0): Final=209.2, Time=83.9, Moves(72)=0.3, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:41] MOVE 145: Player1 (lawn green) 51->50 [0.02ms]
+[2026-04-13 13:47:41] SCORE Player1 (lawn green): Final=203.2, Time=84.9, Moves(73)=0.3, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:41] SCORE Player2 (gray0): Final=209.2, Time=83.9, Moves(72)=0.3, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:42] MOVE 146: Player2 (gray0) 48->25 [0.02ms]
+[2026-04-13 13:47:42] SCORE Player1 (lawn green): Final=203.2, Time=84.9, Moves(73)=0.3, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:42] SCORE Player2 (gray0): Final=209.0, Time=83.7, Moves(73)=0.3, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:42] MOVE 147: Player1 (lawn green) 18->31 [0.02ms]
+[2026-04-13 13:47:42] SCORE Player1 (lawn green): Final=203.0, Time=84.7, Moves(74)=0.3, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:42] SCORE Player2 (gray0): Final=209.0, Time=83.7, Moves(73)=0.3, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:42] MOVE 148: Player2 (gray0) 25->48 [0.02ms]
+[2026-04-13 13:47:42] SCORE Player1 (lawn green): Final=203.0, Time=84.7, Moves(74)=0.3, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:42] SCORE Player2 (gray0): Final=208.8, Time=83.5, Moves(74)=0.3, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:42] MOVE 149: Player1 (lawn green) 84->95 [0.02ms]
+[2026-04-13 13:47:42] SCORE Player1 (lawn green): Final=203.8, Time=84.5, Moves(75)=0.2, Pins(0)=0.0, Dist=119.0
+[2026-04-13 13:47:42] SCORE Player2 (gray0): Final=208.8, Time=83.5, Moves(74)=0.3, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:42] MOVE 150: Player2 (gray0) 48->58 [0.02ms]
+[2026-04-13 13:47:42] SCORE Player1 (lawn green): Final=203.8, Time=84.5, Moves(75)=0.2, Pins(0)=0.0, Dist=119.0
+[2026-04-13 13:47:42] SCORE Player2 (gray0): Final=208.6, Time=83.4, Moves(75)=0.2, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:43] MOVE 151: Player1 (lawn green) 50->40 [0.02ms]
+[2026-04-13 13:47:43] SCORE Player1 (lawn green): Final=202.5, Time=84.3, Moves(76)=0.2, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:43] SCORE Player2 (gray0): Final=208.6, Time=83.4, Moves(75)=0.2, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:43] MOVE 152: Player2 (gray0) 67->68 [0.03ms]
+[2026-04-13 13:47:43] SCORE Player1 (lawn green): Final=202.5, Time=84.3, Moves(76)=0.2, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:43] SCORE Player2 (gray0): Final=209.4, Time=83.2, Moves(76)=0.2, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:43] MOVE 153: Player1 (lawn green) 40->41 [0.02ms]
+[2026-04-13 13:47:43] SCORE Player1 (lawn green): Final=201.4, Time=84.1, Moves(77)=0.2, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:43] SCORE Player2 (gray0): Final=209.4, Time=83.2, Moves(76)=0.2, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:43] MOVE 154: Player2 (gray0) 39->49 [0.02ms]
+[2026-04-13 13:47:43] SCORE Player1 (lawn green): Final=201.4, Time=84.1, Moves(77)=0.2, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:43] SCORE Player2 (gray0): Final=208.2, Time=83.0, Moves(77)=0.2, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:43] MOVE 155: Player1 (lawn green) 73->74 [0.02ms]
+[2026-04-13 13:47:43] SCORE Player1 (lawn green): Final=200.1, Time=84.0, Moves(78)=0.2, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:43] SCORE Player2 (gray0): Final=208.2, Time=83.0, Moves(77)=0.2, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:43] MOVE 156: Player2 (gray0) 68->48 [0.02ms]
+[2026-04-13 13:47:43] SCORE Player1 (lawn green): Final=200.1, Time=84.0, Moves(78)=0.2, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:43] SCORE Player2 (gray0): Final=208.0, Time=82.8, Moves(78)=0.2, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:44] MOVE 157: Player1 (lawn green) 41->29 [0.02ms]
+[2026-04-13 13:47:44] SCORE Player1 (lawn green): Final=200.0, Time=83.8, Moves(79)=0.2, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:44] SCORE Player2 (gray0): Final=208.0, Time=82.8, Moves(78)=0.2, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:44] MOVE 158: Player2 (gray0) 117->114 [0.02ms]
+[2026-04-13 13:47:44] SCORE Player1 (lawn green): Final=200.0, Time=83.8, Moves(79)=0.2, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:44] SCORE Player2 (gray0): Final=208.7, Time=82.6, Moves(79)=0.2, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:44] MOVE 159: Player1 (lawn green) 29->16 [0.02ms]
+[2026-04-13 13:47:44] SCORE Player1 (lawn green): Final=199.7, Time=83.6, Moves(80)=0.2, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:44] SCORE Player2 (gray0): Final=208.7, Time=82.6, Moves(79)=0.2, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:44] MOVE 160: Player2 (gray0) 114->117 [0.02ms]
+[2026-04-13 13:47:45] SCORE Player1 (lawn green): Final=199.7, Time=83.6, Moves(80)=0.2, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:45] SCORE Player2 (gray0): Final=207.5, Time=82.3, Moves(80)=0.2, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:45] MOVE 161: Player1 (lawn green) 80->81 [0.02ms]
+[2026-04-13 13:47:45] SCORE Player1 (lawn green): Final=198.6, Time=83.4, Moves(81)=0.1, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:45] SCORE Player2 (gray0): Final=207.5, Time=82.3, Moves(80)=0.2, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:45] MOVE 162: Player2 (gray0) 58->57 [0.02ms]
+[2026-04-13 13:47:45] SCORE Player1 (lawn green): Final=198.6, Time=83.4, Moves(81)=0.1, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:45] SCORE Player2 (gray0): Final=206.3, Time=82.1, Moves(81)=0.1, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:46] MOVE 163: Player1 (lawn green) 16->8 [0.02ms]
+[2026-04-13 13:47:46] SCORE Player1 (lawn green): Final=197.3, Time=83.2, Moves(82)=0.1, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:46] SCORE Player2 (gray0): Final=206.3, Time=82.1, Moves(81)=0.1, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:46] MOVE 164: Player2 (gray0) 89->90 [0.02ms]
+[2026-04-13 13:47:46] SCORE Player1 (lawn green): Final=197.3, Time=83.2, Moves(82)=0.1, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:46] SCORE Player2 (gray0): Final=207.1, Time=81.9, Moves(82)=0.1, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:46] MOVE 165: Player1 (lawn green) 72->71 [0.02ms]
+[2026-04-13 13:47:46] SCORE Player1 (lawn green): Final=198.2, Time=83.1, Moves(83)=0.1, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:46] SCORE Player2 (gray0): Final=207.1, Time=81.9, Moves(82)=0.1, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:46] MOVE 166: Player2 (gray0) 116->112 [0.02ms]
+[2026-04-13 13:47:46] SCORE Player1 (lawn green): Final=198.2, Time=83.1, Moves(83)=0.1, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:46] SCORE Player2 (gray0): Final=206.9, Time=81.8, Moves(83)=0.1, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:46] MOVE 167: Player1 (lawn green) 95->84 [0.05ms]
+[2026-04-13 13:47:46] SCORE Player1 (lawn green): Final=197.0, Time=82.9, Moves(84)=0.1, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:46] SCORE Player2 (gray0): Final=206.9, Time=81.8, Moves(83)=0.1, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:47] MOVE 168: Player2 (gray0) 90->103 [0.02ms]
+[2026-04-13 13:47:47] SCORE Player1 (lawn green): Final=197.0, Time=82.9, Moves(84)=0.1, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:47] SCORE Player2 (gray0): Final=206.7, Time=81.6, Moves(84)=0.1, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:47] MOVE 169: Player1 (lawn green) 8->16 [0.02ms]
+[2026-04-13 13:47:47] SCORE Player1 (lawn green): Final=197.7, Time=82.6, Moves(85)=0.1, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:47] SCORE Player2 (gray0): Final=206.7, Time=81.6, Moves(84)=0.1, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:47] MOVE 170: Player2 (gray0) 48->47 [0.02ms]
+[2026-04-13 13:47:47] SCORE Player1 (lawn green): Final=197.7, Time=82.6, Moves(85)=0.1, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:47] SCORE Player2 (gray0): Final=205.5, Time=81.4, Moves(85)=0.1, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:47] MOVE 171: Player1 (lawn green) 74->64 [0.02ms]
+[2026-04-13 13:47:47] SCORE Player1 (lawn green): Final=197.5, Time=82.4, Moves(86)=0.1, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:47] SCORE Player2 (gray0): Final=205.5, Time=81.4, Moves(85)=0.1, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:47] MOVE 172: Player2 (gray0) 115->104 [0.02ms]
+[2026-04-13 13:47:47] SCORE Player1 (lawn green): Final=197.5, Time=82.4, Moves(86)=0.1, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:48] SCORE Player2 (gray0): Final=207.3, Time=81.2, Moves(86)=0.1, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:48] MOVE 173: Player1 (lawn green) 32->55 [0.03ms]
+[2026-04-13 13:47:48] SCORE Player1 (lawn green): Final=197.2, Time=82.1, Moves(87)=0.1, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:48] SCORE Player2 (gray0): Final=207.3, Time=81.2, Moves(86)=0.1, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:48] MOVE 174: Player2 (gray0) 112->113 [0.02ms]
+[2026-04-13 13:47:48] SCORE Player1 (lawn green): Final=197.2, Time=82.1, Moves(87)=0.1, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:48] SCORE Player2 (gray0): Final=208.1, Time=81.0, Moves(87)=0.1, Pins(0)=0.0, Dist=127.0
+[2026-04-13 13:47:48] MOVE 175: Player1 (lawn green) 55->73 [0.02ms]
+[2026-04-13 13:47:48] SCORE Player1 (lawn green): Final=199.0, Time=81.9, Moves(88)=0.1, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:48] SCORE Player2 (gray0): Final=208.1, Time=81.0, Moves(87)=0.1, Pins(0)=0.0, Dist=127.0
+[2026-04-13 13:47:48] MOVE 176: Player2 (gray0) 103->90 [0.02ms]
+[2026-04-13 13:47:49] SCORE Player1 (lawn green): Final=199.0, Time=81.9, Moves(88)=0.1, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:49] SCORE Player2 (gray0): Final=207.9, Time=80.8, Moves(88)=0.1, Pins(0)=0.0, Dist=127.0
+[2026-04-13 13:47:49] MOVE 177: Player1 (lawn green) 34->21 [0.02ms]
+[2026-04-13 13:47:49] SCORE Player1 (lawn green): Final=198.7, Time=81.7, Moves(89)=0.1, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:49] SCORE Player2 (gray0): Final=207.9, Time=80.8, Moves(88)=0.1, Pins(0)=0.0, Dist=127.0
+[2026-04-13 13:47:50] MOVE 178: Player2 (gray0) 37->39 [0.02ms]
+[2026-04-13 13:47:50] SCORE Player1 (lawn green): Final=198.7, Time=81.7, Moves(89)=0.1, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:50] SCORE Player2 (gray0): Final=209.7, Time=80.7, Moves(89)=0.1, Pins(0)=0.0, Dist=129.0
+[2026-04-13 13:47:50] MOVE 179: Player1 (lawn green) 44->43 [0.02ms]
+[2026-04-13 13:47:50] SCORE Player1 (lawn green): Final=199.5, Time=81.5, Moves(90)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:50] SCORE Player2 (gray0): Final=209.7, Time=80.7, Moves(89)=0.1, Pins(0)=0.0, Dist=129.0
+[2026-04-13 13:47:50] MOVE 180: Player2 (gray0) 39->27 [0.02ms]
+[2026-04-13 13:47:50] SCORE Player1 (lawn green): Final=199.5, Time=81.5, Moves(90)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:50] SCORE Player2 (gray0): Final=209.6, Time=80.5, Moves(90)=0.0, Pins(0)=0.0, Dist=129.0
+[2026-04-13 13:47:50] MOVE 181: Player1 (lawn green) 81->82 [0.02ms]
+[2026-04-13 13:47:50] SCORE Player1 (lawn green): Final=198.3, Time=81.3, Moves(91)=0.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:50] SCORE Player2 (gray0): Final=209.6, Time=80.5, Moves(90)=0.0, Pins(0)=0.0, Dist=129.0
+[2026-04-13 13:47:50] MOVE 182: Player2 (gray0) 27->66 [0.02ms]
+[2026-04-13 13:47:50] SCORE Player1 (lawn green): Final=198.3, Time=81.3, Moves(91)=0.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:50] SCORE Player2 (gray0): Final=205.3, Time=80.3, Moves(91)=0.0, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:51] MOVE 183: Player1 (lawn green) 43->54 [0.02ms]
+[2026-04-13 13:47:51] SCORE Player1 (lawn green): Final=198.0, Time=81.0, Moves(92)=0.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:51] SCORE Player2 (gray0): Final=205.3, Time=80.3, Moves(91)=0.0, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:51] MOVE 184: Player2 (gray0) 102->79 [0.02ms]
+[2026-04-13 13:47:51] SCORE Player1 (lawn green): Final=198.0, Time=81.0, Moves(92)=0.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:51] SCORE Player2 (gray0): Final=207.1, Time=80.1, Moves(92)=0.0, Pins(0)=0.0, Dist=127.0
+[2026-04-13 13:47:51] MOVE 185: Player1 (lawn green) 21->33 [0.02ms]
+[2026-04-13 13:47:51] SCORE Player1 (lawn green): Final=198.8, Time=80.8, Moves(93)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:51] SCORE Player2 (gray0): Final=207.1, Time=80.1, Moves(92)=0.0, Pins(0)=0.0, Dist=127.0
+[2026-04-13 13:47:51] MOVE 186: Player2 (gray0) 49->39 [0.02ms]
+[2026-04-13 13:47:51] SCORE Player1 (lawn green): Final=198.8, Time=80.8, Moves(93)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:51] SCORE Player2 (gray0): Final=207.9, Time=79.9, Moves(93)=0.0, Pins(0)=0.0, Dist=128.0
+[2026-04-13 13:47:51] MOVE 187: Player1 (lawn green) 2->5 [0.02ms]
+[2026-04-13 13:47:51] SCORE Player1 (lawn green): Final=198.6, Time=80.6, Moves(94)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:51] SCORE Player2 (gray0): Final=207.9, Time=79.9, Moves(93)=0.0, Pins(0)=0.0, Dist=128.0
+[2026-04-13 13:47:52] MOVE 188: Player2 (gray0) 90->102 [0.02ms]
+[2026-04-13 13:47:52] SCORE Player1 (lawn green): Final=198.6, Time=80.6, Moves(94)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:52] SCORE Player2 (gray0): Final=206.8, Time=79.8, Moves(94)=0.0, Pins(0)=0.0, Dist=127.0
+[2026-04-13 13:47:52] MOVE 189: Player1 (lawn green) 73->53 [0.04ms]
+[2026-04-13 13:47:52] SCORE Player1 (lawn green): Final=198.4, Time=80.4, Moves(95)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:52] SCORE Player2 (gray0): Final=206.8, Time=79.8, Moves(94)=0.0, Pins(0)=0.0, Dist=127.0
+[2026-04-13 13:47:52] MOVE 190: Player2 (gray0) 102->103 [0.03ms]
+[2026-04-13 13:47:52] SCORE Player1 (lawn green): Final=198.4, Time=80.4, Moves(95)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:52] SCORE Player2 (gray0): Final=207.7, Time=79.6, Moves(95)=0.0, Pins(0)=0.0, Dist=128.0
+[2026-04-13 13:47:52] MOVE 191: Player1 (lawn green) 84->74 [0.02ms]
+[2026-04-13 13:47:52] SCORE Player1 (lawn green): Final=197.2, Time=80.1, Moves(96)=0.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:52] SCORE Player2 (gray0): Final=207.7, Time=79.6, Moves(95)=0.0, Pins(0)=0.0, Dist=128.0
+[2026-04-13 13:47:52] MOVE 192: Player2 (gray0) 113->111 [0.02ms]
+[2026-04-13 13:47:52] SCORE Player1 (lawn green): Final=197.2, Time=80.1, Moves(96)=0.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:52] SCORE Player2 (gray0): Final=205.5, Time=79.5, Moves(96)=0.0, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:52] MOVE 193: Player1 (lawn green) 82->93 [0.03ms]
+[2026-04-13 13:47:52] SCORE Player1 (lawn green): Final=198.0, Time=79.9, Moves(97)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:53] SCORE Player2 (gray0): Final=205.5, Time=79.5, Moves(96)=0.0, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:53] MOVE 194: Player2 (gray0) 47->46 [0.02ms]
+[2026-04-13 13:47:53] SCORE Player1 (lawn green): Final=198.0, Time=79.9, Moves(97)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:53] SCORE Player2 (gray0): Final=204.4, Time=79.3, Moves(97)=0.0, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:53] MOVE 195: Player1 (lawn green) 53->63 [0.02ms]
+[2026-04-13 13:47:53] SCORE Player1 (lawn green): Final=197.7, Time=79.7, Moves(98)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:53] SCORE Player2 (gray0): Final=204.4, Time=79.3, Moves(97)=0.0, Pins(0)=0.0, Dist=125.0
+[2026-04-13 13:47:53] MOVE 196: Player2 (gray0) 79->90 [0.02ms]
+[2026-04-13 13:47:54] SCORE Player1 (lawn green): Final=197.7, Time=79.7, Moves(98)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:54] SCORE Player2 (gray0): Final=203.1, Time=79.1, Moves(98)=0.0, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:54] MOVE 197: Player1 (lawn green) 5->2 [0.02ms]
+[2026-04-13 13:47:54] SCORE Player1 (lawn green): Final=197.5, Time=79.5, Moves(99)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:54] SCORE Player2 (gray0): Final=203.1, Time=79.1, Moves(98)=0.0, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:54] MOVE 198: Player2 (gray0) 38->26 [0.02ms]
+[2026-04-13 13:47:54] SCORE Player1 (lawn green): Final=197.5, Time=79.5, Moves(99)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:54] SCORE Player2 (gray0): Final=202.9, Time=78.9, Moves(99)=0.0, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:54] MOVE 199: Player1 (lawn green) 71->61 [0.02ms]
+[2026-04-13 13:47:54] SCORE Player1 (lawn green): Final=197.3, Time=79.3, Moves(100)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:54] SCORE Player2 (gray0): Final=202.9, Time=78.9, Moves(99)=0.0, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:55] MOVE 200: Player2 (gray0) 39->27 [0.02ms]
+[2026-04-13 13:47:55] SCORE Player1 (lawn green): Final=197.3, Time=79.3, Moves(100)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:55] SCORE Player2 (gray0): Final=202.7, Time=78.7, Moves(100)=0.0, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:55] MOVE 201: Player1 (lawn green) 64->55 [0.02ms]
+[2026-04-13 13:47:55] SCORE Player1 (lawn green): Final=196.1, Time=79.1, Moves(101)=0.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:55] SCORE Player2 (gray0): Final=202.7, Time=78.7, Moves(100)=0.0, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:55] MOVE 202: Player2 (gray0) 103->112 [0.02ms]
+[2026-04-13 13:47:55] SCORE Player1 (lawn green): Final=196.1, Time=79.1, Moves(101)=0.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:55] SCORE Player2 (gray0): Final=202.6, Time=78.5, Moves(101)=0.0, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:55] MOVE 203: Player1 (lawn green) 63->62 [0.02ms]
+[2026-04-13 13:47:55] SCORE Player1 (lawn green): Final=196.9, Time=78.9, Moves(102)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:55] SCORE Player2 (gray0): Final=202.6, Time=78.5, Moves(101)=0.0, Pins(0)=0.0, Dist=124.0
+[2026-04-13 13:47:55] MOVE 204: Player2 (gray0) 26->28 [0.03ms]
+[2026-04-13 13:47:55] SCORE Player1 (lawn green): Final=196.9, Time=78.9, Moves(102)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:55] SCORE Player2 (gray0): Final=204.4, Time=78.4, Moves(102)=0.0, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:55] MOVE 205: Player1 (lawn green) 61->63 [0.03ms]
+[2026-04-13 13:47:55] SCORE Player1 (lawn green): Final=194.7, Time=78.7, Moves(103)=0.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:55] SCORE Player2 (gray0): Final=204.4, Time=78.4, Moves(102)=0.0, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:56] MOVE 206: Player2 (gray0) 46->56 [0.02ms]
+[2026-04-13 13:47:56] SCORE Player1 (lawn green): Final=194.7, Time=78.7, Moves(103)=0.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:56] SCORE Player2 (gray0): Final=204.2, Time=78.2, Moves(103)=0.0, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:56] MOVE 207: Player1 (lawn green) 74->85 [0.02ms]
+[2026-04-13 13:47:56] SCORE Player1 (lawn green): Final=194.5, Time=78.5, Moves(104)=0.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:56] SCORE Player2 (gray0): Final=204.2, Time=78.2, Moves(103)=0.0, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:56] MOVE 208: Player2 (gray0) 28->40 [0.02ms]
+[2026-04-13 13:47:56] SCORE Player1 (lawn green): Final=194.5, Time=78.5, Moves(104)=0.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:56] SCORE Player2 (gray0): Final=204.0, Time=78.0, Moves(104)=0.0, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:56] MOVE 209: Player1 (lawn green) 31->30 [0.02ms]
+[2026-04-13 13:47:56] SCORE Player1 (lawn green): Final=195.4, Time=78.4, Moves(105)=0.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:56] SCORE Player2 (gray0): Final=204.0, Time=78.0, Moves(104)=0.0, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:56] MOVE 210: Player2 (gray0) 40->51 [0.02ms]
+[2026-04-13 13:47:56] SCORE Player1 (lawn green): Final=195.4, Time=78.4, Moves(105)=0.0, Pins(0)=0.0, Dist=117.0
+[2026-04-13 13:47:56] SCORE Player2 (gray0): Final=203.8, Time=77.8, Moves(105)=0.0, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:57] MOVE 211: Player1 (lawn green) 93->105 [0.03ms]
+[2026-04-13 13:47:57] SCORE Player1 (lawn green): Final=196.1, Time=78.1, Moves(106)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:57] SCORE Player2 (gray0): Final=203.8, Time=77.8, Moves(105)=0.0, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:57] MOVE 212: Player2 (gray0) 57->48 [0.02ms]
+[2026-04-13 13:47:57] SCORE Player1 (lawn green): Final=196.1, Time=78.1, Moves(106)=0.0, Pins(0)=0.0, Dist=118.0
+[2026-04-13 13:47:57] SCORE Player2 (gray0): Final=204.7, Time=77.7, Moves(106)=0.0, Pins(0)=0.0, Dist=127.0
+[2026-04-13 13:47:57] MOVE 213: Player1 (lawn green) 62->64 [0.02ms]
+[2026-04-13 13:47:57] SCORE Player1 (lawn green): Final=193.9, Time=77.9, Moves(107)=0.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:57] SCORE Player2 (gray0): Final=204.7, Time=77.7, Moves(106)=0.0, Pins(0)=0.0, Dist=127.0
+[2026-04-13 13:47:57] MOVE 214: Player2 (gray0) 117->116 [0.03ms]
+[2026-04-13 13:47:57] SCORE Player1 (lawn green): Final=193.9, Time=77.9, Moves(107)=0.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:57] SCORE Player2 (gray0): Final=203.5, Time=77.5, Moves(107)=0.0, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:57] MOVE 215: Player1 (lawn green) 33->34 [0.03ms]
+[2026-04-13 13:47:57] SCORE Player1 (lawn green): Final=192.7, Time=77.7, Moves(108)=0.0, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:57] SCORE Player2 (gray0): Final=203.5, Time=77.5, Moves(107)=0.0, Pins(0)=0.0, Dist=126.0
+[2026-04-13 13:47:58] MOVE 216: Player2 (gray0) 56->47 [0.02ms]
+[2026-04-13 13:47:58] SCORE Player1 (lawn green): Final=192.7, Time=77.7, Moves(108)=0.0, Pins(0)=0.0, Dist=115.0
+[2026-04-13 13:47:58] SCORE Player2 (gray0): Final=204.3, Time=77.3, Moves(108)=0.0, Pins(0)=0.0, Dist=127.0
+[2026-04-13 13:47:58] MOVE 217: Player1 (lawn green) 30->29 [0.03ms]
+[2026-04-13 13:47:58] SCORE Player1 (lawn green): Final=193.5, Time=77.5, Moves(109)=0.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:58] SCORE Player2 (gray0): Final=204.3, Time=77.3, Moves(108)=0.0, Pins(0)=0.0, Dist=127.0
+[2026-04-13 13:47:58] MOVE 218: Player2 (gray0) 66->57 [0.03ms]
+[2026-04-13 13:47:58] SCORE Player1 (lawn green): Final=193.5, Time=77.5, Moves(109)=0.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:58] SCORE Player2 (gray0): Final=205.1, Time=77.1, Moves(109)=0.0, Pins(0)=0.0, Dist=128.0
+[2026-04-13 13:47:58] MOVE 219: Player1 (lawn green) 85->74 [0.02ms]
+[2026-04-13 13:47:58] SCORE Player1 (lawn green): Final=193.3, Time=77.3, Moves(110)=0.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:58] SCORE Player2 (gray0): Final=205.1, Time=77.1, Moves(109)=0.0, Pins(0)=0.0, Dist=128.0
+[2026-04-13 13:47:58] MOVE 220: Player2 (gray0) 48->38 [0.02ms]
+[2026-04-13 13:47:58] SCORE Player1 (lawn green): Final=193.3, Time=77.3, Moves(110)=0.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:58] SCORE Player2 (gray0): Final=205.9, Time=76.9, Moves(110)=0.0, Pins(0)=0.0, Dist=129.0
+[2026-04-13 13:47:59] MOVE 221: Player1 (lawn green) 2->5 [0.02ms]
+[2026-04-13 13:47:59] SCORE Player1 (lawn green): Final=193.1, Time=77.1, Moves(111)=0.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:59] SCORE Player2 (gray0): Final=205.9, Time=76.9, Moves(110)=0.0, Pins(0)=0.0, Dist=129.0
+[2026-04-13 13:47:59] MOVE 222: Player2 (gray0) 51->40 [0.02ms]
+[2026-04-13 13:47:59] SCORE Player1 (lawn green): Final=193.1, Time=77.1, Moves(111)=0.0, Pins(0)=0.0, Dist=116.0
+[2026-04-13 13:47:59] SCORE Player2 (gray0): Final=205.7, Time=76.7, Moves(111)=0.0, Pins(0)=0.0, Dist=129.0
+[2026-04-13 13:47:59] MOVE 223: Player1 (lawn green) 64->45 [0.02ms]
+[2026-04-13 13:47:59] SCORE Player1 (lawn green): Final=190.8, Time=76.8, Moves(112)=0.0, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:59] SCORE Player2 (gray0): Final=205.7, Time=76.7, Moves(111)=0.0, Pins(0)=0.0, Dist=129.0
+[2026-04-13 13:47:59] MOVE 224: Player2 (gray0) 57->67 [0.03ms]
+[2026-04-13 13:47:59] SCORE Player1 (lawn green): Final=190.8, Time=76.8, Moves(112)=0.0, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:47:59] SCORE Player2 (gray0): Final=205.4, Time=76.4, Moves(112)=0.0, Pins(0)=0.0, Dist=129.0
+[2026-04-13 13:48:00] MOVE 225: Player1 (lawn green) 74->64 [0.02ms]
+[2026-04-13 13:48:00] SCORE Player1 (lawn green): Final=190.7, Time=76.7, Moves(113)=0.0, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:48:00] SCORE Player2 (gray0): Final=205.4, Time=76.4, Moves(112)=0.0, Pins(0)=0.0, Dist=129.0
+[2026-04-13 13:48:00] MOVE 226: Player2 (gray0) 67->68 [0.02ms]
+[2026-04-13 13:48:00] SCORE Player1 (lawn green): Final=190.7, Time=76.7, Moves(113)=0.0, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:48:00] SCORE Player2 (gray0): Final=206.2, Time=76.2, Moves(113)=0.0, Pins(0)=0.0, Dist=130.0
+[2026-04-13 13:48:00] MOVE 227: Player1 (lawn green) 105->59 [0.02ms]
+[2026-04-13 13:48:00] SCORE Player1 (lawn green): Final=190.5, Time=76.5, Moves(114)=0.0, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:48:00] SCORE Player2 (gray0): Final=206.2, Time=76.2, Moves(113)=0.0, Pins(0)=0.0, Dist=130.0
+[2026-04-13 13:48:00] MOVE 228: Player2 (gray0) 68->78 [0.02ms]
+[2026-04-13 13:48:00] SCORE Player1 (lawn green): Final=190.5, Time=76.5, Moves(114)=0.0, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:48:00] SCORE Player2 (gray0): Final=205.0, Time=76.0, Moves(114)=0.0, Pins(0)=0.0, Dist=129.0
+[2026-04-13 13:48:00] MOVE 229: Player1 (lawn green) 5->2 [0.02ms]
+[2026-04-13 13:48:00] SCORE Player1 (lawn green): Final=190.3, Time=76.3, Moves(115)=0.0, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:48:00] SCORE Player2 (gray0): Final=205.0, Time=76.0, Moves(114)=0.0, Pins(0)=0.0, Dist=129.0
+[2026-04-13 13:48:01] MOVE 230: Player2 (gray0) 27->39 [0.04ms]
+[2026-04-13 13:48:01] SCORE Player1 (lawn green): Final=190.3, Time=76.3, Moves(115)=0.0, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:48:01] SCORE Player2 (gray0): Final=204.8, Time=75.8, Moves(115)=0.0, Pins(0)=0.0, Dist=129.0
+[2026-04-13 13:48:01] MOVE 231: Player1 (lawn green) 45->22 [0.02ms]
+[2026-04-13 13:48:01] SCORE Player1 (lawn green): Final=188.1, Time=76.1, Moves(116)=0.0, Pins(0)=0.0, Dist=112.0
+[2026-04-13 13:48:01] SCORE Player2 (gray0): Final=204.8, Time=75.8, Moves(115)=0.0, Pins(0)=0.0, Dist=129.0
+[2026-04-13 13:48:01] MOVE 232: Player2 (gray0) 38->26 [0.02ms]
+[2026-04-13 13:48:01] SCORE Player1 (lawn green): Final=188.1, Time=76.1, Moves(116)=0.0, Pins(0)=0.0, Dist=112.0
+[2026-04-13 13:48:01] SCORE Player2 (gray0): Final=204.6, Time=75.6, Moves(116)=0.0, Pins(0)=0.0, Dist=129.0
+[2026-04-13 13:48:01] MOVE 233: Player1 (lawn green) 63->62 [0.06ms]
+[2026-04-13 13:48:01] SCORE Player1 (lawn green): Final=188.9, Time=75.9, Moves(117)=0.0, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:48:01] SCORE Player2 (gray0): Final=204.6, Time=75.6, Moves(116)=0.0, Pins(0)=0.0, Dist=129.0
+[2026-04-13 13:48:01] MOVE 234: Player2 (gray0) 78->77 [0.03ms]
+[2026-04-13 13:48:01] SCORE Player1 (lawn green): Final=188.9, Time=75.9, Moves(117)=0.0, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:48:01] SCORE Player2 (gray0): Final=203.5, Time=75.5, Moves(117)=0.0, Pins(0)=0.0, Dist=128.0
+[2026-04-13 13:48:01] MOVE 235: Player1 (lawn green) 29->41 [0.02ms]
+[2026-04-13 13:48:01] SCORE Player1 (lawn green): Final=188.7, Time=75.7, Moves(118)=0.0, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:48:01] SCORE Player2 (gray0): Final=203.5, Time=75.5, Moves(117)=0.0, Pins(0)=0.0, Dist=128.0
+[2026-04-13 13:48:02] MOVE 236: Player2 (gray0) 47->37 [0.03ms]
+[2026-04-13 13:48:02] SCORE Player1 (lawn green): Final=188.7, Time=75.7, Moves(118)=0.0, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:48:02] SCORE Player2 (gray0): Final=204.3, Time=75.3, Moves(118)=0.0, Pins(0)=0.0, Dist=129.0
+[2026-04-13 13:48:02] MOVE 237: Player1 (lawn green) 2->0 [0.02ms]
+[2026-04-13 13:48:02] SCORE Player1 (lawn green): Final=188.5, Time=75.5, Moves(119)=0.0, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:48:02] SCORE Player2 (gray0): Final=204.3, Time=75.3, Moves(118)=0.0, Pins(0)=0.0, Dist=129.0
+[2026-04-13 13:48:02] MOVE 238: Player2 (gray0) 37->14 [0.07ms]
+[2026-04-13 13:48:02] SCORE Player1 (lawn green): Final=188.5, Time=75.5, Moves(119)=0.0, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:48:02] SCORE Player2 (gray0): Final=206.1, Time=75.1, Moves(119)=0.0, Pins(0)=0.0, Dist=131.0
+[2026-04-13 13:48:02] MOVE 239: Player1 (lawn green) 16->7 [0.02ms]
+[2026-04-13 13:48:02] SCORE Player1 (lawn green): Final=188.2, Time=75.2, Moves(120)=0.0, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:48:02] SCORE Player2 (gray0): Final=206.1, Time=75.1, Moves(119)=0.0, Pins(0)=0.0, Dist=131.0
+[2026-04-13 13:48:03] MOVE 240: Player2 (gray0) 90->79 [0.03ms]
+[2026-04-13 13:48:03] SCORE Player1 (lawn green): Final=188.2, Time=75.2, Moves(120)=0.0, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:48:03] SCORE Player2 (gray0): Final=206.8, Time=74.8, Moves(120)=0.0, Pins(0)=0.0, Dist=132.0
+[2026-04-13 13:48:03] MOVE 241: Player1 (lawn green) 34->45 [0.03ms]
+[2026-04-13 13:48:03] SCORE Player1 (lawn green): Final=189.0, Time=75.0, Moves(121)=0.0, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:48:03] SCORE Player2 (gray0): Final=206.8, Time=74.8, Moves(120)=0.0, Pins(0)=0.0, Dist=132.0
+[2026-04-13 13:48:03] MOVE 242: Player2 (gray0) 26->6 [0.03ms]
+[2026-04-13 13:48:03] SCORE Player1 (lawn green): Final=189.0, Time=75.0, Moves(121)=0.0, Pins(0)=0.0, Dist=114.0
+[2026-04-13 13:48:03] SCORE Player2 (gray0): Final=207.6, Time=74.6, Moves(121)=0.0, Pins(0)=0.0, Dist=133.0
+[2026-04-13 13:48:03] MOVE 243: Player1 (lawn green) 41->30 [0.02ms]
+[2026-04-13 13:48:03] SCORE Player1 (lawn green): Final=187.8, Time=74.8, Moves(122)=0.0, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:48:03] SCORE Player2 (gray0): Final=207.6, Time=74.6, Moves(121)=0.0, Pins(0)=0.0, Dist=133.0
+[2026-04-13 13:48:03] MOVE 244: Player2 (gray0) 6->8 [0.03ms]
+[2026-04-13 13:48:03] SCORE Player1 (lawn green): Final=187.8, Time=74.8, Moves(122)=0.0, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:48:03] SCORE Player2 (gray0): Final=209.4, Time=74.4, Moves(122)=0.0, Pins(0)=0.0, Dist=135.0
+[2026-04-13 13:48:04] MOVE 245: Player1 (lawn green) 45->33 [0.03ms]
+[2026-04-13 13:48:04] SCORE Player1 (lawn green): Final=187.6, Time=74.6, Moves(123)=0.0, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:48:04] SCORE Player2 (gray0): Final=209.4, Time=74.4, Moves(122)=0.0, Pins(0)=0.0, Dist=135.0
+[2026-04-13 13:48:04] SCORE Player1 (lawn green): Final=187.6, Time=74.6, Moves(123)=0.0, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:48:04] SCORE Player2 (gray0): Final=209.4, Time=74.4, Moves(122)=0.0, Pins(0)=0.0, Dist=135.0
+[2026-04-13 13:48:04] GAME TIME LIMIT REACHED.
+[2026-04-13 13:48:04] SCORE Player1 (lawn green): Final=187.6, Time=74.6, Moves(123)=0.0, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:48:04] SCORE Player2 (gray0): Final=209.4, Time=74.4, Moves(122)=0.0, Pins(0)=0.0, Dist=135.0
+[2026-04-13 13:48:04] GAME TIME LIMIT REACHED.
+[2026-04-13 13:48:04] SCORE Player1 (lawn green): Final=187.6, Time=74.6, Moves(123)=0.0, Pins(0)=0.0, Dist=113.0
+[2026-04-13 13:48:04] SCORE Player2 (gray0): Final=209.4, Time=74.4, Moves(122)=0.0, Pins(0)=0.0, Dist=135.0
+[2026-04-13 13:48:04] GAME TIME LIMIT REACHED.

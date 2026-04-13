@@ -1,6 +1,34 @@
 # RLChineseCheckers
 For IKT 460 (RL) base Chinese Checkers
 
+## Quick Launch (No Manual Multi-Terminal Setup)
+
+From the `RLChineseCheckers` folder, use:
+
+```bash
+./run_checkers.sh --players 2
+```
+
+Enable network debug output from players:
+
+```bash
+./run_checkers.sh --players 2 --debug
+
+You can also run the Python launcher directly:
+
+```bash
+python3 "multi system single machine minimal/run_game.py" --players 2 --debug
+```
+```
+
+This launcher will:
+- start `game.py`
+- send `Create` automatically
+- start the requested number of `player.py` clients
+- auto-fill player names (`Player1`, `Player2`, ...)
+
+Press `Ctrl+C` to stop all launched processes.
+
 
 # Rules
 - each player starts with their colored pieces on one of the six points or corners of the star and attempts to race them all home into the opposite corner

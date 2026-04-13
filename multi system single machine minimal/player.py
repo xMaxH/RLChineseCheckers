@@ -22,7 +22,7 @@ def debug(*args):
 def rpc(payload: Dict[str, Any]) -> Dict[str, Any]:
     """Send JSON to server and receive JSON reply."""
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.settimeout(10.0)
+    s.settimeout(100.0)
     try:
         s.connect((HOST, PORT))
     except Exception as e:
@@ -84,7 +84,7 @@ def main():
         if st.get("state", {}).get("status") in ("READY_TO_START", "PLAYING"):
             break
         print("Waiting for players...")
-        time.sleep(0.5)
+        time.sleep(0.1)
 
     input("Press ENTER to send START...")
     rpc({"op": "start", "game_id": game_id, "player_id": player_id})
@@ -95,7 +95,7 @@ def main():
         st = rpc({"op": "get_state", "game_id": game_id})
         if st.get("state", {}).get("status") == "PLAYING":
             break
-        time.sleep(0.5)
+        time.sleep(0.1)
 
     print("=== GAME STARTED ===\n")
 
@@ -160,7 +160,7 @@ def main():
 
             if not legal_req.get("ok"):
                 print("Error requesting legal moves:", legal_req.get("error"))
-                time.sleep(0.5)
+                time.sleep(0.1)
                 continue
 
             legal_moves = legal_req.get("legal_moves", {})
@@ -171,13 +171,13 @@ def main():
             movable = [(pid, moves) for pid, moves in legal_moves.items() if moves]
             if not movable:
                 print("No legal moves available.")
-                time.sleep(0.5)
+                time.sleep(0.1)
                 continue
 
             pid, moves = random.choice(movable)
             to_index = random.choice(moves)
 
-            delay = random.randint(1, 12)
+            delay = random.uniform(0.1, 0.2)
             print("Randomized delay:", delay)
             time.sleep(delay)
             '''-----------------PLAYING LOGIC----------------'''
@@ -200,7 +200,7 @@ def main():
                     print("DRAW")
                     print(mv.get("msg"))
 
-        time.sleep(0.5)
+        time.sleep(0.1)
 
 
 if __name__ == "__main__":

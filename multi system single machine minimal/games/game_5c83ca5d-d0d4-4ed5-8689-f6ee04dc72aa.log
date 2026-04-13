@@ -1,0 +1,18 @@
+[2026-04-13 13:10:27] GAME CREATED
+[2026-04-13 13:10:27] PLAYER JOINED: Player1 as yellow
+[2026-04-13 13:10:27] PLAYER JOINED: Player2 as purple
+[2026-04-13 13:10:27] PLAYER START: Player2 (purple)
+[2026-04-13 13:10:27] PLAYER START: Player1 (yellow)
+[2026-04-13 13:10:27] GAME START — turn order ['yellow', 'purple']
+[2026-04-13 13:10:37] SCORE Player1 (yellow): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-04-13 13:10:37] SCORE Player2 (purple): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-04-13 13:10:37] TURN TIMEOUT: Player with colour yellow exceeded 10s at move 0. Turn skipped.
+[2026-04-13 13:10:47] SCORE Player1 (yellow): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-04-13 13:10:47] SCORE Player2 (purple): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-04-13 13:10:47] TURN TIMEOUT: Player with colour purple exceeded 10s at move 0. Turn skipped.
+[2026-04-13 13:10:49] MOVE 1: Player1 (yellow) 35->56 [0.02ms]
+[2026-04-13 13:10:49] SCORE Player1 (yellow): Final=190.0, Time=98.0, Moves(1)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 13:10:49] SCORE Player2 (purple): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-04-13 13:10:53] MOVE 2: Player2 (purple) 84->73 [0.02ms]
+[2026-04-13 13:10:53] SCORE Player1 (yellow): Final=190.0, Time=98.0, Moves(1)=0.0, Pins(0)=0.0, Dist=92.0
+[2026-04-13 13:10:53] SCORE Player2 (purple): Final=187.5, Time=96.5, Moves(1)=0.0, Pins(0)=0.0, Dist=91.0

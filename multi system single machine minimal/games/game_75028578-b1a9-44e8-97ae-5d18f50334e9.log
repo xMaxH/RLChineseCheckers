@@ -1,0 +1,9 @@
+[2026-04-13 13:45:11] GAME CREATED
+[2026-04-13 13:45:11] PLAYER JOINED: Player1 as yellow
+[2026-04-13 13:45:12] PLAYER JOINED: Player2 as purple
+[2026-04-13 13:45:12] PLAYER START: Player2 (purple)
+[2026-04-13 13:45:12] PLAYER START: Player1 (yellow)
+[2026-04-13 13:45:12] GAME START — turn order ['yellow', 'purple']
+[2026-04-13 13:45:22] SCORE Player1 (yellow): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-04-13 13:45:22] SCORE Player2 (purple): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0
+[2026-04-13 13:45:22] TURN TIMEOUT: Player with colour yellow exceeded 10s at move 0. Turn skipped.
