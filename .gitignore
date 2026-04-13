@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*.pyd
+
+games/
+**/games/
+
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+.idea/
+.vscode/
+.DS_Store
