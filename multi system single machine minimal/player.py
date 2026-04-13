@@ -4,10 +4,11 @@
 
 import os
 import json
-import random
 import socket
 import time
 from typing import Dict, Any
+
+from alphazero_logic import play_turn_with_alphazero
 
 HOST = "127.0.0.1"
 PORT = 50555
@@ -151,44 +152,28 @@ def main():
         if state.get("current_turn_colour") == colour and state["status"] == "PLAYING":
             print("\nMy turn")
             '''------------PLAYING LOGIC-----------'''
-            # Request legal moves for each pin from server
-            legal_req = rpc({
-                "op": "get_legal_moves",
-                "game_id": game_id,
-                "player_id": player_id
-            })
+            turn = play_turn_with_alphazero(
+                rpc=rpc,
+                state=state,
+                game_id=game_id,
+                player_id=player_id,
+                colour=colour,
+            )
 
-            if not legal_req.get("ok"):
-                print("Error requesting legal moves:", legal_req.get("error"))
+            if not turn["ok"]:
+                print("AlphaZero turn failed:", turn["error"])
                 time.sleep(0.5)
                 continue
 
-            legal_moves = legal_req.get("legal_moves", {})
-
-            # legal_moves example structure:
-            # { pin_id: [to_index1, to_index2, ...], ... }
-
-            movable = [(pid, moves) for pid, moves in legal_moves.items() if moves]
-            if not movable:
-                print("No legal moves available.")
-                time.sleep(0.5)
-                continue
-
-            pid, moves = random.choice(movable)
-            to_index = random.choice(moves)
-
-            delay = random.randint(1, 12)
-            print("Randomized delay:", delay)
-            time.sleep(delay)
+            pid = turn["pin_id"]
+            to_index = turn["to_index"]
+            print(
+                f"AlphaZero choice: pin={pid} -> {to_index} "
+                f"(value={turn['value_estimate']:.3f})"
+            )
             '''-----------------PLAYING LOGIC----------------'''
 
-            mv = rpc({
-                "op": "move",
-                "game_id": game_id,
-                "player_id": player_id,
-                "pin_id": pid,
-                "to_index": to_index
-            })
+            mv = turn["move_response"]
             render_json_board(state)
             if not mv.get("ok"):
                 print("Move rejected:", mv.get("error"))
