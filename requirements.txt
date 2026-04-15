@@ -12,10 +12,6 @@ Farama-Notifications==0.0.4
 filelock==3.24.3
 fonttools==4.61.1
 fsspec==2026.2.0
-gym==0.26.2
-gym-notices==0.1.0
-gymnasium==1.2.3
-helper_functions==2.0.11
 imutils==0.5.4
 ipykernel==7.1.0
 ipython==9.9.0
