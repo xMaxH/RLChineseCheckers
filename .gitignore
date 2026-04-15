@@ -10,3 +10,5 @@ env/
 .idea/
 .vscode/
 .DS_Store
+
+multi system single machine minimal/renders/
