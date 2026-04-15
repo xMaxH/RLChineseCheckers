@@ -3,6 +3,7 @@ __pycache__/
 *.pyd
 
 games/
+multi system single machine minimal/games/
 
 .ipynb_checkpoints/
 .venv/
