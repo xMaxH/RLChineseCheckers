@@ -13,12 +13,19 @@ Enable network debug output from players:
 
 ```bash
 ./run_checkers.sh --players 2 --debug
+```
 
-can also run the Python launcher directly:
+Select playing method (default: `random`):
+
+```bash
+python3 "multi system single machine minimal/run_game.py" --players 2 --method random
+python3 "multi system single machine minimal/run_game.py" --players 2 --method alphazero
+```
+
+You can also run the Python launcher directly:
 
 ```bash
 python3 "multi system single machine minimal/run_game.py" --players 2 --debug
-```
 ```
 
 This launcher will:
@@ -53,8 +60,11 @@ In game.py ::
 In player.py ::
   Enter player name
   Press Enter when you get message 'Press enter to send Start'
-
-  **You'll need to replace the code inside 'PLAYING LOGIC' to your own logic.**
+  
+  The playing method is selected by `run_game.py` through the `PLAYER_METHOD` environment variable.
+  Supported methods: `random` (default), `alphazero` (requires alphazero_method.py).
+  
+  For custom methods: implement a new method file and import it in `player.py`.
 
 
 - You can see the scoring inside game.py

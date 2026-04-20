@@ -9,6 +9,11 @@ import socket
 import time
 from typing import Dict, Any
 
+try:
+    from alphazero_method import choose_move_alphazero
+except Exception:
+    choose_move_alphazero = None
+
 HOST = "127.0.0.1"
 PORT = 50555
 DEBUG_NET = os.getenv("DEBUG_NET", "0") not in ("0", "", "false", "False")
@@ -61,7 +66,18 @@ def render_json_board(state):
 # =============================================================
 def main():
     timeoutnotice_move = -1
+    selected_method = os.getenv("PLAYER_METHOD", "random").strip().lower()
+    
+    if selected_method not in ("random", "alphazero"):
+        print(f"Unknown PLAYER_METHOD '{selected_method}', falling back to random.")
+        selected_method = "random"
+
+    if selected_method == "alphazero" and choose_move_alphazero is None:
+        print("alphazero_method.py not available, falling back to random.")
+        selected_method = "random"
+
     print("==== Player ====")
+    print(f"Playing method: {selected_method}")
     name = input("Enter name: ").strip()
     if not name:
         return
@@ -174,11 +190,29 @@ def main():
                 time.sleep(0.1)
                 continue
 
-            pid, moves = random.choice(movable)
-            to_index = random.choice(moves)
+            if selected_method == "random":
+                pid, moves = random.choice(movable)
+                to_index = random.choice(moves)
+                delay = random.uniform(0.1, 0.2)
+            else:
+                try:
+                    pid, to_index, delay = choose_move_alphazero(
+                        legal_moves=legal_moves,
+                        state=state,
+                        player_context={
+                            "game_id": game_id,
+                            "player_id": player_id,
+                            "colour": colour,
+                            "name": name,
+                        },
+                    )
+                except Exception as e:
+                    print(f"Method '{selected_method}' failed ({e}), using random fallback.")
+                    pid, moves = random.choice(movable)
+                    to_index = random.choice(moves)
+                    delay = random.uniform(0.1, 0.2)
 
-            delay = random.uniform(0.1, 0.2)
-            print("Randomized delay:", delay)
+            print("Move delay:", delay)
             time.sleep(delay)
             '''-----------------PLAYING LOGIC----------------'''
 

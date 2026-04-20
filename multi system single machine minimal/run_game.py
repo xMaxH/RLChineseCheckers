@@ -42,7 +42,41 @@ def parse_args() -> argparse.Namespace:
         default=DEFAULT_PLAYER_STAGGER_SEC,
         help="Seconds between launching player processes. Default: 0.5",
     )
+    parser.add_argument(
+        "--method",
+        type=str,
+        default="random",
+        help="Playing method for all players (random or alphazero). Default: random",
+    )
+    parser.add_argument(
+        "--player-methods",
+        type=str,
+        default="",
+        help="Comma-separated playing methods per player, e.g. random,alphazero,random",
+    )
     return parser.parse_args()
+
+
+def resolve_player_methods(players: int, default_method: str, per_player_methods: str) -> list[str]:
+    if per_player_methods.strip():
+        methods = [m.strip().lower() for m in per_player_methods.split(",") if m.strip()]
+        if len(methods) != players:
+            raise ValueError(
+                f"--player-methods must provide exactly {players} entries "
+                f"(got {len(methods)})."
+            )
+    else:
+        methods = [default_method.strip().lower()] * players
+
+    valid = {"random", "alphazero"}
+    invalid = [m for m in methods if m not in valid]
+    if invalid:
+        raise ValueError(
+            "Invalid method(s): "
+            + ", ".join(invalid)
+            + ". Valid options are: random, alphazero."
+        )
+    return methods
 
 
 def stream_output(prefix: str, pipe):
@@ -71,6 +105,16 @@ def main() -> int:
 
     if args.players < 2 or args.players > 6:
         print("Error: --players must be between 2 and 6.")
+        return 2
+
+    try:
+        player_methods = resolve_player_methods(
+            players=args.players,
+            default_method=args.method,
+            per_player_methods=args.player_methods,
+        )
+    except ValueError as e:
+        print(f"Error: {e}")
         return 2
 
     base_dir = Path(__file__).resolve().parent
@@ -125,6 +169,10 @@ def main() -> int:
         print("[launcher] Sent 'create' to server.")
 
         for i in range(1, args.players + 1):
+            player_env = env.copy()
+            method = player_methods[i - 1]
+            player_env["PLAYER_METHOD"] = method
+
             player = subprocess.Popen(
                 [sys.executable, str(player_script)],
                 cwd=str(base_dir),
@@ -133,7 +181,7 @@ def main() -> int:
                 stderr=subprocess.STDOUT,
                 text=True,
                 bufsize=1,
-                env=env,
+                env=player_env,
             )
             processes.append(player)
 
@@ -148,7 +196,7 @@ def main() -> int:
             # First line answers "Enter name"; second newline pre-answers "Press ENTER to send START...".
             player.stdin.write(f"Player{i}\n\n")
             player.stdin.flush()
-            print(f"[launcher] Started player {i}.")
+            print(f"[launcher] Started player {i} with method '{method}'.")
             time.sleep(args.player_stagger)
 
         print("[launcher] Game running. Press Ctrl+C to stop all processes.")
