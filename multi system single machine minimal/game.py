@@ -50,8 +50,8 @@ PRIMARY_COLOURS = ['red', 'lawn green', 'yellow']
 random.shuffle(PRIMARY_COLOURS)
 COMPLEMENT = {'red': 'blue', 'lawn green': 'gray0', 'yellow': 'purple'}
 MAX_PLAYERS = 6
-TURN_TIMEOUT_SEC = 10
-GAME_TIME_LIMIT_SEC = 60
+TURN_TIMEOUT_SEC = 10 
+GAME_TIME_LIMIT_SEC = 60 
 
 
 # ==========================================================
