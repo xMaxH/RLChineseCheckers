@@ -194,7 +194,7 @@ class GameVisualizer:
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        # Find latest game log near this script first, then fallback to cwd-relative paths.
+        # Find game logs near this script first, then fallback to cwd-relative paths.
         script_dir = Path(__file__).resolve().parent
         game_dir = None
         candidate_dirs = [
@@ -219,9 +219,26 @@ if __name__ == "__main__":
         if not log_files:
             print("Error: no game logs found in games/")
             sys.exit(1)
-        
-        log_file = str(log_files[-1])
-        print(f"Using latest log: {log_file}\n")
+
+        print("Available game logs:")
+        for idx, path in enumerate(reversed(log_files), start=1):
+            print(f"  {idx}. {path.name}")
+
+        choice = input("Select game number (Enter = latest): ").strip()
+        if choice:
+            try:
+                choice_idx = int(choice)
+                ordered_logs = list(reversed(log_files))
+                if not (1 <= choice_idx <= len(ordered_logs)):
+                    raise ValueError
+                log_file = str(ordered_logs[choice_idx - 1])
+            except ValueError:
+                print("Error: invalid selection.")
+                sys.exit(1)
+        else:
+            log_file = str(log_files[-1])
+
+        print(f"Using log: {log_file}\n")
     else:
         log_file = sys.argv[1]
     
