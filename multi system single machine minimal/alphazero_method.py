@@ -455,7 +455,7 @@ def choose_move_alphazero(
     )
 
     chosen = _sample_action_from_visits(visits, temperature)
-    delay = random.uniform(0.05, 0.12)
+    delay = 0.0 # random.uniform(0.05,0.12)
     return chosen.pin_id, chosen.to_index, delay
 
 
@@ -578,11 +578,12 @@ def generate_self_play_game(
 
 
 def run_self_play_training(
-    episodes: int = 50,
-    train_epochs: int = 5,
+    episodes: int = 100,
+    train_epochs: int = 10,
     batch_size: int = 64,
     lr: float = 1e-3,
     num_simulations: int = 96,
+    c_puct: float = 1.5,
     max_moves: int = 500,
     model_path: Optional[Path] = None,
     verbose: bool = False,
@@ -599,6 +600,7 @@ def run_self_play_training(
         episode_samples = generate_self_play_game(
             agent=agent,
             num_simulations=num_simulations,
+            c_puct=c_puct,
             max_moves=max_moves,
         )
         replay.extend(episode_samples)
@@ -666,12 +668,16 @@ def _build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Train a 2-player AlphaZero-style model via self-play."
     )
-    parser.add_argument("--episodes", type=int, default=300, help="Number of self-play games (quick default: 5).")
+    parser.add_argument("--episodes", type=int, default=100, help="Number of self-play games (quick default: 5).")
     parser.add_argument("--train-epochs", type=int, default=10, help="Epochs over replay data (quick default: 2).")
     parser.add_argument("--batch-size", type=int, default=64, help="Batch size for optimizer steps.")
     parser.add_argument("--lr", type=float, default=1e-3, help="Learning rate.")
-    parser.add_argument("--num-simulations", type=int, default=128, help="MCTS simulations per move (quick default: 24).")
-    parser.add_argument("--max-moves", type=int, default=350, help="Max plies per self-play game.")
+    parser.add_argument("--num-simulations", type=int, default=24, help="MCTS simulations per move (quick default: 24).")
+    parser.add_argument("--max-moves", type=int, default=500, help="Max plies per self-play game.")
+    parser.add_argument("--c-puct", type=float, default=1.5, help="PUCT exploration constant.")
+    parser.add_argument("--temp-opening", type=float, default=1.0, help="Temperature for early moves.")
+    parser.add_argument("--temp-late", type=float, default=0.15, help="Temperature for late moves.")
+    parser.add_argument("--temp-cutoff-move", type=int, default=20, help="Move number to switch temperatures.")
     parser.add_argument(
         "--model-path",
         type=str,
@@ -701,6 +707,13 @@ def _print_training_review(metrics: Mapping[str, Any]) -> None:
 def main() -> int:
     args = _build_arg_parser().parse_args()
 
+    # Set env vars so gameplay uses same parameters
+    os.environ["AZ_MCTS_SIMS"] = str(args.num_simulations)
+    os.environ["AZ_C_PUCT"] = str(args.c_puct)
+    os.environ["AZ_TEMP_OPENING"] = str(args.temp_opening)
+    os.environ["AZ_TEMP_LATE"] = str(args.temp_late)
+    os.environ["AZ_TEMP_CUTOFF_MOVE"] = str(args.temp_cutoff_move)
+
     print("[train] Starting AlphaZero self-play training", flush=True)
     print(
         "[train] config: "
@@ -709,6 +722,10 @@ def main() -> int:
         f"batch={args.batch_size}, "
         f"lr={args.lr}, "
         f"sims={args.num_simulations}, "
+        f"c_puct={args.c_puct}, "
+        f"temp_opening={args.temp_opening}, "
+        f"temp_late={args.temp_late}, "
+        f"temp_cutoff={args.temp_cutoff_move}, "
         f"max_moves={args.max_moves}, "
         f"model={args.model_path}",
         flush=True,
@@ -720,6 +737,7 @@ def main() -> int:
         batch_size=args.batch_size,
         lr=args.lr,
         num_simulations=args.num_simulations,
+        c_puct=args.c_puct,
         max_moves=args.max_moves,
         model_path=Path(args.model_path),
         verbose=not args.quiet,
