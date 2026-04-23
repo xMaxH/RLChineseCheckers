@@ -14,6 +14,11 @@ try:
 except Exception:
     choose_move_alphazero = None
 
+try:
+    from dqn_method import choose_move_dqn
+except Exception:
+    choose_move_dqn = None
+
 HOST = "127.0.0.1"
 PORT = 50555
 DEBUG_NET = os.getenv("DEBUG_NET", "0") not in ("0", "", "false", "False")
@@ -68,12 +73,16 @@ def main():
     timeoutnotice_move = -1
     selected_method = os.getenv("PLAYER_METHOD", "random").strip().lower()
     
-    if selected_method not in ("random", "alphazero"):
+    if selected_method not in ("random", "alphazero", "dqn"):
         print(f"Unknown PLAYER_METHOD '{selected_method}', falling back to random.")
         selected_method = "random"
 
     if selected_method == "alphazero" and choose_move_alphazero is None:
         print("alphazero_method.py not available, falling back to random.")
+        selected_method = "random"
+
+    if selected_method == "dqn" and choose_move_dqn is None:
+        print("dqn_method.py not available, falling back to random.")
         selected_method = "random"
 
     print("==== Player ====")
@@ -127,7 +136,7 @@ def main():
 
         # Timeout messages
         if state.get("turn_timeout_notice") and timeoutnotice_move< state.get("move_count"):
-            print("⚠ TIMEOUT:", state["turn_timeout_notice"])
+            print("[TIMEOUT]", state["turn_timeout_notice"])
             timeoutnotice_move =  state.get("move_count")
 
 
@@ -158,7 +167,7 @@ def main():
             if mv:
                 print(
                     f"MOVE: {mv['by']} ({mv['colour']}) "
-                    f"{mv['from']}→{mv['to']}  [{mv['move_ms']:.1f}ms]"
+                    f"{mv['from']}->{mv['to']}  [{mv['move_ms']:.1f}ms]"
                 )
             last_move_seen = state["move_count"]
 
@@ -195,8 +204,12 @@ def main():
                 to_index = random.choice(moves)
                 delay = random.uniform(0.1, 0.2)
             else:
+                method_fn = {
+                    "alphazero": choose_move_alphazero,
+                    "dqn": choose_move_dqn,
+                }.get(selected_method)
                 try:
-                    pid, to_index, delay = choose_move_alphazero(
+                    pid, to_index, delay = method_fn(
                         legal_moves=legal_moves,
                         state=state,
                         player_context={

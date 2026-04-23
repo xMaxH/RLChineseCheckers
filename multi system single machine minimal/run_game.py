@@ -68,13 +68,13 @@ def resolve_player_methods(players: int, default_method: str, per_player_methods
     else:
         methods = [default_method.strip().lower()] * players
 
-    valid = {"random", "alphazero"}
+    valid = {"random", "alphazero", "dqn"}
     invalid = [m for m in methods if m not in valid]
     if invalid:
         raise ValueError(
             "Invalid method(s): "
             + ", ".join(invalid)
-            + ". Valid options are: random, alphazero."
+            + ". Valid options are: random, alphazero, dqn."
         )
     return methods
 

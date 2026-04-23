@@ -1,0 +1,51 @@
+{
+  "seed": 7,
+  "device": "auto",
+  "agent": {
+    "gamma": 0.995,
+    "lr": 5e-4,
+    "batch_size": 256,
+    "buffer_size": 100000,
+    "epsilon_start": 1.0,
+    "epsilon_end": 0.05,
+    "epsilon_decay_steps": 20000,
+    "target_update_interval": 500,
+    "train_freq": 4,
+    "learn_starts": 1000,
+    "double_dqn": true,
+    "hidden_sizes": [512, 512]
+  },
+  "curriculum": {
+    "solo": {
+      "enabled": true,
+      "max_episodes": 600,
+      "max_steps_per_episode": 600,
+      "exit_win_rate": 0.95,
+      "exit_window": 100,
+      "my_colour": "red",
+      "warmup_episodes": 25,
+      "reward": {
+        "per_pin_home": 5.0,
+        "step_penalty": 0.005,
+        "all_home_bonus": 50.0,
+        "distance_shaping": 0.1
+      }
+    },
+    "vs_random": {
+      "enabled": false,
+      "max_episodes": 0,
+      "max_steps_per_episode": 600,
+      "exit_win_rate": 0.7,
+      "exit_window": 100,
+      "my_colour": "red",
+      "reward": {}
+    }
+  },
+  "eval": {"episodes": 20, "max_steps_per_episode": 600},
+  "output": {
+    "checkpoint_dir": "rl/checkpoints/quicktest",
+    "metrics_dir": "rl/checkpoints/quicktest/metrics",
+    "checkpoint_name": "dqn_latest.pt",
+    "best_name": "dqn_best.pt"
+  }
+}
