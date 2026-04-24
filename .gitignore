@@ -9,6 +9,8 @@ multi system single machine minimal/games/
 .venv/
 venv/
 env/
+!rl/env/
+!rl/env/*.py
 
 .idea/
 .vscode/
