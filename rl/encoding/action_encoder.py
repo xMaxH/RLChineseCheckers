@@ -100,3 +100,49 @@ class ActionEncoder:
     @staticmethod
     def any_legal(mask: np.ndarray) -> bool:
         return bool(mask.any())
+
+    @staticmethod
+    def rank_legal_actions(obs: np.ndarray, legal_actions: np.ndarray) -> np.ndarray:
+        """Heuristic ranking score for legal actions.
+
+        Uses canonical observation channels:
+          - channel 2: goal zone
+          - channel 3: start zone
+          - channel 5: move progress
+          - channels 6..15: per-pin one-hot (optional signal)
+
+        Higher score means "more promising" according to simple priors:
+          1) landing in goal-zone strongly preferred
+          2) landing outside start-zone preferred
+          3) later in game: stronger push toward goal-zone
+          4) small tie-break by pin channel presence
+        """
+        if legal_actions.size == 0:
+            return np.array([], dtype=np.float32)
+
+        scores = np.zeros(legal_actions.shape[0], dtype=np.float32)
+        move_progress = float(obs[5, 0]) if obs.shape[0] > 5 else 0.0
+        for i, flat in enumerate(legal_actions.tolist()):
+            pid, to_idx = ActionEncoder.from_flat(int(flat))
+            s = 0.0
+            if obs.shape[0] > 2:
+                s += 2.0 * float(obs[2, to_idx])  # goal zone
+            if obs.shape[0] > 3:
+                s += 0.5 * (1.0 - float(obs[3, to_idx]))  # leave start zone
+            s += 0.5 * move_progress * float(obs[2, to_idx] if obs.shape[0] > 2 else 0.0)
+            pin_ch = 6 + pid
+            if obs.shape[0] > pin_ch:
+                s += 0.05 * float(obs[pin_ch].sum() > 0.5)
+            scores[i] = s
+        return scores
+
+    @staticmethod
+    def select_topk_legal(obs: np.ndarray, mask: np.ndarray, top_k: int) -> np.ndarray:
+        legal = np.flatnonzero(mask)
+        if legal.size == 0:
+            return legal
+        if top_k <= 0 or legal.size <= top_k:
+            return legal
+        scores = ActionEncoder.rank_legal_actions(obs, legal)
+        order = np.argsort(scores)[::-1]
+        return legal[order[:top_k]]

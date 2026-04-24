@@ -13,7 +13,15 @@
     "train_freq": 4,
     "learn_starts": 2000,
     "double_dqn": true,
-    "hidden_sizes": [256, 256]
+    "hidden_sizes": [256, 256],
+    "use_topk_legal": false,
+    "topk_legal": 0,
+    "prioritized_replay": false,
+    "per_alpha": 0.6,
+    "per_beta_start": 0.4,
+    "per_beta_frames": 100000,
+    "per_eps": 1e-6,
+    "n_step": 1
   },
   "curriculum": {
     "solo": {
@@ -28,7 +36,11 @@
         "per_pin_home": 1.0,
         "step_penalty": 0.001,
         "all_home_bonus": 10.0,
-        "distance_shaping": 0.05
+        "distance_shaping": 0.05,
+        "anti_loop_enabled": true,
+        "anti_loop_window": 12,
+        "anti_loop_revisit_penalty": 0.02,
+        "anti_loop_aba_penalty": 0.05
       }
     },
     "vs_random": {
@@ -44,13 +56,45 @@
         "all_home_bonus": 5.0,
         "distance_shaping": 0.03,
         "win_bonus": 5.0,
-        "lose_penalty": -3.0
+        "lose_penalty": -3.0,
+        "anti_loop_enabled": true,
+        "anti_loop_window": 12,
+        "anti_loop_revisit_penalty": 0.01,
+        "anti_loop_aba_penalty": 0.04
       }
     }
   },
   "eval": {
     "episodes": 50,
     "max_steps_per_episode": 600
+  },
+  "gpu_profiles": {
+    "default_cuda": {
+      "agent": {
+        "batch_size": 384,
+        "buffer_size": 200000
+      }
+    },
+    "v100": {
+      "agent": {
+        "batch_size": 768,
+        "buffer_size": 300000
+      },
+      "curriculum": {
+        "solo": {"max_episodes": 4500, "warmup_episodes": 100},
+        "vs_random": {"max_episodes": 1500}
+      }
+    },
+    "cpu_fallback": {
+      "agent": {
+        "batch_size": 128,
+        "buffer_size": 80000
+      },
+      "curriculum": {
+        "solo": {"max_episodes": 1200},
+        "vs_random": {"max_episodes": 400}
+      }
+    }
   },
   "output": {
     "checkpoint_dir": "rl/checkpoints",

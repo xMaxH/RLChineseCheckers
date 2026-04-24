@@ -119,6 +119,13 @@ select legal moves. During Bellman target computation, the next state's
 mask is applied as well — a necessary correction in masked-action DQN
 that many implementations skip.
 
+### Move-ranking + top-k
+
+`ActionEncoder` also provides lightweight heuristic ranking for legal
+actions. When enabled (`agent.use_topk_legal=true`), `DQNAgent` only
+considers the top-k legal actions (by heuristic score) for sampling and
+argmax. This reduces effective branching early in training.
+
 ## Environment (CheckersEnv)
 
 Two modes, same API:
@@ -170,6 +177,10 @@ network. Relevant details:
   uses online to pick action / target to evaluate it for the bootstrap
   target (double DQN), then Huber-loss on `r + gamma * (1-done) * Q_next`.
   Target net is copied every `target_update_interval` training steps.
+- Replay supports both uniform and PER (priority-weighted sampling with
+  importance weights).
+- Optional n-step return (`n_step > 1`) aggregates short reward horizons
+  before insertion into replay.
 
 Default network: `MLP [1936 -> 256 -> 256 -> 1210]` with ReLU. Small
 enough to train quickly on CPU/GPU within our 1-hour budget, large
@@ -187,6 +198,16 @@ Stage 2 — `vs_random` (2-player). Build on the solo policy; now a
 random opponent occupies the opposite-colour base (red vs blue).
 Terminal reward now includes `win_bonus` and `lose_penalty`, so the
 agent has a reason to finish quickly.
+
+## GPU profiles (local vs server)
+
+`train_dqn.py` supports automatic hardware-aware config scaling:
+- `v100` profile if CUDA device name contains `V100`,
+- `default_cuda` for other CUDA GPUs,
+- `cpu_fallback` without CUDA.
+
+Profiles can override selected config fields (`agent.batch_size`,
+episode counts, etc.) without changing the base experiment JSON.
 
 ## Integration with `player.py`
 

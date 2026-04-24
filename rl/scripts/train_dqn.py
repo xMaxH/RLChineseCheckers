@@ -10,6 +10,7 @@ Usage (run from the repository root)::
 from __future__ import annotations
 
 import argparse
+import copy
 import json
 import os
 import sys
@@ -26,6 +27,7 @@ if str(REPO_ROOT) not in sys.path:
 from rl.agents import DQNAgent  # noqa: E402
 from rl.agents.dqn_agent import DQNConfig  # noqa: E402
 from rl.encoding import NUM_ACTIONS, NUM_CELLS, OBS_CHANNELS  # noqa: E402
+from rl.scripts.pretrain_from_greedy import run_pretrain  # noqa: E402
 from rl.training.trainer import StageConfig, Trainer, TrainerConfig  # noqa: E402
 
 
@@ -50,6 +52,30 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="Path to checkpoint to resume from.",
     )
+    parser.add_argument(
+        "--skip-pretrain",
+        action="store_true",
+        help="Skip greedy-imitation pretraining bootstrap.",
+    )
+    parser.add_argument(
+        "--pretrain-episodes",
+        type=int,
+        default=2000,
+        help="Greedy imitation episodes before RL finetuning.",
+    )
+    parser.add_argument(
+        "--pretrain-epochs",
+        type=int,
+        default=6,
+        help="Supervised epochs for greedy imitation pretraining.",
+    )
+    parser.add_argument(
+        "--gpu-profile",
+        type=str,
+        default="auto",
+        choices=["auto", "v100", "default_cuda", "cpu_fallback", "none"],
+        help="GPU profile override for config scaling.",
+    )
     return parser.parse_args()
 
 
@@ -57,6 +83,42 @@ def resolve_device(cfg_device: str) -> str:
     if cfg_device == "auto":
         return "cuda" if torch.cuda.is_available() else "cpu"
     return cfg_device
+
+
+def detect_gpu_profile(device: str) -> str:
+    if device != "cuda":
+        return "cpu_fallback"
+    try:
+        name = torch.cuda.get_device_name(0)
+    except Exception:
+        return "default_cuda"
+    upper = name.upper()
+    if "V100" in upper:
+        return "v100"
+    return "default_cuda"
+
+
+def deep_update(dst: dict, src: dict) -> dict:
+    for k, v in src.items():
+        if isinstance(v, dict) and isinstance(dst.get(k), dict):
+            deep_update(dst[k], v)
+        else:
+            dst[k] = v
+    return dst
+
+
+def apply_gpu_profile(cfg: dict, profile: str) -> dict:
+    if profile == "none":
+        return cfg
+    profs = cfg.get("gpu_profiles", {})
+    if not isinstance(profs, dict):
+        return cfg
+    ov = profs.get(profile)
+    if not isinstance(ov, dict):
+        return cfg
+    merged = copy.deepcopy(cfg)
+    deep_update(merged, ov)
+    return merged
 
 
 def build_stages(cfg: dict, args: argparse.Namespace) -> list:
@@ -100,11 +162,17 @@ def build_stages(cfg: dict, args: argparse.Namespace) -> list:
 
 def main() -> int:
     args = parse_args()
-    with open(args.config, "r", encoding="utf-8") as f:
-        cfg = json.load(f)
+    with open(args.config, "r", encoding="utf-8-sig") as f:
+        cfg_raw = json.load(f)
 
-    device = resolve_device(cfg.get("device", "cpu"))
+    device = resolve_device(cfg_raw.get("device", "cpu"))
+    profile = args.gpu_profile
+    if profile == "auto":
+        profile = detect_gpu_profile(device)
+    cfg = apply_gpu_profile(cfg_raw, profile)
     print(f"[train_dqn] device={device}")
+    if profile != "none":
+        print(f"[train_dqn] gpu_profile={profile}")
 
     ac = cfg["agent"]
     dqn_cfg = DQNConfig(
@@ -124,12 +192,38 @@ def main() -> int:
         double_dqn=bool(ac.get("double_dqn", True)),
         device=device,
         seed=int(cfg.get("seed", 0)),
+        use_topk_legal=bool(ac.get("use_topk_legal", False)),
+        topk_legal=int(ac.get("topk_legal", 0)),
+        prioritized_replay=bool(ac.get("prioritized_replay", False)),
+        per_alpha=float(ac.get("per_alpha", 0.6)),
+        per_beta_start=float(ac.get("per_beta_start", 0.4)),
+        per_beta_frames=int(ac.get("per_beta_frames", 100000)),
+        per_eps=float(ac.get("per_eps", 1e-6)),
+        n_step=int(ac.get("n_step", 1)),
     )
 
     agent = DQNAgent(dqn_cfg)
-    if args.resume:
-        print(f"[train_dqn] Resuming from {args.resume}")
-        agent.load(args.resume)
+    resume_path = args.resume
+    if not args.skip_pretrain and not resume_path:
+        print(
+            "[train_dqn] Running default bootstrap: pretrain from greedy "
+            "before RL finetune."
+        )
+        resume_path = run_pretrain(
+            episodes=args.pretrain_episodes,
+            batch_size=512,
+            epochs=args.pretrain_epochs,
+            lr=float(ac.get("lr", 3e-4)),
+            seed=int(cfg.get("seed", 0)),
+            out_path=str(
+                Path(cfg["output"].get("checkpoint_dir", "rl/checkpoints"))
+                / cfg["output"].get("best_name", "dqn_best.pt")
+            ),
+            hidden_sizes=tuple(ac.get("hidden_sizes", [512, 512])),
+        )
+    if resume_path:
+        print(f"[train_dqn] Resuming from {resume_path}")
+        agent.load(resume_path)
 
     stages = build_stages(cfg, args)
     if not stages:

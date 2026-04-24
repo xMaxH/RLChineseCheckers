@@ -1,0 +1,73 @@
+{
+  "seed": 301,
+  "device": "auto",
+  "agent": {
+    "gamma": 0.99,
+    "lr": 1e-4,
+    "batch_size": 256,
+    "buffer_size": 120000,
+    "epsilon_start": 1.0,
+    "epsilon_end": 0.05,
+    "epsilon_decay_steps": 60000,
+    "target_update_interval": 1800,
+    "train_freq": 4,
+    "learn_starts": 1200,
+    "double_dqn": true,
+    "hidden_sizes": [256, 256],
+    "use_topk_legal": true,
+    "topk_legal": 24,
+    "prioritized_replay": true,
+    "per_alpha": 0.7,
+    "per_beta_start": 0.45,
+    "per_beta_frames": 120000,
+    "per_eps": 1e-6,
+    "n_step": 1
+  },
+  "curriculum": {
+    "solo": {
+      "enabled": true,
+      "max_episodes": 1000,
+      "max_steps_per_episode": 600,
+      "exit_win_rate": 0.9,
+      "exit_window": 100,
+      "my_colour": "red",
+      "warmup_episodes": 40,
+      "reward": {
+        "per_pin_home": 1.0,
+        "step_penalty": 0.001,
+        "all_home_bonus": 10.0,
+        "distance_shaping": 0.05,
+        "anti_loop_enabled": false
+      }
+    },
+    "vs_random": {
+      "enabled": true,
+      "max_episodes": 380,
+      "max_steps_per_episode": 600,
+      "exit_win_rate": 0.7,
+      "exit_window": 100,
+      "my_colour": "red",
+      "reward": {
+        "per_pin_home": 0.5,
+        "step_penalty": 0.001,
+        "all_home_bonus": 5.0,
+        "distance_shaping": 0.03,
+        "win_bonus": 5.0,
+        "lose_penalty": -3.0,
+        "anti_loop_enabled": false
+      }
+    }
+  },
+  "eval": {"episodes": 30, "max_steps_per_episode": 600},
+  "gpu_profiles": {
+    "default_cuda": {"agent": {"batch_size": 384}},
+    "v100": {"agent": {"batch_size": 768}},
+    "cpu_fallback": {"agent": {"batch_size": 128}}
+  },
+  "output": {
+    "checkpoint_dir": "rl/checkpoints/exp_batch3_A",
+    "metrics_dir": "rl/checkpoints/exp_batch3_A/metrics",
+    "checkpoint_name": "dqn_latest.pt",
+    "best_name": "dqn_best.pt"
+  }
+}

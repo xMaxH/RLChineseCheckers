@@ -15,6 +15,11 @@ Training workflow (driven by ``Trainer``):
 from __future__ import annotations
 
 import random
+import tempfile
+import time
+import os
+from collections import deque
+from pathlib import Path
 from dataclasses import dataclass, field
 from typing import Optional, Sequence
 
@@ -22,7 +27,7 @@ import numpy as np
 import torch
 from torch import nn, optim
 
-from ..encoding import NUM_ACTIONS, NUM_CELLS, OBS_CHANNELS
+from ..encoding import NUM_ACTIONS, NUM_CELLS, OBS_CHANNELS, ActionEncoder
 from ..networks import DQNNet
 from ..training.replay_buffer import ReplayBuffer
 from .base import Agent, Transition
@@ -53,6 +58,14 @@ class DQNConfig:
     eval_policy: str = "epsilon_greedy"
     eval_epsilon: float = 0.05
     eval_boltzmann_temperature: float = 0.5
+    use_topk_legal: bool = False
+    topk_legal: int = 0
+    prioritized_replay: bool = False
+    per_alpha: float = 0.6
+    per_beta_start: float = 0.4
+    per_beta_frames: int = 100_000
+    per_eps: float = 1e-6
+    n_step: int = 1
 
 
 class DQNAgent(Agent):
@@ -82,12 +95,19 @@ class DQNAgent(Agent):
             capacity=cfg.buffer_size,
             obs_dim=cfg.obs_dim,
             mask_dim=cfg.num_actions,
+            prioritized=cfg.prioritized_replay,
+            per_alpha=cfg.per_alpha,
+            per_beta_start=cfg.per_beta_start,
+            per_beta_frames=cfg.per_beta_frames,
+            per_eps=cfg.per_eps,
             seed=cfg.seed,
         )
 
         self.total_steps = 0
         self.train_steps = 0
         self.last_loss: Optional[float] = None
+        self.n_step = max(1, int(cfg.n_step))
+        self._nstep_queue: deque[Transition] = deque()
 
     # ------------------------------------------------------------------
     def epsilon(self) -> float:
@@ -98,6 +118,8 @@ class DQNAgent(Agent):
     @torch.no_grad()
     def act(self, obs: np.ndarray, mask: np.ndarray, training: bool = False) -> int:
         legal = np.flatnonzero(mask)
+        if self.cfg.use_topk_legal and int(self.cfg.topk_legal) > 0:
+            legal = ActionEncoder.select_topk_legal(obs, mask, int(self.cfg.topk_legal))
         if legal.size == 0:
             return -1
 
@@ -127,23 +149,76 @@ class DQNAgent(Agent):
 
     # ------------------------------------------------------------------
     def observe(self, transition: Transition) -> None:
-        self.buffer.push(
-            obs=transition.obs,
-            action=transition.action,
-            reward=transition.reward,
-            next_obs=transition.next_obs,
-            next_mask=transition.next_mask,
-            done=transition.done,
-        )
+        if self.n_step <= 1:
+            self.buffer.push(
+                obs=transition.obs,
+                action=transition.action,
+                reward=transition.reward,
+                next_obs=transition.next_obs,
+                next_mask=transition.next_mask,
+                done=transition.done,
+            )
+        else:
+            self._nstep_queue.append(transition)
+            if len(self._nstep_queue) >= self.n_step:
+                ns = self._build_nstep_transition()
+                self.buffer.push(
+                    obs=ns.obs,
+                    action=ns.action,
+                    reward=ns.reward,
+                    next_obs=ns.next_obs,
+                    next_mask=ns.next_mask,
+                    done=ns.done,
+                )
+                self._nstep_queue.popleft()
+            if transition.done:
+                while self._nstep_queue:
+                    ns = self._build_nstep_transition()
+                    self.buffer.push(
+                        obs=ns.obs,
+                        action=ns.action,
+                        reward=ns.reward,
+                        next_obs=ns.next_obs,
+                        next_mask=ns.next_mask,
+                        done=ns.done,
+                    )
+                    self._nstep_queue.popleft()
         if (
             len(self.buffer) >= max(self.cfg.learn_starts, self.cfg.batch_size)
             and self.total_steps % self.cfg.train_freq == 0
         ):
             self._learn()
 
+    def _build_nstep_transition(self) -> Transition:
+        """Aggregate front transition with n-step discounted return."""
+        reward = 0.0
+        discount = 1.0
+        done = False
+        next_obs = self._nstep_queue[0].next_obs
+        next_mask = self._nstep_queue[0].next_mask
+        horizon = min(self.n_step, len(self._nstep_queue))
+        for i in range(horizon):
+            tr = self._nstep_queue[i]
+            reward += discount * float(tr.reward)
+            next_obs = tr.next_obs
+            next_mask = tr.next_mask
+            done = bool(tr.done)
+            if done:
+                break
+            discount *= self.cfg.gamma
+        first = self._nstep_queue[0]
+        return Transition(
+            obs=first.obs,
+            action=first.action,
+            reward=float(reward),
+            next_obs=next_obs,
+            next_mask=next_mask,
+            done=done,
+        )
+
     # ------------------------------------------------------------------
     def _learn(self) -> None:
-        obs, actions, rewards, next_obs, next_masks, dones = self.buffer.sample(
+        obs, actions, rewards, next_obs, next_masks, dones, idxs, is_w = self.buffer.sample(
             self.cfg.batch_size
         )
 
@@ -153,6 +228,7 @@ class DQNAgent(Agent):
         next_obs_t = torch.from_numpy(next_obs).to(self.device)
         mask_t = torch.from_numpy(next_masks).to(self.device)
         done_t = torch.from_numpy(dones).to(self.device)
+        w_t = torch.from_numpy(is_w).to(self.device)
 
         # Current Q(s, a)
         q_vals = self.online(obs_t).gather(1, act_t.unsqueeze(1)).squeeze(1)
@@ -175,7 +251,9 @@ class DQNAgent(Agent):
 
             target = rew_t + self.cfg.gamma * (1.0 - done_t) * q_next_target
 
-        loss = nn.functional.smooth_l1_loss(q_vals, target)
+        td = q_vals - target
+        per_sample = nn.functional.smooth_l1_loss(q_vals, target, reduction="none")
+        loss = (w_t * per_sample).mean()
         self.optimizer.zero_grad()
         loss.backward()
         nn.utils.clip_grad_norm_(self.online.parameters(), max_norm=10.0)
@@ -183,23 +261,49 @@ class DQNAgent(Agent):
 
         self.train_steps += 1
         self.last_loss = float(loss.item())
+        self.buffer.update_priorities(idxs, np.abs(td.detach().cpu().numpy()))
 
         if self.train_steps % max(1, self.cfg.target_update_interval) == 0:
             self.target.load_state_dict(self.online.state_dict())
 
     # ------------------------------------------------------------------
     def save(self, path: str) -> None:
-        torch.save(
-            {
-                "online": self.online.state_dict(),
-                "target": self.target.state_dict(),
-                "optimizer": self.optimizer.state_dict(),
-                "total_steps": self.total_steps,
-                "train_steps": self.train_steps,
-                "cfg": self.cfg.__dict__,
-            },
-            path,
-        )
+        payload = {
+            "online": self.online.state_dict(),
+            "target": self.target.state_dict(),
+            "optimizer": self.optimizer.state_dict(),
+            "total_steps": self.total_steps,
+            "train_steps": self.train_steps,
+            "cfg": self.cfg.__dict__,
+        }
+        target = str(path)
+        parent = str(Path(target).parent)
+        os.makedirs(parent, exist_ok=True)
+
+        # Atomic-style save with retries (helps on Windows where files can
+        # be briefly locked by scanners/indexers).
+        last_err = None
+        for attempt in range(4):
+            try:
+                with tempfile.NamedTemporaryFile(
+                    mode="wb",
+                    suffix=".pt.tmp",
+                    dir=parent,
+                    delete=False,
+                ) as f:
+                    tmp_path = f.name
+                torch.save(payload, tmp_path)
+                os.replace(tmp_path, target)
+                return
+            except Exception as e:
+                last_err = e
+                try:
+                    if "tmp_path" in locals() and os.path.exists(tmp_path):
+                        os.remove(tmp_path)
+                except Exception:
+                    pass
+                time.sleep(0.25 * (attempt + 1))
+        raise RuntimeError(f"Failed to save checkpoint to {target}: {last_err}")
 
     def load(self, path: str, map_location: Optional[str] = None) -> None:
         ckpt = torch.load(path, map_location=map_location or self.device, weights_only=False)
@@ -207,6 +311,16 @@ class DQNAgent(Agent):
         saved_cfg = ckpt.get("cfg", {})
         saved_hidden = saved_cfg.get("hidden_sizes") if isinstance(saved_cfg, dict) else None
         cur_hidden = tuple(self.cfg.hidden_sizes)
+        if isinstance(saved_cfg, dict):
+            for key in (
+                "use_topk_legal",
+                "topk_legal",
+                "eval_policy",
+                "eval_epsilon",
+                "eval_boltzmann_temperature",
+            ):
+                if key in saved_cfg:
+                    setattr(self.cfg, key, saved_cfg[key])
         if saved_hidden is not None and tuple(saved_hidden) != cur_hidden:
             print(f"[DQNAgent] Rebuilding network with saved hidden_sizes={tuple(saved_hidden)} "
                   f"(was {cur_hidden}).")

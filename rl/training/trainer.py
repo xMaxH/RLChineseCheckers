@@ -72,6 +72,10 @@ class Trainer:
             reward_distance_shaping=r.get("distance_shaping", 0.05),
             reward_win_bonus=r.get("win_bonus", 10.0),
             reward_lose_penalty=r.get("lose_penalty", -5.0),
+            anti_loop_enabled=bool(r.get("anti_loop_enabled", False)),
+            anti_loop_window=int(r.get("anti_loop_window", 12)),
+            anti_loop_revisit_penalty=float(r.get("anti_loop_revisit_penalty", 0.03)),
+            anti_loop_aba_penalty=float(r.get("anti_loop_aba_penalty", 0.06)),
         )
         return CheckersEnv(env_cfg)
 
@@ -149,6 +153,8 @@ class Trainer:
             done = False
             outcome = "truncated"
             pins_home = 0
+            loop_revisit_events = 0
+            loop_aba_events = 0
 
             while not done:
                 action = self.agent.act(obs, mask, training=True)
@@ -174,6 +180,10 @@ class Trainer:
                     outcome = str(res.info.get("outcome", "truncated"))
                     pins_home = int(res.info.get("pins_home", 0))
                     done = True
+                if bool(res.info.get("loop_revisit", False)):
+                    loop_revisit_events += 1
+                if bool(res.info.get("loop_aba", False)):
+                    loop_aba_events += 1
 
             self.agent.on_episode_end(info=None)
             stats = EpisodeStats(
@@ -186,6 +196,8 @@ class Trainer:
                 outcome=outcome,
                 epsilon=self.agent.epsilon(),
                 loss=self.agent.last_loss,
+                loop_revisit_events=loop_revisit_events,
+                loop_aba_events=loop_aba_events,
             )
             self.metrics.log(stats)
 
@@ -201,6 +213,8 @@ class Trainer:
                     f"loss={self.agent.last_loss if self.agent.last_loss else 0.0:.4f} "
                     f"| win%={roll.get('win_rate', 0)*100:5.1f} "
                     f"avgmv={roll.get('avg_moves_if_win', float('nan')):.1f} "
+                    f"loopR={roll.get('avg_loop_revisit_events', 0):.2f} "
+                    f"loopABA={roll.get('avg_loop_aba_events', 0):.2f} "
                     f"| {elapsed:5.0f}s"
                 )
 

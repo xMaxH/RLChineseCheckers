@@ -15,3 +15,9 @@ env/
 .DS_Store
 
 multi system single machine minimal/renders/
+
+# RL training artifacts (large / generated)
+rl/checkpoints/**/*.pt
+rl/checkpoints/**/metrics/
+rl/checkpoints/exp_batch*/
+rl/checkpoints/*.txt

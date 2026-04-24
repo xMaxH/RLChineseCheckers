@@ -1,0 +1,66 @@
+﻿{
+  "seed": 102,
+  "device": "auto",
+  "agent": {
+    "gamma": 0.99,
+    "lr": 1e-4,
+    "batch_size": 256,
+    "buffer_size": 80000,
+    "epsilon_start": 1.0,
+    "epsilon_end": 0.05,
+    "epsilon_decay_steps": 40000,
+    "target_update_interval": 1500,
+    "train_freq": 4,
+    "learn_starts": 1000,
+    "double_dqn": true,
+    "hidden_sizes": [256, 256]
+  },
+  "curriculum": {
+    "solo": {
+      "enabled": true,
+      "max_episodes": 800,
+      "max_steps_per_episode": 600,
+      "exit_win_rate": 0.9,
+      "exit_window": 100,
+      "my_colour": "red",
+      "warmup_episodes": 30,
+      "reward": {
+        "per_pin_home": 1.0,
+        "step_penalty": 0.001,
+        "all_home_bonus": 10.0,
+        "distance_shaping": 0.05,
+        "anti_loop_enabled": true,
+        "anti_loop_window": 12,
+        "anti_loop_revisit_penalty": 0.02,
+        "anti_loop_aba_penalty": 0.05
+      }
+    },
+    "vs_random": {
+      "enabled": true,
+      "max_episodes": 300,
+      "max_steps_per_episode": 600,
+      "exit_win_rate": 0.7,
+      "exit_window": 100,
+      "my_colour": "red",
+      "reward": {
+        "per_pin_home": 0.5,
+        "step_penalty": 0.001,
+        "all_home_bonus": 5.0,
+        "distance_shaping": 0.03,
+        "win_bonus": 5.0,
+        "lose_penalty": -3.0,
+        "anti_loop_enabled": true,
+        "anti_loop_window": 12,
+        "anti_loop_revisit_penalty": 0.01,
+        "anti_loop_aba_penalty": 0.04
+      }
+    }
+  },
+  "eval": {"episodes": 30, "max_steps_per_episode": 600},
+  "output": {
+    "checkpoint_dir": "rl/checkpoints/exp_batch1_B",
+    "metrics_dir": "rl/checkpoints/exp_batch1_B/metrics",
+    "checkpoint_name": "dqn_latest.pt",
+    "best_name": "dqn_best.pt"
+  }
+}

@@ -24,6 +24,8 @@ class EpisodeStats:
     outcome: str
     epsilon: float = 0.0
     loss: Optional[float] = None
+    loop_revisit_events: int = 0
+    loop_aba_events: int = 0
 
 
 class MetricsLogger:
@@ -44,6 +46,8 @@ class MetricsLogger:
                 "outcome",
                 "epsilon",
                 "loss",
+                "loop_revisit_events",
+                "loop_aba_events",
             ],
         )
         if self._csv_file.tell() == 0:
@@ -69,6 +73,8 @@ class MetricsLogger:
                 "outcome": stats.outcome,
                 "epsilon": f"{stats.epsilon:.4f}",
                 "loss": "" if stats.loss is None else f"{stats.loss:.6f}",
+                "loop_revisit_events": stats.loop_revisit_events,
+                "loop_aba_events": stats.loop_aba_events,
             }
         )
         self._csv_file.flush()
@@ -81,12 +87,16 @@ class MetricsLogger:
         moves = [s.agent_moves for s in self._recent if s.outcome == "win"]
         returns = [s.return_sum for s in self._recent]
         pins = [s.pins_home for s in self._recent]
+        loop_revisit = [s.loop_revisit_events for s in self._recent]
+        loop_aba = [s.loop_aba_events for s in self._recent]
         return {
             "n": len(self._recent),
             "win_rate": wins / len(self._recent),
             "avg_moves_if_win": (sum(moves) / len(moves)) if moves else float("nan"),
             "avg_return": sum(returns) / len(returns),
             "avg_pins_home": sum(pins) / len(pins),
+            "avg_loop_revisit_events": sum(loop_revisit) / len(loop_revisit),
+            "avg_loop_aba_events": sum(loop_aba) / len(loop_aba),
         }
 
     # ------------------------------------------------------------------

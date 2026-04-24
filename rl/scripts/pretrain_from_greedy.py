@@ -38,23 +38,34 @@ def parse_args():
     return p.parse_args()
 
 
-def main() -> int:
-    args = parse_args()
-    random.seed(args.seed)
-    np.random.seed(args.seed)
-    torch.manual_seed(args.seed)
+def run_pretrain(
+    episodes: int = 2500,
+    batch_size: int = 512,
+    epochs: int = 6,
+    lr: float = 3e-4,
+    seed: int = 42,
+    out_path: str = "rl/checkpoints/dqn_best.pt",
+    hidden_sizes: tuple[int, int] = (256, 256),
+) -> str:
+    """Run supervised pretraining from greedy trajectories.
+
+    Returns absolute path to the saved checkpoint.
+    """
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    env = CheckersEnv(EnvConfig(mode="solo_race", my_colour="red", max_steps=600, seed=args.seed))
+    env = CheckersEnv(EnvConfig(mode="solo_race", my_colour="red", max_steps=600, seed=seed))
 
-    print(f"[pretrain] collecting dataset from greedy ({args.episodes} episodes)...")
+    print(f"[pretrain] collecting dataset from greedy ({episodes} episodes)...")
     xs: list[np.ndarray] = []
     ys: list[int] = []
     ms: list[np.ndarray] = []
 
-    for ep in range(args.episodes):
-        obs, info = env.reset(seed=args.seed + ep)
-        greedy = GreedyAgent(env.board, "red", epsilon=0.0, seed=args.seed + ep)
+    for ep in range(episodes):
+        obs, info = env.reset(seed=seed + ep)
+        greedy = GreedyAgent(env.board, "red", epsilon=0.0, seed=seed + ep)
         for _ in range(600):
             mask = env.action_mask()
             legal = np.flatnonzero(mask)
@@ -79,22 +90,22 @@ def main() -> int:
     cfg = DQNConfig(
         obs_dim=OBS_CHANNELS * NUM_CELLS,
         num_actions=NUM_ACTIONS,
-        hidden_sizes=(256, 256),
-        lr=args.lr,
+        hidden_sizes=hidden_sizes,
+        lr=lr,
         device=device,
-        seed=args.seed,
+        seed=seed,
     )
     agent = DQNAgent(cfg)
     model = agent.online
-    opt = optim.Adam(model.parameters(), lr=args.lr)
+    opt = optim.Adam(model.parameters(), lr=lr)
     criterion = nn.CrossEntropyLoss()
 
     idx = np.arange(n)
-    for epoch in range(args.epochs):
+    for epoch in range(epochs):
         np.random.shuffle(idx)
         total_loss = 0.0
-        for i in range(0, n, args.batch_size):
-            b = idx[i : i + args.batch_size]
+        for i in range(0, n, batch_size):
+            b = idx[i : i + batch_size]
             logits = model(X[b])
             # Train only over legal actions for each sample.
             logits = logits.masked_fill(~M[b], -1e9)
@@ -104,13 +115,27 @@ def main() -> int:
             nn.utils.clip_grad_norm_(model.parameters(), max_norm=5.0)
             opt.step()
             total_loss += float(loss.item()) * len(b)
-        print(f"[pretrain] epoch {epoch+1}/{args.epochs} loss={total_loss/n:.4f}")
+        print(f"[pretrain] epoch {epoch+1}/{epochs} loss={total_loss/n:.4f}")
 
     agent.target.load_state_dict(agent.online.state_dict())
-    out = (REPO_ROOT / args.out).resolve()
+    out = (REPO_ROOT / out_path).resolve()
     os.makedirs(out.parent, exist_ok=True)
     agent.save(str(out))
     print(f"[pretrain] saved checkpoint -> {out}")
+    return str(out)
+
+
+def main() -> int:
+    args = parse_args()
+    run_pretrain(
+        episodes=args.episodes,
+        batch_size=args.batch_size,
+        epochs=args.epochs,
+        lr=args.lr,
+        seed=args.seed,
+        out_path=args.out,
+        hidden_sizes=(256, 256),
+    )
     return 0
 
 

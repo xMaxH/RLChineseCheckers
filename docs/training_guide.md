@@ -43,6 +43,17 @@ all under 600 moves), and is a good initialization for subsequent RL.
 python -m rl.scripts.train_dqn --config rl/configs/dqn_default.json --minutes 45
 ```
 
+`train_dqn.py` kjører nå som standard `Pretrain -> RL finetune` hvis
+du ikke sender `--skip-pretrain`. Dette gir bedre startpolicy i stor,
+maskert action space.
+
+Skriptet støtter også GPU-profiler via `if`-logikk:
+- auto-detect (`--gpu-profile auto`) velger:
+  - `v100` når GPU-navn inneholder `V100`,
+  - `default_cuda` for annen CUDA-GPU,
+  - `cpu_fallback` uten CUDA.
+- overstyr manuelt ved behov (`--gpu-profile v100` osv.).
+
 Expected timeline (CPU-ish; GPU is ~2x faster):
 
 | Phase                  | Approx. time | What to watch                            |
@@ -62,6 +73,10 @@ is written after every episode.
 python -m rl.scripts.train_dqn \
     --config rl/configs/dqn_default.json \
     --minutes 45                 \  # hard wall-clock cap
+    --gpu-profile auto           \  # auto|v100|default_cuda|cpu_fallback|none
+    --skip-pretrain              \  # disable greedy-imitation bootstrap
+    --pretrain-episodes 2000     \  # bootstrap dataset size
+    --pretrain-epochs 6          \  # bootstrap supervised passes
     --skip-vs-random             \  # run only stage 1
     --skip-solo                  \  # run only stage 2 (needs a checkpoint)
     --resume rl/checkpoints/dqn_latest.pt
@@ -156,6 +171,25 @@ reasonable.
 This is usually because it has learned to shove pins near the goal
 entrance and then stalls. Increase `distance_shaping` modestly (0.1 ->
 0.2), give more training time, or extend `max_steps_per_episode`.
+
+## Batch experiment notes (local PC)
+
+We ran local 20-30 minute style *proxy* runs with shorter budgets to
+validate implementation and direction:
+
+- **Batch 1 (pretrain + anti-loop):**
+  - anti-loop as configured was too aggressive locally and hurt returns.
+  - keep feature, but reduce penalties heavily before server runs.
+- **Batch 2 (top-k + PER):**
+  - implementation validated; no local quality gain under very short
+    budgets.
+- **Batch 3 (n-step + top-k + PER):**
+  - implementation validated; n-step=3 looked slightly better than
+    baseline in `vs_random` under short local runs, but still weak.
+
+Interpretation: local short runs are mainly smoke/ablation checks.
+Meaningful policy quality should be measured on your V100 server with
+full 20-60 min budgets per run.
 
 ## Reproducibility
 
