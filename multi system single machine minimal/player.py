@@ -10,9 +10,14 @@ import time
 from typing import Dict, Any
 
 try:
-    from alphazero_method import choose_move_alphazero
+    from alphazero_method import choose_move_alphazero as choose_move_alphazero_2p
 except Exception:
-    choose_move_alphazero = None
+    choose_move_alphazero_2p = None
+
+try:
+    from alphazero_multiplayer_method import choose_move_alphazero_multiplayer
+except Exception:
+    choose_move_alphazero_multiplayer = None
 
 HOST = "127.0.0.1"
 PORT = 50555
@@ -67,14 +72,17 @@ def render_json_board(state):
 def main():
     timeoutnotice_move = -1
     selected_method = os.getenv("PLAYER_METHOD", "random").strip().lower()
+    alpha_move_fn = None
+    alpha_mode = None
     
     if selected_method not in ("random", "alphazero"):
         print(f"Unknown PLAYER_METHOD '{selected_method}', falling back to random.")
         selected_method = "random"
 
-    if selected_method == "alphazero" and choose_move_alphazero is None:
-        print("alphazero_method.py not available, falling back to random.")
-        selected_method = "random"
+    if selected_method == "alphazero":
+        if choose_move_alphazero_2p is None and choose_move_alphazero_multiplayer is None:
+            print("alphazero modules not available, falling back to random.")
+            selected_method = "random"
 
     print("==== Player ====")
     print(f"Playing method: {selected_method}")
@@ -101,6 +109,24 @@ def main():
             break
         print("Waiting for players...")
         time.sleep(0.1)
+
+    if selected_method == "alphazero":
+        player_count = len(st.get("state", {}).get("players", []))
+        if player_count <= 2 and choose_move_alphazero_2p is not None:
+            alpha_move_fn = choose_move_alphazero_2p
+            alpha_mode = "2-player"
+        elif choose_move_alphazero_multiplayer is not None:
+            alpha_move_fn = choose_move_alphazero_multiplayer
+            alpha_mode = f"multiplayer ({player_count} players)"
+        elif choose_move_alphazero_2p is not None and player_count <= 2:
+            alpha_move_fn = choose_move_alphazero_2p
+            alpha_mode = "2-player"
+
+        if alpha_move_fn is None:
+            print("alphazero implementation unavailable for this game size, falling back to random.")
+            selected_method = "random"
+        else:
+            print(f"AlphaZero mode: {alpha_mode}")
 
     input("Press ENTER to send START...")
     rpc({"op": "start", "game_id": game_id, "player_id": player_id})
@@ -196,7 +222,9 @@ def main():
                 delay = random.uniform(0.1, 0.2)
             else:
                 try:
-                    pid, to_index, delay = choose_move_alphazero(
+                    if alpha_move_fn is None:
+                        raise RuntimeError("AlphaZero chooser not resolved for this game.")
+                    pid, to_index, delay = alpha_move_fn(
                         legal_moves=legal_moves,
                         state=state,
                         player_context={

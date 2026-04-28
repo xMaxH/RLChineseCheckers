@@ -1,11 +1,8 @@
-"""AlphaZero-style method for 2-player Chinese Checkers.
+"""AlphaZero-style method for 3-6 player Chinese Checkers.
 
-This module provides:
-1. `choose_move_alphazero(...)` for runtime move selection in `player.py`
-2. A local 2-player simulator from JSON state
-3. MCTS (PUCT)
-4. Optional policy-value network support with heuristic fallback
-5. Self-play training utilities for offline training
+This module is a multiplayer companion to alphazero_method.py.
+It keeps the same runtime interface for player.py but removes the
+strict 2-player assumptions by using a root-perspective paranoid MCTS.
 """
 
 from __future__ import annotations
@@ -17,20 +14,23 @@ import random
 import time
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
+from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from alphazero_method import format_parameter_summary
 from checkers_board import HexBoard
 from checkers_pins import Pin
 
 
 MAX_CELLS = 121
 ACTION_SIZE = MAX_CELLS * MAX_CELLS
-DEFAULT_MODEL_PATH = Path(__file__).resolve().parent / "alphazero_2p.pt"
-MODEL_CACHE: Optional["AlphaZeroAgent"] = None
+INPUT_CHANNELS = 24
+DEFAULT_MODEL_PATH = Path(__file__).resolve().parent / "alphazero_multi.pt"
+MODEL_CACHE: Optional["MultiAlphaZeroAgent"] = None
+COLOUR_ORDER = ["red", "lawn green", "yellow", "blue", "gray0", "purple"]
 
 
 @dataclass(frozen=True)
@@ -41,12 +41,19 @@ class Action:
     to_index: int
 
 
-class SimState:
-    """Lightweight 2-player simulator using existing board/pin logic."""
+class MultiSimState:
+    """Lightweight multiplayer simulator using existing board/pin logic."""
 
-    def __init__(self, pins_by_colour: Mapping[str, Sequence[int]], turn_order: Sequence[str], current_turn_colour: str):
-        if len(turn_order) != 2:
-            raise ValueError("AlphaZero method supports exactly 2 players.")
+    def __init__(
+        self,
+        pins_by_colour: Mapping[str, Sequence[int]],
+        turn_order: Sequence[str],
+        current_turn_colour: str,
+    ):
+        if len(turn_order) < 2:
+            raise ValueError("AlphaZero multiplayer mode needs at least 2 players.")
+        if current_turn_colour not in turn_order:
+            raise ValueError("Current turn colour must be part of the turn order.")
 
         self.board = HexBoard()
         self.turn_order = list(turn_order)
@@ -60,23 +67,20 @@ class SimState:
                 for i, idx in enumerate(positions)
             ]
 
-    def clone(self) -> "SimState":
+    def clone(self) -> "MultiSimState":
         positions = {
             colour: [pin.axialindex for pin in pins]
             for colour, pins in self.pins_by_colour.items()
         }
-        return SimState(positions, self.turn_order, self.current_turn_colour())
+        return MultiSimState(positions, self.turn_order, self.current_turn_colour())
 
     def current_turn_colour(self) -> str:
         return self.turn_order[self.current_turn_index]
 
-    def opponent_colour(self, colour: str) -> str:
-        return self.turn_order[1] if self.turn_order[0] == colour else self.turn_order[0]
-
     def legal_actions(self, colour: Optional[str] = None) -> List[Action]:
-        c = colour or self.current_turn_colour()
+        chosen_colour = colour or self.current_turn_colour()
         actions: List[Action] = []
-        for pin in self.pins_by_colour[c]:
+        for pin in self.pins_by_colour[chosen_colour]:
             for target in pin.getPossibleMoves():
                 actions.append(Action(pin_id=pin.id, to_index=int(target)))
         return actions
@@ -90,7 +94,7 @@ class SimState:
         pin.axialindex = int(action.to_index)
         self.board.cells[action.to_index].occupied = True
 
-        self.current_turn_index = (self.current_turn_index + 1) % 2
+        self.current_turn_index = (self.current_turn_index + 1) % len(self.turn_order)
 
     def winner(self) -> Optional[str]:
         for colour in self.turn_order:
@@ -101,7 +105,7 @@ class SimState:
         return None
 
     def is_terminal(self) -> bool:
-        return self.winner() is not None
+        return self.winner() is not None or not self.legal_actions()
 
     def _hex_distance(self, a_idx: int, b_idx: int) -> int:
         a = self.board.cells[a_idx]
@@ -118,54 +122,53 @@ class SimState:
         for pin in self.pins_by_colour[colour]:
             if self.board.cells[pin.axialindex].postype == opposite:
                 continue
-            total += min(self._hex_distance(pin.axialindex, t) for t in target_idxs)
+            total += min(self._hex_distance(pin.axialindex, target) for target in target_idxs)
         return total
 
-    def heuristic_value(self, perspective_colour: str) -> float:
+    def heuristic_value(self, root_colour: str) -> float:
         win = self.winner()
-        if win == perspective_colour:
+        if win == root_colour:
             return 1.0
         if win is not None:
             return -1.0
 
-        opp = self.opponent_colour(perspective_colour)
-        own_dist = self.distance_to_goal(perspective_colour)
-        opp_dist = self.distance_to_goal(opp)
-        raw = (opp_dist - own_dist) / 40.0
+        root_dist = self.distance_to_goal(root_colour)
+        opp_dists = [self.distance_to_goal(colour) for colour in self.turn_order if colour != root_colour]
+        avg_opp_dist = sum(opp_dists) / max(1, len(opp_dists))
+        raw = (avg_opp_dist - root_dist) / 40.0
         return float(max(-0.99, min(0.99, math.tanh(raw))))
 
-    def encode(self, perspective_colour: str) -> torch.Tensor:
-        """Encode board as [7, MAX_CELLS] tensor for policy-value net."""
+    def encode(self, root_colour: str) -> torch.Tensor:
+        """Encode as [24, MAX_CELLS] tensor for the policy-value net."""
         cur = self.current_turn_colour()
-        opp = self.opponent_colour(perspective_colour)
         n = len(self.board.cells)
+        x = torch.zeros((INPUT_CHANNELS, MAX_CELLS), dtype=torch.float32)
 
-        x = torch.zeros((7, MAX_CELLS), dtype=torch.float32)
+        colour_to_idx = {colour: idx for idx, colour in enumerate(COLOUR_ORDER)}
+        root_idx = colour_to_idx[root_colour]
+        cur_idx = colour_to_idx[cur]
 
-        for pin in self.pins_by_colour[perspective_colour]:
-            x[0, pin.axialindex] = 1.0
-        for pin in self.pins_by_colour[opp]:
-            x[1, pin.axialindex] = 1.0
+        for colour, idx in colour_to_idx.items():
+            if colour in self.pins_by_colour:
+                for pin in self.pins_by_colour[colour]:
+                    x[idx, pin.axialindex] = 1.0
 
-        own_goal = self.board.axial_of_colour(self.board.colour_opposites[perspective_colour])
-        opp_goal = self.board.axial_of_colour(self.board.colour_opposites[opp])
-        own_start = self.board.axial_of_colour(perspective_colour)
-        opp_start = self.board.axial_of_colour(opp)
+        x[6 + root_idx, :n] = 1.0
+        x[12 + cur_idx, :n] = 1.0
+        for colour, idx in colour_to_idx.items():
+            if colour in self.board.colour_opposites:
+                for cell_idx in self.board.axial_of_colour(colour):
+                    x[18 + idx, cell_idx] = 1.0
 
-        x[2, own_goal] = 1.0
-        x[3, opp_goal] = 1.0
-        x[4, own_start] = 1.0
-        x[5, opp_start] = 1.0
-        x[6, :n] = 1.0 if cur == perspective_colour else 0.0
         return x
 
 
-class PolicyValueNet(nn.Module):
-    """Compact MLP policy-value network for fixed action space."""
+class MultiPolicyValueNet(nn.Module):
+    """Compact MLP policy-value network for multiplayer play."""
 
     def __init__(self, hidden_dim: int = 512):
         super().__init__()
-        input_dim = 7 * MAX_CELLS
+        input_dim = INPUT_CHANNELS * MAX_CELLS
         self.backbone = nn.Sequential(
             nn.Linear(input_dim, hidden_dim),
             nn.ReLU(),
@@ -182,30 +185,13 @@ class PolicyValueNet(nn.Module):
         return policy_logits, value
 
 
-def action_to_id(from_idx: int, to_idx: int) -> int:
-    return int(from_idx) * MAX_CELLS + int(to_idx)
-
-
-def format_parameter_summary(title: str, entries: Sequence[Tuple[str, Any]]) -> str:
-    cleaned = [(str(label), value) for label, value in entries]
-    width = max((len(label) for label, _ in cleaned), default=0)
-    lines = [f"=== {title} ==="]
-    for label, value in cleaned:
-        lines.append(f"{label:<{width}} : {value}")
-    return "\n".join(lines)
-
-
-def print_parameter_summary(title: str, entries: Sequence[Tuple[str, Any]]) -> None:
-    print("\n" + format_parameter_summary(title, entries), flush=True)
-
-
-class Node:
-    def __init__(self, state: SimState, prior: float = 1.0):
+class MultiNode:
+    def __init__(self, state: MultiSimState, prior: float = 1.0):
         self.state = state
         self.prior = prior
         self.visit_count = 0
         self.value_sum = 0.0
-        self.children: Dict[Action, "Node"] = {}
+        self.children: Dict[Action, "MultiNode"] = {}
 
     def expanded(self) -> bool:
         return len(self.children) > 0
@@ -216,8 +202,15 @@ class Node:
         return self.value_sum / self.visit_count
 
 
-class AlphaZeroAgent:
-    def __init__(self, model: Optional[PolicyValueNet] = None, device: Optional[str] = None):
+@dataclass
+class TrainingExample:
+    state_tensor: torch.Tensor
+    policy: torch.Tensor
+    value: float
+
+
+class MultiAlphaZeroAgent:
+    def __init__(self, model: Optional[MultiPolicyValueNet] = None, device: Optional[str] = None):
         self.device = torch.device(device or ("cuda" if torch.cuda.is_available() else "cpu"))
         self.model = model.to(self.device) if model is not None else None
         if self.model is not None:
@@ -231,31 +224,44 @@ class AlphaZeroAgent:
 
     def _evaluate_policy_and_value(
         self,
-        state: SimState,
-        perspective: str,
+        state: MultiSimState,
+        root_colour: str,
         legal_actions: Sequence[Action],
     ) -> Tuple[Dict[Action, float], float]:
         if not legal_actions:
-            return {}, state.heuristic_value(perspective)
+            return {}, state.heuristic_value(root_colour)
 
         if self.model is None:
             priors: Dict[Action, float] = {}
             total = 0.0
             for action in legal_actions:
-                before = state.distance_to_goal(perspective)
+                before = state.distance_to_goal(root_colour)
                 tmp = state.clone()
                 tmp.apply_action(action)
-                after = tmp.distance_to_goal(perspective)
-                improve = max(0.0, before - after)
-                into_goal = 1.0 if tmp.board.cells[tmp.pins_by_colour[perspective][action.pin_id].axialindex].postype == tmp.board.colour_opposites[perspective] else 0.0
-                score = 1e-3 + improve + 0.5 * into_goal
+                after = tmp.distance_to_goal(root_colour)
+                improvement = max(0.0, before - after)
+
+                opponent_pressure = 0.0
+                for colour in state.turn_order:
+                    if colour == root_colour:
+                        continue
+                    opp_before = state.distance_to_goal(colour)
+                    opp_after = tmp.distance_to_goal(colour)
+                    opponent_pressure += max(0.0, opp_after - opp_before)
+
+                into_goal = 1.0 if tmp.board.cells[tmp.pins_by_colour[root_colour][action.pin_id].axialindex].postype == tmp.board.colour_opposites[root_colour] else 0.0
+                score = 1e-3 + improvement + 0.1 * opponent_pressure + 0.5 * into_goal
                 priors[action] = score
                 total += score
-            priors = {a: p / total for a, p in priors.items()} if total > 0 else {a: 1.0 / len(legal_actions) for a in legal_actions}
-            return priors, state.heuristic_value(perspective)
+
+            if total > 0:
+                priors = {a: p / total for a, p in priors.items()}
+            else:
+                priors = {a: 1.0 / len(legal_actions) for a in legal_actions}
+            return priors, state.heuristic_value(root_colour)
 
         with torch.no_grad():
-            x = state.encode(perspective).flatten().unsqueeze(0).to(self.device)
+            x = state.encode(root_colour).flatten().unsqueeze(0).to(self.device)
             policy_logits, value = self.model(x)
             logits = policy_logits[0]
             probs: Dict[Action, float] = {}
@@ -263,8 +269,8 @@ class AlphaZeroAgent:
             cur_colour = state.current_turn_colour()
             for action in legal_actions:
                 from_idx = state.pins_by_colour[cur_colour][action.pin_id].axialindex
-                aid = action_to_id(from_idx, action.to_index)
-                p = float(torch.exp(logits[aid]).item())
+                action_id = int(from_idx) * MAX_CELLS + int(action.to_index)
+                p = float(torch.exp(logits[action_id]).item())
                 probs[action] = p
                 total += p
 
@@ -274,14 +280,17 @@ class AlphaZeroAgent:
                 probs = {a: p / total for a, p in probs.items()}
             return probs, float(value.item())
 
-    def _select_child(self, node: Node, c_puct: float) -> Tuple[Action, Node]:
+    def _select_child(self, node: MultiNode, root_colour: str, c_puct: float) -> Tuple[Action, MultiNode]:
         best_score = -float("inf")
         best_action = None
         best_child = None
         parent_sqrt = math.sqrt(max(1, node.visit_count))
+        minimizing_turn = node.state.current_turn_colour() != root_colour
 
         for action, child in node.children.items():
-            q = -child.value()
+            q = child.value()
+            if minimizing_turn:
+                q = -q
             u = c_puct * child.prior * parent_sqrt / (1 + child.visit_count)
             score = q + u
             if score > best_score:
@@ -295,22 +304,21 @@ class AlphaZeroAgent:
 
     def run_mcts(
         self,
-        root_state: SimState,
-        perspective_colour: str,
-        root_legal_override: Optional[Mapping[int, Sequence[int]]] = None,
+        root_state: MultiSimState,
+        root_colour: str,
         num_simulations: int = 96,
         c_puct: float = 1.5,
         root_dirichlet_alpha: float = 0.3,
         root_dirichlet_frac: float = 0.25,
     ) -> Dict[Action, int]:
-        root = Node(root_state.clone(), prior=1.0)
+        root = MultiNode(root_state.clone(), prior=1.0)
 
-        root_legal = self._legal_actions_for_node(root.state, root_legal_override)
-        root_priors, root_value = self._evaluate_policy_and_value(root.state, perspective_colour, root_legal)
+        root_legal = root.state.legal_actions()
+        root_priors, root_value = self._evaluate_policy_and_value(root.state, root_colour, root_legal)
         for action in root_legal:
             child_state = root.state.clone()
             child_state.apply_action(action)
-            root.children[action] = Node(child_state, prior=root_priors[action])
+            root.children[action] = MultiNode(child_state, prior=root_priors[action])
 
         noise = self._root_dirichlet(root_dirichlet_alpha, len(root_legal)) if root_legal else []
         for i, action in enumerate(root_legal):
@@ -325,7 +333,7 @@ class AlphaZeroAgent:
             path = [node]
 
             while node.expanded() and not node.state.is_terminal():
-                _, node = self._select_child(node, c_puct)
+                _, node = self._select_child(node, root_colour, c_puct)
                 path.append(node)
 
             if node.state.is_terminal():
@@ -333,75 +341,23 @@ class AlphaZeroAgent:
                 if winner is None:
                     value = 0.0
                 else:
-                    to_play = node.state.current_turn_colour()
-                    value = 1.0 if winner == to_play else -1.0
+                    value = 1.0 if winner == root_colour else -1.0
             else:
-                legal = self._legal_actions_for_node(node.state, None)
-                priors, value = self._evaluate_policy_and_value(node.state, perspective_colour, legal)
+                legal = node.state.legal_actions()
+                priors, value = self._evaluate_policy_and_value(node.state, root_colour, legal)
                 for action in legal:
                     child_state = node.state.clone()
                     child_state.apply_action(action)
-                    node.children[action] = Node(child_state, prior=priors[action])
+                    node.children[action] = MultiNode(child_state, prior=priors[action])
 
             for p in reversed(path):
                 p.visit_count += 1
                 p.value_sum += value
-                value = -value
 
         return {action: child.visit_count for action, child in root.children.items()}
 
-    def _legal_actions_for_node(
-        self,
-        state: SimState,
-        root_legal_override: Optional[Mapping[int, Sequence[int]]],
-    ) -> List[Action]:
-        if root_legal_override is None:
-            return state.legal_actions()
 
-        actions: List[Action] = []
-        for pin_id, moves in root_legal_override.items():
-            for target in moves:
-                actions.append(Action(pin_id=int(pin_id), to_index=int(target)))
-        return actions
-
-
-def _load_agent() -> AlphaZeroAgent:
-    global MODEL_CACHE
-    if MODEL_CACHE is not None:
-        return MODEL_CACHE
-
-    model_path = Path(os.getenv("AZ_MODEL_PATH", str(DEFAULT_MODEL_PATH)))
-    if not model_path.exists():
-        MODEL_CACHE = AlphaZeroAgent(model=None)
-        return MODEL_CACHE
-
-    model = PolicyValueNet()
-    ckpt = torch.load(model_path, map_location="cpu")
-    if isinstance(ckpt, dict) and "model_state_dict" in ckpt:
-        model.load_state_dict(ckpt["model_state_dict"])
-    elif isinstance(ckpt, dict):
-        model.load_state_dict(ckpt)
-    else:
-        raise ValueError("Unsupported checkpoint format for AlphaZero model.")
-
-    MODEL_CACHE = AlphaZeroAgent(model=model)
-    return MODEL_CACHE
-
-
-def _extract_two_player_turn_order(state: Mapping[str, Any]) -> List[str]:
-    players = state.get("players", [])
-    if len(players) != 2:
-        raise ValueError("AlphaZero method currently supports exactly 2 players.")
-    order = state.get("turn_order") or [p["colour"] for p in players]
-    if len(order) != 2:
-        raise ValueError("Invalid turn order for 2-player game.")
-    return list(order)
-
-
-def _sample_action_from_visits(
-    visits: Mapping[Action, int],
-    temperature: float,
-) -> Action:
+def _sample_action_from_visits(visits: Mapping[Action, int], temperature: float) -> Action:
     if not visits:
         raise ValueError("No actions from MCTS.")
 
@@ -417,30 +373,67 @@ def _sample_action_from_visits(
     return actions[idx]
 
 
-def choose_move_alphazero(
+def _extract_turn_order(state: Mapping[str, Any]) -> List[str]:
+    players = state.get("players", [])
+    if len(players) < 2:
+        raise ValueError("Multiplayer AlphaZero requires at least 2 players.")
+    order = state.get("turn_order") or [p["colour"] for p in players]
+    if len(order) != len(players):
+        return list(order)
+    return list(order)
+
+
+def _load_agent() -> MultiAlphaZeroAgent:
+    global MODEL_CACHE
+    if MODEL_CACHE is not None:
+        return MODEL_CACHE
+
+    model_path = Path(os.getenv("AZ_MP_MODEL_PATH", os.getenv("AZ_MODEL_PATH", str(DEFAULT_MODEL_PATH))))
+    if not model_path.exists():
+        MODEL_CACHE = MultiAlphaZeroAgent(model=None)
+        return MODEL_CACHE
+
+    model = MultiPolicyValueNet()
+    ckpt = torch.load(model_path, map_location="cpu")
+    if isinstance(ckpt, dict) and "model_state_dict" in ckpt:
+        model.load_state_dict(ckpt["model_state_dict"])
+    elif isinstance(ckpt, dict):
+        model.load_state_dict(ckpt)
+    else:
+        raise ValueError("Unsupported checkpoint format for multiplayer AlphaZero model.")
+
+    MODEL_CACHE = MultiAlphaZeroAgent(model=model)
+    return MODEL_CACHE
+
+
+def build_parameter_summary(entries: Sequence[Tuple[str, Any]]) -> str:
+    return format_parameter_summary("AlphaZero Multiplayer Parameters", entries)
+
+
+def print_parameter_summary(entries: Sequence[Tuple[str, Any]]) -> None:
+    print("\n" + build_parameter_summary(entries), flush=True)
+
+
+def choose_move_alphazero_multiplayer(
     legal_moves: Mapping[str, Sequence[int]],
     state: Mapping[str, Any],
     player_context: Dict[str, Any],
 ) -> Tuple[int, int, float]:
-    """Choose a move with AlphaZero-style MCTS for 2-player games.
-
-    Returns:
-        (pin_id, to_index, delay_seconds)
-    """
+    """Choose a move with AlphaZero-style MCTS for multiplayer games."""
     my_colour = str(player_context.get("colour", ""))
     if not my_colour:
-        raise ValueError("player_context must include colour for AlphaZero method.")
+        raise ValueError("player_context must include colour for AlphaZero multiplayer mode.")
 
-    turn_order = _extract_two_player_turn_order(state)
     current_turn = str(state.get("current_turn_colour", ""))
     if current_turn != my_colour:
-        raise ValueError("AlphaZero called when it is not this player's turn.")
+        raise ValueError("AlphaZero multiplayer called when it is not this player's turn.")
 
     pins = state.get("pins", {})
     if my_colour not in pins:
         raise ValueError("Current player colour not present in state pins.")
 
-    root_state = SimState(
+    turn_order = _extract_turn_order(state)
+    root_state = MultiSimState(
         pins_by_colour={colour: list(map(int, pins.get(colour, []))) for colour in turn_order},
         turn_order=turn_order,
         current_turn_colour=current_turn,
@@ -448,41 +441,63 @@ def choose_move_alphazero(
 
     legal_override = {int(k): [int(x) for x in v] for k, v in legal_moves.items() if v}
     if not legal_override:
-        raise ValueError("No legal moves available for AlphaZero method.")
+        raise ValueError("No legal moves available for AlphaZero multiplayer mode.")
 
     agent = _load_agent()
-    sims = int(os.getenv("AZ_MCTS_SIMS", "96"))
-    c_puct = float(os.getenv("AZ_C_PUCT", "1.5"))
-    temp_opening = float(os.getenv("AZ_TEMP_OPENING", "1.0"))
-    temp_late = float(os.getenv("AZ_TEMP_LATE", "0.15"))
-    cutoff = int(os.getenv("AZ_TEMP_CUTOFF_MOVE", "20"))
+    sims = int(os.getenv("AZ_MP_MCTS_SIMS", os.getenv("AZ_MCTS_SIMS", "96")))
+    c_puct = float(os.getenv("AZ_MP_C_PUCT", os.getenv("AZ_C_PUCT", "1.5")))
+    temp_opening = float(os.getenv("AZ_MP_TEMP_OPENING", os.getenv("AZ_TEMP_OPENING", "1.0")))
+    temp_late = float(os.getenv("AZ_MP_TEMP_LATE", os.getenv("AZ_TEMP_LATE", "0.15")))
+    cutoff = int(os.getenv("AZ_MP_TEMP_CUTOFF_MOVE", os.getenv("AZ_TEMP_CUTOFF_MOVE", "20")))
     move_count = int(state.get("move_count", 0))
     temperature = temp_opening if move_count < cutoff else temp_late
 
     visits = agent.run_mcts(
         root_state=root_state,
-        perspective_colour=my_colour,
-        root_legal_override=legal_override,
+        root_colour=my_colour,
         num_simulations=sims,
         c_puct=c_puct,
     )
 
     chosen = _sample_action_from_visits(visits, temperature)
-    delay = 0.0 # random.uniform(0.05,0.12)
+    delay = 0.0
     return chosen.pin_id, chosen.to_index, delay
 
 
-@dataclass
-class TrainingExample:
-    state_tensor: torch.Tensor
-    policy: torch.Tensor
-    value: float
+def create_initial_multiplayer_state(colours: Sequence[str]) -> MultiSimState:
+    board = HexBoard()
+    positions = {
+        colour: board.axial_of_colour(colour)[:10]
+        for colour in colours
+    }
+    return MultiSimState(
+        pins_by_colour=positions,
+        turn_order=list(colours),
+        current_turn_colour=colours[0],
+    )
 
 
-def build_policy_target(
-    state: SimState,
-    action_visits: Mapping[Action, int],
-) -> torch.Tensor:
+def _resolve_episode_player_count(
+    player_count_min: int,
+    player_count_max: int,
+    fixed_player_count: Optional[int] = None,
+) -> int:
+    if fixed_player_count is not None:
+        if fixed_player_count < 2 or fixed_player_count > 6:
+            raise ValueError("fixed_player_count must be between 2 and 6.")
+        return fixed_player_count
+
+    if player_count_min < 2 or player_count_min > 6:
+        raise ValueError("player_count_min must be between 2 and 6.")
+    if player_count_max < 2 or player_count_max > 6:
+        raise ValueError("player_count_max must be between 2 and 6.")
+    if player_count_min > player_count_max:
+        raise ValueError("player_count_min must be <= player_count_max.")
+
+    return random.randint(player_count_min, player_count_max)
+
+
+def build_policy_target(state: MultiSimState, action_visits: Mapping[Action, int]) -> torch.Tensor:
     target = torch.zeros(ACTION_SIZE, dtype=torch.float32)
     colour = state.current_turn_colour()
     total = sum(max(0, int(v)) for v in action_visits.values())
@@ -490,13 +505,71 @@ def build_policy_target(
         return target
     for action, count in action_visits.items():
         from_idx = state.pins_by_colour[colour][action.pin_id].axialindex
-        aid = action_to_id(from_idx, action.to_index)
-        target[aid] = float(count) / float(total)
+        action_id = int(from_idx) * MAX_CELLS + int(action.to_index)
+        target[action_id] = float(count) / float(total)
     return target
 
 
+def generate_self_play_game(
+    agent: MultiAlphaZeroAgent,
+    player_count: int = 6,
+    num_simulations: int = 96,
+    c_puct: float = 1.5,
+    max_moves: int = 400,
+    temperature_cutoff: int = 20,
+    temp_opening: float = 1.0,
+    temp_late: float = 0.15,
+) -> List[TrainingExample]:
+    if player_count < 2 or player_count > 6:
+        raise ValueError("player_count must be between 2 and 6.")
+
+    colours = random.sample(COLOUR_ORDER, k=player_count)
+    state = create_initial_multiplayer_state(colours)
+    raw_samples: List[Tuple[torch.Tensor, torch.Tensor, str]] = []
+
+    for ply in range(max_moves):
+        if state.is_terminal():
+            break
+
+        to_play = state.current_turn_colour()
+        legal = state.legal_actions(to_play)
+        if not legal:
+            break
+
+        visits = agent.run_mcts(
+            root_state=state,
+            root_colour=to_play,
+            num_simulations=num_simulations,
+            c_puct=c_puct,
+        )
+
+        policy_target = build_policy_target(state, visits)
+        state_tensor = state.encode(to_play).flatten()
+        raw_samples.append((state_tensor, policy_target, to_play))
+
+        temperature = temp_opening if ply < temperature_cutoff else temp_late
+        action = _sample_action_from_visits(visits, temperature)
+        state.apply_action(action)
+
+    winner = state.winner()
+    samples: List[TrainingExample] = []
+    for state_tensor, policy_target, to_play in raw_samples:
+        if winner is None:
+            value = 0.0
+        else:
+            value = 1.0 if winner == to_play else -1.0
+        samples.append(
+            TrainingExample(
+                state_tensor=state_tensor,
+                policy=policy_target,
+                value=value,
+            )
+        )
+    return samples
+
+
 def train_step(
-    model: PolicyValueNet,
+    model: MultiPolicyValueNet,
     optimizer: torch.optim.Optimizer,
     batch: Sequence[TrainingExample],
     device: str,
@@ -522,74 +595,6 @@ def train_step(
     }
 
 
-def create_initial_two_player_state(
-    first_colour: str = "yellow",
-    second_colour: str = "purple",
-) -> SimState:
-    board = HexBoard()
-    positions = {
-        first_colour: board.axial_of_colour(first_colour)[:10],
-        second_colour: board.axial_of_colour(second_colour)[:10],
-    }
-    return SimState(
-        pins_by_colour=positions,
-        turn_order=[first_colour, second_colour],
-        current_turn_colour=first_colour,
-    )
-
-
-def generate_self_play_game(
-    agent: AlphaZeroAgent,
-    num_simulations: int = 96,
-    c_puct: float = 1.5,
-    max_moves: int = 400,
-    temperature_cutoff: int = 20,
-) -> List[TrainingExample]:
-    state = create_initial_two_player_state()
-    raw_samples: List[Tuple[torch.Tensor, torch.Tensor, str]] = []
-
-    for ply in range(max_moves):
-        if state.is_terminal():
-            break
-
-        to_play = state.current_turn_colour()
-        legal = state.legal_actions(to_play)
-        if not legal:
-            break
-
-        visits = agent.run_mcts(
-            root_state=state,
-            perspective_colour=to_play,
-            root_legal_override=None,
-            num_simulations=num_simulations,
-            c_puct=c_puct,
-        )
-
-        policy_target = build_policy_target(state, visits)
-        state_tensor = state.encode(to_play).flatten()
-        raw_samples.append((state_tensor, policy_target, to_play))
-
-        temperature = 1.0 if ply < temperature_cutoff else 0.15
-        action = _sample_action_from_visits(visits, temperature)
-        state.apply_action(action)
-
-    winner = state.winner()
-    samples: List[TrainingExample] = []
-    for state_tensor, policy_target, to_play in raw_samples:
-        if winner is None:
-            value = 0.0
-        else:
-            value = 1.0 if winner == to_play else -1.0
-        samples.append(
-            TrainingExample(
-                state_tensor=state_tensor,
-                policy=policy_target,
-                value=value,
-            )
-        )
-    return samples
-
-
 def run_self_play_training(
     episodes: int = 100,
     train_epochs: int = 10,
@@ -598,29 +603,47 @@ def run_self_play_training(
     num_simulations: int = 96,
     c_puct: float = 1.5,
     max_moves: int = 500,
+    player_count_min: int = 2,
+    player_count_max: int = 6,
+    fixed_player_count: Optional[int] = None,
+    temp_opening: float = 1.0,
+    temp_late: float = 0.15,
+    temperature_cutoff: int = 20,
     model_path: Optional[Path] = None,
     verbose: bool = False,
 ) -> Dict[str, float]:
     started = time.time()
-    model = PolicyValueNet()
+    model = MultiPolicyValueNet()
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-    agent = AlphaZeroAgent(model=model)
+    agent = MultiAlphaZeroAgent(model=model)
 
     replay: List[TrainingExample] = []
     for ep in range(1, episodes + 1):
+        episode_player_count = _resolve_episode_player_count(
+            player_count_min=player_count_min,
+            player_count_max=player_count_max,
+            fixed_player_count=fixed_player_count,
+        )
         if verbose:
-            print(f"[self-play] episode {ep}/{episodes} started", flush=True)
+            print(
+                f"[self-play] episode {ep}/{episodes} started "
+                f"(players={episode_player_count})",
+                flush=True,
+            )
         episode_samples = generate_self_play_game(
             agent=agent,
+            player_count=episode_player_count,
             num_simulations=num_simulations,
             c_puct=c_puct,
             max_moves=max_moves,
+            temperature_cutoff=temperature_cutoff,
+            temp_opening=temp_opening,
+            temp_late=temp_late,
         )
         replay.extend(episode_samples)
         if verbose:
             print(
-                f"[self-play] episode {ep}/{episodes} "
-                f"samples={len(episode_samples)} total_samples={len(replay)}",
+                f"[self-play] episode {ep}/{episodes} samples={len(episode_samples)} total_samples={len(replay)}",
                 flush=True,
             )
 
@@ -639,7 +662,7 @@ def run_self_play_training(
         batches = 0
 
         for i in range(0, len(replay), batch_size):
-            batch = replay[i: i + batch_size]
+            batch = replay[i : i + batch_size]
             if not batch:
                 continue
             last_metrics = train_step(model, optimizer, batch, device)
@@ -653,15 +676,11 @@ def run_self_play_training(
 
         if verbose and batches > 0:
             print(
-                f"[train] epoch {epoch}/{train_epochs} "
-                f"loss={epoch_loss / batches:.4f} "
-                f"policy={epoch_policy / batches:.4f} "
-                f"value={epoch_value / batches:.4f} "
-                f"time={epoch_elapsed:.2f}s",
+                f"[train] epoch {epoch}/{train_epochs} loss={epoch_loss / batches:.4f} policy={epoch_policy / batches:.4f} value={epoch_value / batches:.4f} time={epoch_elapsed:.2f}s",
                 flush=True,
             )
 
-    save_path = Path(model_path or os.getenv("AZ_MODEL_PATH", str(DEFAULT_MODEL_PATH)))
+    save_path = Path(model_path or os.getenv("AZ_MP_MODEL_PATH", str(DEFAULT_MODEL_PATH)))
     save_path.parent.mkdir(parents=True, exist_ok=True)
     torch.save({"model_state_dict": model.state_dict()}, save_path)
 
@@ -679,18 +698,36 @@ def run_self_play_training(
 
 def _build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Train a 2-player AlphaZero-style model via self-play."
+        description="Train a multiplayer AlphaZero-style model via self-play.",
     )
-    parser.add_argument("--episodes", type=int, default=250, help="Number of self-play games (quick default: 5).")
-    parser.add_argument("--train-epochs", type=int, default=10, help="Epochs over replay data (quick default: 2).")
-    parser.add_argument("--batch-size", type=int, default=96, help="Batch size for optimizer steps.")
-    parser.add_argument("--lr", type=float, default=3e-4, help="Learning rate.")
-    parser.add_argument("--num-simulations", type=int, default=115, help="MCTS simulations per move (quick default: 24).")
-    parser.add_argument("--max-moves", type=int, default=300, help="Max plies per self-play game.")
-    parser.add_argument("--c-puct", type=float, default=2.0, help="PUCT exploration constant.")
+    parser.add_argument("--episodes", type=int, default=500, help="Number of self-play games.")
+    parser.add_argument("--train-epochs", type=int, default=8, help="Epochs over replay data.")
+    parser.add_argument("--batch-size", type=int, default=64, help="Batch size for optimizer steps.")
+    parser.add_argument("--lr", type=float, default=1e-3, help="Learning rate.")
+    parser.add_argument("--num-simulations", type=int, default=96, help="MCTS simulations per move.") # high for training low forplaying
+    parser.add_argument("--max-moves", type=int, default=500, help="Max plies per self-play game.")
+    parser.add_argument("--c-puct", type=float, default=1.5, help="PUCT exploration constant.")
     parser.add_argument("--temp-opening", type=float, default=1.0, help="Temperature for early moves.")
     parser.add_argument("--temp-late", type=float, default=0.15, help="Temperature for late moves.")
     parser.add_argument("--temp-cutoff-move", type=int, default=20, help="Move number to switch temperatures.")
+    parser.add_argument(
+        "--player-count-min",
+        type=int,
+        default=2,
+        help="Minimum player count sampled per self-play episode (2-6).",
+    )
+    parser.add_argument(
+        "--player-count-max",
+        type=int,
+        default=6,
+        help="Maximum player count sampled per self-play episode (2-6).",
+    )
+    parser.add_argument(
+        "--fixed-player-count",
+        type=int,
+        default=None,
+        help="Optional fixed player count for all episodes (2-6). Overrides the sampled range.",
+    )
     parser.add_argument(
         "--model-path",
         type=str,
@@ -720,15 +757,13 @@ def _print_training_review(metrics: Mapping[str, Any]) -> None:
 def main() -> int:
     args = _build_arg_parser().parse_args()
 
-    # Set env vars so gameplay uses same parameters
-    os.environ["AZ_MCTS_SIMS"] = str(args.num_simulations)
-    os.environ["AZ_C_PUCT"] = str(args.c_puct)
-    os.environ["AZ_TEMP_OPENING"] = str(args.temp_opening)
-    os.environ["AZ_TEMP_LATE"] = str(args.temp_late)
-    os.environ["AZ_TEMP_CUTOFF_MOVE"] = str(args.temp_cutoff_move)
+    os.environ["AZ_MP_MCTS_SIMS"] = str(args.num_simulations)
+    os.environ["AZ_MP_C_PUCT"] = str(args.c_puct)
+    os.environ["AZ_MP_TEMP_OPENING"] = str(args.temp_opening)
+    os.environ["AZ_MP_TEMP_LATE"] = str(args.temp_late)
+    os.environ["AZ_MP_TEMP_CUTOFF_MOVE"] = str(args.temp_cutoff_move)
 
     print_parameter_summary(
-        "AlphaZero Training Parameters",
         [
             ("episodes", args.episodes),
             ("train_epochs", args.train_epochs),
@@ -739,29 +774,16 @@ def main() -> int:
             ("temp_opening", args.temp_opening),
             ("temp_late", args.temp_late),
             ("temp_cutoff_move", args.temp_cutoff_move),
+            ("player_count_min", args.player_count_min),
+            ("player_count_max", args.player_count_max),
+            ("fixed_player_count", args.fixed_player_count),
             ("max_moves", args.max_moves),
             ("model_path", args.model_path),
             ("quiet", args.quiet),
-        ],
+        ]
     )
 
-    print("[train] Starting AlphaZero self-play training", flush=True)
-    print(
-        "[train] config: "
-        f"episodes={args.episodes}, "
-        f"epochs={args.train_epochs}, "
-        f"batch={args.batch_size}, "
-        f"lr={args.lr}, "
-        f"sims={args.num_simulations}, "
-        f"c_puct={args.c_puct}, "
-        f"temp_opening={args.temp_opening}, "
-        f"temp_late={args.temp_late}, "
-        f"temp_cutoff={args.temp_cutoff_move}, "
-        f"max_moves={args.max_moves}, "
-        f"model={args.model_path}",
-        flush=True,
-    )
-
+    print("[train] Starting multiplayer AlphaZero self-play training", flush=True)
     metrics = run_self_play_training(
         episodes=args.episodes,
         train_epochs=args.train_epochs,
@@ -770,6 +792,12 @@ def main() -> int:
         num_simulations=args.num_simulations,
         c_puct=args.c_puct,
         max_moves=args.max_moves,
+        player_count_min=args.player_count_min,
+        player_count_max=args.player_count_max,
+        fixed_player_count=args.fixed_player_count,
+        temp_opening=args.temp_opening,
+        temp_late=args.temp_late,
+        temperature_cutoff=args.temp_cutoff_move,
         model_path=Path(args.model_path),
         verbose=not args.quiet,
     )

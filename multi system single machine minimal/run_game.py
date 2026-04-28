@@ -10,6 +10,10 @@ import threading
 import time
 from pathlib import Path
 
+from alphazero_method import DEFAULT_MODEL_PATH as DEFAULT_2P_MODEL_PATH
+from alphazero_method import format_parameter_summary
+from alphazero_multiplayer_method import DEFAULT_MODEL_PATH as DEFAULT_MULTI_MODEL_PATH
+
 
 DEFAULT_CREATE_DELAY_SEC = 1.0
 DEFAULT_PLAYER_STAGGER_SEC = 0.5
@@ -116,6 +120,42 @@ def main() -> int:
     except ValueError as e:
         print(f"Error: {e}")
         return 2
+
+    alpha_enabled = any(method == "alphazero" for method in player_methods)
+    alpha_mode = "multiplayer" if args.players > 2 else "2-player"
+
+    print(
+        format_parameter_summary(
+            "Game Run Parameters",
+            [
+                ("players", args.players),
+                ("methods", ",".join(player_methods)),
+                ("alpha_enabled", alpha_enabled),
+                ("alpha_mode", alpha_mode if alpha_enabled else "n/a"),
+                ("create_delay", args.create_delay),
+                ("player_stagger", args.player_stagger),
+                ("debug", args.debug),
+            ],
+        ),
+        flush=True,
+    )
+
+    if alpha_enabled:
+        print(
+            format_parameter_summary(
+                "AlphaZero Game Defaults",
+                [
+                    ("num_simulations", os.getenv("AZ_MCTS_SIMS", "96")),
+                    ("c_puct", os.getenv("AZ_C_PUCT", "1.5")),
+                    ("temp_opening", os.getenv("AZ_TEMP_OPENING", "1.0")),
+                    ("temp_late", os.getenv("AZ_TEMP_LATE", "0.15")),
+                    ("temp_cutoff_move", os.getenv("AZ_TEMP_CUTOFF_MOVE", "20")),
+                    ("model_path", os.getenv("AZ_MODEL_PATH", str(DEFAULT_2P_MODEL_PATH))),
+                    ("multiplayer_model_path", os.getenv("AZ_MP_MODEL_PATH", str(DEFAULT_MULTI_MODEL_PATH))),
+                ],
+            ),
+            flush=True,
+        )
 
     base_dir = Path(__file__).resolve().parent
     server_script = base_dir / "game.py"
