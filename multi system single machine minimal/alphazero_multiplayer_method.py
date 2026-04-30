@@ -617,13 +617,51 @@ def run_self_play_training(
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
     agent = MultiAlphaZeroAgent(model=model)
 
+    save_path = Path(model_path or os.getenv("AZ_MP_MODEL_PATH", str(DEFAULT_MODEL_PATH)))
+    save_path.parent.mkdir(parents=True, exist_ok=True)
+    checkpoint_path = save_path.with_suffix(".checkpoint")
+
     replay: List[TrainingExample] = []
-    for ep in range(1, episodes + 1):
-        episode_player_count = _resolve_episode_player_count(
-            player_count_min=player_count_min,
-            player_count_max=player_count_max,
-            fixed_player_count=fixed_player_count,
-        )
+    start_episode = 1
+    episode_player_counts: List[int] = []
+
+    # Try to resume from checkpoint
+    if checkpoint_path.exists():
+        try:
+            checkpoint = torch.load(checkpoint_path, map_location="cpu")
+            model.load_state_dict(checkpoint["model_state_dict"])
+            optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
+            replay = checkpoint["replay"]
+            start_episode = checkpoint["completed_episodes"] + 1
+            episode_player_counts = checkpoint.get("episode_player_counts", [])
+            if verbose:
+                print(
+                    f"[checkpoint] Resumed from episode {start_episode}/{episodes} with {len(replay)} samples",
+                    flush=True,
+                )
+        except Exception as e:
+            if verbose:
+                print(f"[checkpoint] Could not load checkpoint: {e}. Starting fresh.", flush=True)
+            start_episode = 1
+
+    # Build shuffled player count distribution on first run
+    if not episode_player_counts:
+        episode_player_counts = []
+        for player_count in range(2, 7):
+            episode_player_counts.extend([player_count] * (episodes // 5))
+        random.shuffle(episode_player_counts)
+        if verbose:
+            print(
+                f"[setup] Created shuffled distribution: {sum(1 for p in episode_player_counts if p == 2)}/25 2p, "
+                f"{sum(1 for p in episode_player_counts if p == 3)}/25 3p, "
+                f"{sum(1 for p in episode_player_counts if p == 4)}/25 4p, "
+                f"{sum(1 for p in episode_player_counts if p == 5)}/25 5p, "
+                f"{sum(1 for p in episode_player_counts if p == 6)}/25 6p",
+                flush=True,
+            )
+
+    for ep in range(start_episode, episodes + 1):
+        episode_player_count = episode_player_counts[ep - 1]  # 0-indexed
         if verbose:
             print(
                 f"[self-play] episode {ep}/{episodes} started "
@@ -646,6 +684,22 @@ def run_self_play_training(
                 f"[self-play] episode {ep}/{episodes} samples={len(episode_samples)} total_samples={len(replay)}",
                 flush=True,
             )
+
+        # Save checkpoint after each episode
+        try:
+            torch.save(
+                {
+                    "model_state_dict": model.state_dict(),
+                    "optimizer_state_dict": optimizer.state_dict(),
+                    "replay": replay,
+                    "completed_episodes": ep,
+                    "episode_player_counts": episode_player_counts,
+                },
+                checkpoint_path,
+            )
+        except Exception as e:
+            if verbose:
+                print(f"[checkpoint] Warning: Could not save checkpoint: {e}", flush=True)
 
     if not replay:
         raise RuntimeError("No self-play samples generated.")
@@ -684,6 +738,16 @@ def run_self_play_training(
     save_path.parent.mkdir(parents=True, exist_ok=True)
     torch.save({"model_state_dict": model.state_dict()}, save_path)
 
+    # Clean up checkpoint after successful training
+    if checkpoint_path.exists():
+        try:
+            checkpoint_path.unlink()
+            if verbose:
+                print(f"[checkpoint] Cleaned up checkpoint file", flush=True)
+        except Exception as e:
+            if verbose:
+                print(f"[checkpoint] Could not delete checkpoint: {e}", flush=True)
+
     elapsed = time.time() - started
     avg_epoch_time = (sum(epoch_times) / len(epoch_times)) if epoch_times else 0.0
 
@@ -700,12 +764,12 @@ def _build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Train a multiplayer AlphaZero-style model via self-play.",
     )
-    parser.add_argument("--episodes", type=int, default=500, help="Number of self-play games.")
+    parser.add_argument("--episodes", type=int, default=125, help="Number of self-play games.")
     parser.add_argument("--train-epochs", type=int, default=8, help="Epochs over replay data.")
     parser.add_argument("--batch-size", type=int, default=64, help="Batch size for optimizer steps.")
-    parser.add_argument("--lr", type=float, default=1e-3, help="Learning rate.")
-    parser.add_argument("--num-simulations", type=int, default=96, help="MCTS simulations per move.") # high for training low forplaying
-    parser.add_argument("--max-moves", type=int, default=500, help="Max plies per self-play game.")
+    parser.add_argument("--lr", type=float, default=3e-4, help="Learning rate.")
+    parser.add_argument("--num-simulations", type=int, default=50, help="MCTS simulations per move.") # high for training low forplaying
+    parser.add_argument("--max-moves", type=int, default=600, help="Max plies per self-play game.")
     parser.add_argument("--c-puct", type=float, default=1.5, help="PUCT exploration constant.")
     parser.add_argument("--temp-opening", type=float, default=1.0, help="Temperature for early moves.")
     parser.add_argument("--temp-late", type=float, default=0.15, help="Temperature for late moves.")

@@ -20,6 +20,7 @@ Select playing method (default: `random`):
 ```bash
 python3 "multi system single machine minimal/run_game.py" --players 2 --method random
 python3 "multi system single machine minimal/run_game.py" --players 2 --method alphazero
+python3 "multi system single machine minimal/run_game.py" --players 6 --method alphazero
 ```
 
 You can also run the Python launcher directly:
@@ -33,6 +34,14 @@ This launcher will:
 - send `Create` automatically
 - start the requested number of `player.py` clients
 - auto-fill player names (`Player1`, `Player2`, ...)
+
+For AlphaZero multiplayer training where the number of players is sampled randomly each episode from 2 to 6, use:
+
+```bash
+python3 "multi system single machine minimal/alphazero_multiplayer_method.py"
+```
+
+Use the defaults in `alphazero_multiplayer_method.py` to control the training setup. If you want a fixed player count for training instead of randomizing each episode, add `--fixed-player-count N`.
 
 Press `Ctrl+C` to stop all launched processes.
 
