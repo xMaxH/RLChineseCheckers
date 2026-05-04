@@ -445,10 +445,10 @@ def choose_move_alphazero_multiplayer(
 
     agent = _load_agent()
     sims = int(os.getenv("AZ_MP_MCTS_SIMS", os.getenv("AZ_MCTS_SIMS", "96")))
-    c_puct = float(os.getenv("AZ_MP_C_PUCT", os.getenv("AZ_C_PUCT", "1.5")))
-    temp_opening = float(os.getenv("AZ_MP_TEMP_OPENING", os.getenv("AZ_TEMP_OPENING", "1.0")))
-    temp_late = float(os.getenv("AZ_MP_TEMP_LATE", os.getenv("AZ_TEMP_LATE", "0.15")))
-    cutoff = int(os.getenv("AZ_MP_TEMP_CUTOFF_MOVE", os.getenv("AZ_TEMP_CUTOFF_MOVE", "20")))
+    c_puct = float(os.getenv("AZ_MP_C_PUCT", os.getenv("AZ_C_PUCT", "1.4")))
+    temp_opening = float(os.getenv("AZ_MP_TEMP_OPENING", os.getenv("AZ_TEMP_OPENING", "0.9")))
+    temp_late = float(os.getenv("AZ_MP_TEMP_LATE", os.getenv("AZ_TEMP_LATE", "0.10")))
+    cutoff = int(os.getenv("AZ_MP_TEMP_CUTOFF_MOVE", os.getenv("AZ_TEMP_CUTOFF_MOVE", "22")))
     move_count = int(state.get("move_count", 0))
     temperature = temp_opening if move_count < cutoff else temp_late
 
@@ -628,7 +628,9 @@ def run_self_play_training(
     # Try to resume from checkpoint
     if checkpoint_path.exists():
         try:
-            checkpoint = torch.load(checkpoint_path, map_location="cpu")
+            # Register TrainingExample as safe global for unpickling checkpoint
+            torch.serialization.add_safe_globals([TrainingExample])
+            checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
             model.load_state_dict(checkpoint["model_state_dict"])
             optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
             replay = checkpoint["replay"]
