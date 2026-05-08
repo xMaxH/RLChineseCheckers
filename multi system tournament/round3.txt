@@ -1,0 +1,7 @@
+game_number,game_id,player1,player2,player3,player4,player5,player6,status,final_scores,time_scores,distance_scores,pin_scores,winner
+R3G1,NA,Deepseekers,Tiefes Verstarkendes Lernen,Gruppe 69,Erlend Og Linor,NA,NA,NOT_CREATED,NA,NA,NA,NA,None
+R3G2,NA,Dandori,Gruppe 2,NA,NA,NA,NA,NOT_CREATED,NA,NA,NA,NA,None
+R3G3,NA,jat,SP,NA,NA,NA,NA,NOT_CREATED,NA,NA,NA,NA,None
+R3G4,NA,PCS,RL,Gruppe 67,Group 16,group 99,CybSec,NOT_CREATED,NA,NA,NA,NA,None
+R3G5,NA,LosTurcos,The bandits,Group 7,NA,NA,NA,NOT_CREATED,NA,NA,NA,NA,None
+R3G6,NA,S&S,Gruppe 10,NA,NA,NA,NA,NOT_CREATED,NA,NA,NA,NA,None

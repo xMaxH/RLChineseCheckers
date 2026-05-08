@@ -1,0 +1,117 @@
+[2026-05-05 23:08:44] GAME CREATED
+[2026-05-05 23:08:51] PLAYER JOINED: pA as lawn green
+[2026-05-05 23:08:58] PLAYER JOINED: pB as gray0
+[2026-05-05 23:08:58] PLAYER START: pB (gray0)
+[2026-05-05 23:09:04] PLAYER START: pA (lawn green)
+[2026-05-05 23:09:04] GAME START — turn order ['lawn green', 'gray0']
+[2026-05-05 23:09:05] MOVE 1: pA (lawn green) 20->43 [0.01ms]
+[2026-05-05 23:09:05] SCORE pA (lawn green): Final=190.9, Time=98.9, Moves(1)=0.0, Pins(0)=0.0, Dist=92.0, Win Bonus=0.0
+[2026-05-05 23:09:05] SCORE pB (gray0): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0, Win Bonus=0.0
+[2026-05-05 23:09:07] MOVE 2: pB (gray0) 76->77 [0.01ms]
+[2026-05-05 23:09:07] SCORE pA (lawn green): Final=190.9, Time=98.9, Moves(1)=0.0, Pins(0)=0.0, Dist=92.0, Win Bonus=0.0
+[2026-05-05 23:09:07] SCORE pB (gray0): Final=188.9, Time=97.9, Moves(1)=0.0, Pins(0)=0.0, Dist=91.0, Win Bonus=0.0
+[2026-05-05 23:09:09] MOVE 3: pA (lawn green) 21->20 [0.00ms]
+[2026-05-05 23:09:09] SCORE pA (lawn green): Final=189.5, Time=96.5, Moves(2)=0.0, Pins(0)=0.0, Dist=93.0, Win Bonus=0.0
+[2026-05-05 23:09:09] SCORE pB (gray0): Final=188.9, Time=97.9, Moves(1)=0.0, Pins(0)=0.0, Dist=91.0, Win Bonus=0.0
+[2026-05-05 23:09:11] MOVE 4: pB (gray0) 101->78 [0.00ms]
+[2026-05-05 23:09:11] SCORE pA (lawn green): Final=189.5, Time=96.5, Moves(2)=0.0, Pins(0)=0.0, Dist=93.0, Win Bonus=0.0
+[2026-05-05 23:09:11] SCORE pB (gray0): Final=188.8, Time=95.8, Moves(2)=0.0, Pins(0)=0.0, Dist=93.0, Win Bonus=0.0
+[2026-05-05 23:09:14] MOVE 5: pA (lawn green) 45->64 [0.00ms]
+[2026-05-05 23:09:14] SCORE pA (lawn green): Final=189.0, Time=94.0, Moves(3)=0.0, Pins(0)=0.0, Dist=95.0, Win Bonus=0.0
+[2026-05-05 23:09:14] SCORE pB (gray0): Final=188.8, Time=95.8, Moves(2)=0.0, Pins(0)=0.0, Dist=93.0, Win Bonus=0.0
+[2026-05-05 23:09:16] MOVE 6: pB (gray0) 100->101 [0.00ms]
+[2026-05-05 23:09:16] SCORE pA (lawn green): Final=189.0, Time=94.0, Moves(3)=0.0, Pins(0)=0.0, Dist=95.0, Win Bonus=0.0
+[2026-05-05 23:09:16] SCORE pB (gray0): Final=187.6, Time=93.6, Moves(3)=0.0, Pins(0)=0.0, Dist=94.0, Win Bonus=0.0
+[2026-05-05 23:09:17] MOVE 7: pA (lawn green) 34->45 [0.00ms]
+[2026-05-05 23:09:17] SCORE pA (lawn green): Final=188.7, Time=92.7, Moves(4)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-05 23:09:17] SCORE pB (gray0): Final=187.6, Time=93.6, Moves(3)=0.0, Pins(0)=0.0, Dist=94.0, Win Bonus=0.0
+[2026-05-05 23:09:20] MOVE 8: pB (gray0) 99->100 [0.00ms]
+[2026-05-05 23:09:20] SCORE pA (lawn green): Final=188.7, Time=92.7, Moves(4)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-05 23:09:20] SCORE pB (gray0): Final=186.5, Time=91.5, Moves(4)=0.0, Pins(0)=0.0, Dist=95.0, Win Bonus=0.0
+[2026-05-05 23:09:21] MOVE 9: pA (lawn green) 64->54 [0.00ms]
+[2026-05-05 23:09:21] SCORE pA (lawn green): Final=187.3, Time=91.3, Moves(5)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-05 23:09:21] SCORE pB (gray0): Final=186.5, Time=91.5, Moves(4)=0.0, Pins(0)=0.0, Dist=95.0, Win Bonus=0.0
+[2026-05-05 23:09:23] MOVE 10: pB (gray0) 87->66 [0.00ms]
+[2026-05-05 23:09:23] SCORE pA (lawn green): Final=187.3, Time=91.3, Moves(5)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-05 23:09:23] SCORE pB (gray0): Final=186.3, Time=89.3, Moves(5)=0.0, Pins(0)=0.0, Dist=97.0, Win Bonus=0.0
+[2026-05-05 23:09:25] MOVE 11: pA (lawn green) 43->31 [0.00ms]
+[2026-05-05 23:09:25] SCORE pA (lawn green): Final=185.9, Time=89.9, Moves(6)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-05 23:09:25] SCORE pB (gray0): Final=186.3, Time=89.3, Moves(5)=0.0, Pins(0)=0.0, Dist=97.0, Win Bonus=0.0
+[2026-05-05 23:09:26] MOVE 12: pB (gray0) 78->57 [0.00ms]
+[2026-05-05 23:09:26] SCORE pA (lawn green): Final=185.9, Time=89.9, Moves(6)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-05 23:09:26] SCORE pB (gray0): Final=185.1, Time=88.1, Moves(6)=0.0, Pins(0)=0.0, Dist=97.0, Win Bonus=0.0
+[2026-05-05 23:09:28] MOVE 13: pA (lawn green) 31->42 [0.00ms]
+[2026-05-05 23:09:28] SCORE pA (lawn green): Final=184.5, Time=87.5, Moves(7)=0.0, Pins(0)=0.0, Dist=97.0, Win Bonus=0.0
+[2026-05-05 23:09:28] SCORE pB (gray0): Final=185.1, Time=88.1, Moves(6)=0.0, Pins(0)=0.0, Dist=97.0, Win Bonus=0.0
+[2026-05-05 23:09:30] MOVE 14: pB (gray0) 65->56 [0.00ms]
+[2026-05-05 23:09:30] SCORE pA (lawn green): Final=184.5, Time=87.5, Moves(7)=0.0, Pins(0)=0.0, Dist=97.0, Win Bonus=0.0
+[2026-05-05 23:09:30] SCORE pB (gray0): Final=183.9, Time=85.9, Moves(7)=0.0, Pins(0)=0.0, Dist=98.0, Win Bonus=0.0
+[2026-05-05 23:09:32] MOVE 15: pA (lawn green) 33->31 [0.00ms]
+[2026-05-05 23:09:32] SCORE pA (lawn green): Final=185.1, Time=86.1, Moves(8)=0.0, Pins(0)=0.0, Dist=99.0, Win Bonus=0.0
+[2026-05-05 23:09:32] SCORE pB (gray0): Final=183.9, Time=85.9, Moves(7)=0.0, Pins(0)=0.0, Dist=98.0, Win Bonus=0.0
+[2026-05-05 23:09:33] MOVE 16: pB (gray0) 100->87 [0.00ms]
+[2026-05-05 23:09:33] SCORE pA (lawn green): Final=185.1, Time=86.1, Moves(8)=0.0, Pins(0)=0.0, Dist=99.0, Win Bonus=0.0
+[2026-05-05 23:09:33] SCORE pB (gray0): Final=182.7, Time=84.7, Moves(8)=0.0, Pins(0)=0.0, Dist=98.0, Win Bonus=0.0
+[2026-05-05 23:09:34] MOVE 17: pA (lawn green) 31->52 [0.00ms]
+[2026-05-05 23:09:34] SCORE pA (lawn green): Final=185.7, Time=84.7, Moves(9)=0.0, Pins(0)=0.0, Dist=101.0, Win Bonus=0.0
+[2026-05-05 23:09:34] SCORE pB (gray0): Final=182.7, Time=84.7, Moves(8)=0.0, Pins(0)=0.0, Dist=98.0, Win Bonus=0.0
+[2026-05-05 23:09:35] MOVE 18: pB (gray0) 87->89 [0.00ms]
+[2026-05-05 23:09:35] SCORE pA (lawn green): Final=185.7, Time=84.7, Moves(9)=0.0, Pins(0)=0.0, Dist=101.0, Win Bonus=0.0
+[2026-05-05 23:09:35] SCORE pB (gray0): Final=183.6, Time=83.6, Moves(9)=0.0, Pins(0)=0.0, Dist=100.0, Win Bonus=0.0
+[2026-05-05 23:09:37] MOVE 19: pA (lawn green) 45->62 [0.00ms]
+[2026-05-05 23:09:37] SCORE pA (lawn green): Final=188.4, Time=83.4, Moves(10)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-05 23:09:37] SCORE pB (gray0): Final=183.6, Time=83.6, Moves(9)=0.0, Pins(0)=0.0, Dist=100.0, Win Bonus=0.0
+[2026-05-05 23:09:39] MOVE 20: pB (gray0) 56->58 [0.00ms]
+[2026-05-05 23:09:39] SCORE pA (lawn green): Final=188.4, Time=83.4, Moves(10)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-05 23:09:39] SCORE pB (gray0): Final=183.4, Time=81.4, Moves(10)=0.0, Pins(0)=0.0, Dist=102.0, Win Bonus=0.0
+[2026-05-05 23:09:40] MOVE 21: pA (lawn green) 32->33 [0.00ms]
+[2026-05-05 23:09:40] SCORE pA (lawn green): Final=185.9, Time=81.9, Moves(11)=0.0, Pins(0)=0.0, Dist=104.0, Win Bonus=0.0
+[2026-05-05 23:09:40] SCORE pB (gray0): Final=183.4, Time=81.4, Moves(10)=0.0, Pins(0)=0.0, Dist=102.0, Win Bonus=0.0
+[2026-05-05 23:09:42] MOVE 22: pB (gray0) 58->68 [0.00ms]
+[2026-05-05 23:09:42] SCORE pA (lawn green): Final=185.9, Time=81.9, Moves(11)=0.0, Pins(0)=0.0, Dist=104.0, Win Bonus=0.0
+[2026-05-05 23:09:42] SCORE pB (gray0): Final=181.3, Time=79.3, Moves(11)=0.0, Pins(0)=0.0, Dist=102.0, Win Bonus=0.0
+[2026-05-05 23:09:44] MOVE 23: pA (lawn green) 22->34 [0.00ms]
+[2026-05-05 23:09:44] SCORE pA (lawn green): Final=185.4, Time=80.4, Moves(12)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-05 23:09:44] SCORE pB (gray0): Final=181.3, Time=79.3, Moves(11)=0.0, Pins(0)=0.0, Dist=102.0, Win Bonus=0.0
+[2026-05-05 23:09:46] MOVE 24: pB (gray0) 88->67 [0.00ms]
+[2026-05-05 23:09:46] SCORE pA (lawn green): Final=185.4, Time=80.4, Moves(12)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-05 23:09:46] SCORE pB (gray0): Final=181.3, Time=77.3, Moves(12)=0.0, Pins(0)=0.0, Dist=104.0, Win Bonus=0.0
+[2026-05-05 23:09:49] MOVE 25: pA (lawn green) 33->21 [0.00ms]
+[2026-05-05 23:09:49] SCORE pA (lawn green): Final=181.9, Time=77.9, Moves(13)=0.0, Pins(0)=0.0, Dist=104.0, Win Bonus=0.0
+[2026-05-05 23:09:49] SCORE pB (gray0): Final=181.3, Time=77.3, Moves(12)=0.0, Pins(0)=0.0, Dist=104.0, Win Bonus=0.0
+[2026-05-05 23:09:50] MOVE 26: pB (gray0) 98->99 [0.00ms]
+[2026-05-05 23:09:50] SCORE pA (lawn green): Final=181.9, Time=77.9, Moves(13)=0.0, Pins(0)=0.0, Dist=104.0, Win Bonus=0.0
+[2026-05-05 23:09:50] SCORE pB (gray0): Final=181.2, Time=76.2, Moves(13)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-05 23:09:52] MOVE 27: pA (lawn green) 44->33 [0.01ms]
+[2026-05-05 23:09:52] SCORE pA (lawn green): Final=178.4, Time=75.4, Moves(14)=0.0, Pins(0)=0.0, Dist=103.0, Win Bonus=0.0
+[2026-05-05 23:09:52] SCORE pB (gray0): Final=181.2, Time=76.2, Moves(13)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-05 23:09:53] MOVE 28: pB (gray0) 67->65 [0.00ms]
+[2026-05-05 23:09:53] SCORE pA (lawn green): Final=178.4, Time=75.4, Moves(14)=0.0, Pins(0)=0.0, Dist=103.0, Win Bonus=0.0
+[2026-05-05 23:09:53] SCORE pB (gray0): Final=178.1, Time=75.1, Moves(14)=0.0, Pins(0)=0.0, Dist=103.0, Win Bonus=0.0
+[2026-05-05 23:09:55] MOVE 29: pA (lawn green) 42->53 [0.00ms]
+[2026-05-05 23:09:55] SCORE pA (lawn green): Final=176.9, Time=73.9, Moves(15)=0.0, Pins(0)=0.0, Dist=103.0, Win Bonus=0.0
+[2026-05-05 23:09:55] SCORE pB (gray0): Final=178.1, Time=75.1, Moves(14)=0.0, Pins(0)=0.0, Dist=103.0, Win Bonus=0.0
+[2026-05-05 23:09:56] MOVE 30: pB (gray0) 75->76 [0.01ms]
+[2026-05-05 23:09:56] SCORE pA (lawn green): Final=176.9, Time=73.9, Moves(15)=0.0, Pins(0)=0.0, Dist=103.0, Win Bonus=0.0
+[2026-05-05 23:09:56] SCORE pB (gray0): Final=178.0, Time=74.0, Moves(15)=0.0, Pins(0)=0.0, Dist=104.0, Win Bonus=0.0
+[2026-05-05 23:09:57] MOVE 31: pA (lawn green) 20->64 [0.00ms]
+[2026-05-05 23:09:57] SCORE pA (lawn green): Final=177.5, Time=72.5, Moves(16)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-05 23:09:57] SCORE pB (gray0): Final=178.0, Time=74.0, Moves(15)=0.0, Pins(0)=0.0, Dist=104.0, Win Bonus=0.0
+[2026-05-05 23:09:58] MOVE 32: pB (gray0) 77->67 [0.00ms]
+[2026-05-05 23:09:58] SCORE pA (lawn green): Final=177.5, Time=72.5, Moves(16)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-05 23:09:58] SCORE pB (gray0): Final=177.9, Time=72.9, Moves(16)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-05 23:10:01] MOVE 33: pA (lawn green) 19->32 [0.00ms]
+[2026-05-05 23:10:01] SCORE pA (lawn green): Final=175.0, Time=70.0, Moves(17)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-05 23:10:01] SCORE pB (gray0): Final=177.9, Time=72.9, Moves(16)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-05 23:10:03] MOVE 34: pB (gray0) 101->88 [0.00ms]
+[2026-05-05 23:10:03] SCORE pA (lawn green): Final=175.0, Time=70.0, Moves(17)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-05 23:10:03] SCORE pB (gray0): Final=175.8, Time=70.8, Moves(17)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-05 23:10:04] SCORE pA (lawn green): Final=175.0, Time=70.0, Moves(17)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-05 23:10:04] SCORE pB (gray0): Final=175.8, Time=70.8, Moves(17)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-05 23:10:04] GAME TIME LIMIT REACHED.
+[2026-05-05 23:10:05] SCORE pA (lawn green): Final=175.0, Time=70.0, Moves(17)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-05 23:10:05] SCORE pB (gray0): Final=175.8, Time=70.8, Moves(17)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-05 23:10:05] GAME TIME LIMIT REACHED.
+[2026-05-05 23:10:06] SCORE pA (lawn green): Final=175.0, Time=70.0, Moves(17)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-05 23:10:06] SCORE pB (gray0): Final=175.8, Time=70.8, Moves(17)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-05 23:10:06] GAME TIME LIMIT REACHED.

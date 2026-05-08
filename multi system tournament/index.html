@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Leaderboard</title>
+<style>
+  body { font-family: Arial, sans-serif; }
+  table { border-collapse: collapse; width: 90%; }
+  th, td { border: 1px solid #ccc; padding: 6px; text-align: right; }
+  th { background: #f0f0f0; }
+  th:first-child, td:first-child { text-align: left; }
+</style>
+</head>
+<body>
+
+<h2>Players Leaderboard</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Player</th>
+      <th>Games</th>
+
+      <th>Avg Final</th>
+      <th>Total Final</th>
+
+      <th>Avg Distance</th>
+      <th>Total Distance</th>
+
+      <th>Avg Pin</th>
+      <th>Total Pin</th>
+
+      <th>Avg Time</th>
+      <th>Total Time</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody id="leaderboard"></tbody>
+</table>
+
+<script>
+	// 
+	/*const ROUND_FILES = [
+	"round1.txt",
+	"round2.txt",
+	"round3.txt"
+	];*/
+	const ROUND_FILES = [
+	"round1.txt"
+	];
+
+	async function loadAllData() {
+	const allRows = [];
+
+	for (const file of ROUND_FILES) {
+	try {
+	const res = await fetch(file);
+
+	if (!res.ok) {
+	console.warn("File not found:", file);
+	continue;
+	}
+
+	const text = await res.text();
+	const rows = text.trim().split("\n").map(r => r.split(","));
+  console.log(`Loaded ${rows.length} rows from ${file}`);
+
+	rows.shift(); // remove header
+	allRows.push(...rows);
+
+	} catch (err) {
+	console.warn("Error loading:", file, err);
+	}
+	}
+  console.log(`Total rows loaded: ${allRows}`);
+	return allRows;
+	}
+
+	function parseScores(str) {
+    console.log("Parsing scores:", str);
+	if (!str || str === "NA") return {};
+	return Object.fromEntries(
+	str.split(";").map(entry => {
+	const [player, score] = entry.split(":");
+  console.log(`Parsed score - Player: ${player}, Score: ${score}`);
+	return [player, parseFloat(score)];
+	})
+	);
+	}
+
+	function computeLeaderboard(rows) {
+	const stats = {};
+
+	for (const row of rows) {
+	const [
+	, , p1, p2, p3, p4, p5, p6, 
+	playstatus, // ignore status
+	finalS, timeS, distS, pinS
+	] = row;
+
+	const finals = parseScores(finalS);
+	const times  = parseScores(timeS);
+	const dists  = parseScores(distS);
+	const pins   = parseScores(pinS);
+
+  console.log("Processing game with players:", p1, p2, p3, p4,p5,p6);
+
+	[p1, p2, p3, p4, p5, p6].filter(p => p !== "NA").forEach(player => {
+	if (!(player in finals)) return;
+
+	if (!stats[player]) {
+	stats[player] = {
+	games: 0,
+	final: 0,
+	dist: 0,
+	pin: 0,
+	time: 0,
+  status:"Unknown"
+	};
+	}
+console.log(`Updating stats for player: ${stats[player].games} games, ${stats[player].final} final, ${stats[player].dist} dist, ${stats[player].pin} pin, ${stats[player].time} time`);
+	stats[player].games++;
+	stats[player].final += finals[player] ?? 0;
+	stats[player].dist  += dists[player]  ?? 0;
+	stats[player].pin   += pins[player]   ?? 0;
+	stats[player].time  += times[player]  ?? 0;
+  stats[player].status = playstatus;
+	});
+
+	}
+
+
+
+	return Object.entries(stats).map(([player, s]) => ({
+	player,
+	games: s.games,
+
+	avgFinal: s.final / s.games,
+	totalFinal: s.final,
+
+	avgDist: s.dist / s.games,
+	totalDist: s.dist,
+
+	avgPin: s.pin / s.games,
+	totalPin: s.pin,
+
+	avgTime: s.time / s.games,
+	totalTime: s.time,
+  status: s.status
+	}))
+	.sort((a, b) =>
+  b.games    - a.games     ||
+	b.avgFinal - a.avgFinal ||
+	b.avgDist  - a.avgDist ||
+	a.avgPin   - b.avgPin ||
+	b.avgTime  - a.avgTime
+	);
+	}
+
+	function render(data) {
+	const tbody = document.getElementById("leaderboard");
+	tbody.innerHTML = "";
+
+	data.forEach(p => {
+	tbody.innerHTML += `
+	<tr>
+        <td>${p.player}</td>
+        <td>${p.games}</td>
+
+        <td>${p.avgFinal.toFixed(2)}</td>
+        <td>${p.totalFinal.toFixed(2)}</td>
+
+        <td>${p.avgDist.toFixed(2)}</td>
+        <td>${p.totalDist.toFixed(2)}</td>
+
+        <td>${p.avgPin.toFixed(2)}</td>
+        <td>${p.totalPin.toFixed(2)}</td>
+
+        <td>${p.avgTime.toFixed(2)}</td>
+        <td>${p.totalTime.toFixed(2)}</td>
+        <td>${p.status}</td>
+      </tr>`;
+  });
+}
+
+async function refresh() {
+  const rows = await loadAllData();
+  const leaderboard = computeLeaderboard(rows);
+  render(leaderboard);
+}
+
+refresh();
+setInterval(refresh, 50000);
+</script>
+
+</body>
+</html>
+

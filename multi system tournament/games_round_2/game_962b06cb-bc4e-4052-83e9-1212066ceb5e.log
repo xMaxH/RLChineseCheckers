@@ -1,0 +1,113 @@
+[2026-05-07 10:14:21] GAME CREATED
+[2026-05-07 10:18:48] PLAYER JOINED: pD as red
+[2026-05-07 10:18:52] PLAYER JOINED: pB as blue
+[2026-05-07 10:18:52] PLAYER START: pD (red)
+[2026-05-07 10:18:52] PLAYER START: pB (blue)
+[2026-05-07 10:18:52] GAME START — turn order ['red', 'blue']
+[2026-05-07 10:18:52] PLAYER START: pD (red)
+[2026-05-07 10:18:52] PLAYER START: pB (blue)
+[2026-05-07 10:18:53] MOVE 1: pD (red) 113->104 [0.00ms]
+[2026-05-07 10:18:53] SCORE pD (red): Final=189.9, Time=98.9, Moves(1)=0.0, Pins(0)=0.0, Dist=91.0, Win Bonus=0.0
+[2026-05-07 10:18:53] SCORE pB (blue): Final=0.0, Time=0.0, Moves(0)=0.0, Pins(0)=0.0, Dist=0.0, Win Bonus=0.0
+[2026-05-07 10:18:55] MOVE 2: pB (blue) 7->15 [0.01ms]
+[2026-05-07 10:18:55] SCORE pD (red): Final=189.9, Time=98.9, Moves(1)=0.0, Pins(0)=0.0, Dist=91.0, Win Bonus=0.0
+[2026-05-07 10:18:55] SCORE pB (blue): Final=189.5, Time=98.5, Moves(1)=0.0, Pins(0)=0.0, Dist=91.0, Win Bonus=0.0
+[2026-05-07 10:18:56] MOVE 3: pD (red) 112->113 [0.00ms]
+[2026-05-07 10:18:56] SCORE pD (red): Final=188.8, Time=97.8, Moves(2)=0.0, Pins(0)=0.0, Dist=91.0, Win Bonus=0.0
+[2026-05-07 10:18:56] SCORE pB (blue): Final=189.5, Time=98.5, Moves(1)=0.0, Pins(0)=0.0, Dist=91.0, Win Bonus=0.0
+[2026-05-07 10:18:57] MOVE 4: pB (blue) 9->27 [0.00ms]
+[2026-05-07 10:18:57] SCORE pD (red): Final=188.8, Time=97.8, Moves(2)=0.0, Pins(0)=0.0, Dist=91.0, Win Bonus=0.0
+[2026-05-07 10:18:57] SCORE pB (blue): Final=189.9, Time=96.9, Moves(2)=0.0, Pins(0)=0.0, Dist=93.0, Win Bonus=0.0
+[2026-05-07 10:18:59] MOVE 5: pD (red) 115->102 [0.01ms]
+[2026-05-07 10:18:59] SCORE pD (red): Final=188.8, Time=95.8, Moves(3)=0.0, Pins(0)=0.0, Dist=93.0, Win Bonus=0.0
+[2026-05-07 10:18:59] SCORE pB (blue): Final=189.9, Time=96.9, Moves(2)=0.0, Pins(0)=0.0, Dist=93.0, Win Bonus=0.0
+[2026-05-07 10:19:02] MOVE 6: pB (blue) 15->14 [0.01ms]
+[2026-05-07 10:19:02] SCORE pD (red): Final=188.8, Time=95.8, Moves(3)=0.0, Pins(0)=0.0, Dist=93.0, Win Bonus=0.0
+[2026-05-07 10:19:02] SCORE pB (blue): Final=187.4, Time=94.4, Moves(3)=0.0, Pins(0)=0.0, Dist=93.0, Win Bonus=0.0
+[2026-05-07 10:19:03] MOVE 7: pD (red) 113->91 [0.00ms]
+[2026-05-07 10:19:03] SCORE pD (red): Final=189.7, Time=94.7, Moves(4)=0.0, Pins(0)=0.0, Dist=95.0, Win Bonus=0.0
+[2026-05-07 10:19:03] SCORE pB (blue): Final=187.4, Time=94.4, Moves(3)=0.0, Pins(0)=0.0, Dist=93.0, Win Bonus=0.0
+[2026-05-07 10:19:04] MOVE 8: pB (blue) 14->26 [0.01ms]
+[2026-05-07 10:19:04] SCORE pD (red): Final=189.7, Time=94.7, Moves(4)=0.0, Pins(0)=0.0, Dist=95.0, Win Bonus=0.0
+[2026-05-07 10:19:04] SCORE pB (blue): Final=186.9, Time=92.9, Moves(4)=0.0, Pins(0)=0.0, Dist=94.0, Win Bonus=0.0
+[2026-05-07 10:19:07] MOVE 9: pD (red) 91->79 [0.00ms]
+[2026-05-07 10:19:07] SCORE pD (red): Final=188.6, Time=92.6, Moves(5)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-07 10:19:07] SCORE pB (blue): Final=186.9, Time=92.9, Moves(4)=0.0, Pins(0)=0.0, Dist=94.0, Win Bonus=0.0
+[2026-05-07 10:19:08] MOVE 10: pB (blue) 8->16 [0.01ms]
+[2026-05-07 10:19:08] SCORE pD (red): Final=188.6, Time=92.6, Moves(5)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-07 10:19:08] SCORE pB (blue): Final=186.9, Time=91.9, Moves(5)=0.0, Pins(0)=0.0, Dist=95.0, Win Bonus=0.0
+[2026-05-07 10:19:10] MOVE 11: pD (red) 102->89 [0.01ms]
+[2026-05-07 10:19:10] SCORE pD (red): Final=187.5, Time=90.5, Moves(6)=0.0, Pins(0)=0.0, Dist=97.0, Win Bonus=0.0
+[2026-05-07 10:19:10] SCORE pB (blue): Final=186.9, Time=91.9, Moves(5)=0.0, Pins(0)=0.0, Dist=95.0, Win Bonus=0.0
+[2026-05-07 10:19:12] MOVE 12: pB (blue) 5->9 [0.01ms]
+[2026-05-07 10:19:12] SCORE pD (red): Final=187.5, Time=90.5, Moves(6)=0.0, Pins(0)=0.0, Dist=97.0, Win Bonus=0.0
+[2026-05-07 10:19:12] SCORE pB (blue): Final=185.8, Time=89.8, Moves(6)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-07 10:19:13] MOVE 13: pD (red) 104->113 [0.01ms]
+[2026-05-07 10:19:13] SCORE pD (red): Final=185.4, Time=89.4, Moves(7)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-07 10:19:13] SCORE pB (blue): Final=185.8, Time=89.8, Moves(6)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-07 10:19:15] MOVE 14: pB (blue) 27->15 [0.01ms]
+[2026-05-07 10:19:15] SCORE pD (red): Final=185.4, Time=89.4, Moves(7)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-07 10:19:15] SCORE pB (blue): Final=182.3, Time=87.3, Moves(7)=0.0, Pins(0)=0.0, Dist=95.0, Win Bonus=0.0
+[2026-05-07 10:19:17] MOVE 15: pD (red) 89->77 [0.01ms]
+[2026-05-07 10:19:17] SCORE pD (red): Final=184.3, Time=87.3, Moves(8)=0.0, Pins(0)=0.0, Dist=97.0, Win Bonus=0.0
+[2026-05-07 10:19:17] SCORE pB (blue): Final=182.3, Time=87.3, Moves(7)=0.0, Pins(0)=0.0, Dist=95.0, Win Bonus=0.0
+[2026-05-07 10:19:20] MOVE 16: pB (blue) 16->28 [0.01ms]
+[2026-05-07 10:19:20] SCORE pD (red): Final=184.3, Time=87.3, Moves(8)=0.0, Pins(0)=0.0, Dist=97.0, Win Bonus=0.0
+[2026-05-07 10:19:20] SCORE pB (blue): Final=180.8, Time=84.8, Moves(8)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-07 10:19:21] MOVE 17: pD (red) 77->89 [0.00ms]
+[2026-05-07 10:19:21] SCORE pD (red): Final=182.2, Time=86.2, Moves(9)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-07 10:19:21] SCORE pB (blue): Final=180.8, Time=84.8, Moves(8)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-07 10:19:24] MOVE 18: pB (blue) 28->27 [0.01ms]
+[2026-05-07 10:19:24] SCORE pD (red): Final=182.2, Time=86.2, Moves(9)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-07 10:19:24] SCORE pB (blue): Final=178.3, Time=82.3, Moves(9)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-07 10:19:26] MOVE 19: pD (red) 111->102 [0.01ms]
+[2026-05-07 10:19:26] SCORE pD (red): Final=181.1, Time=84.1, Moves(10)=0.0, Pins(0)=0.0, Dist=97.0, Win Bonus=0.0
+[2026-05-07 10:19:26] SCORE pB (blue): Final=178.3, Time=82.3, Moves(9)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-07 10:19:28] MOVE 20: pB (blue) 26->25 [0.01ms]
+[2026-05-07 10:19:28] SCORE pD (red): Final=181.1, Time=84.1, Moves(10)=0.0, Pins(0)=0.0, Dist=97.0, Win Bonus=0.0
+[2026-05-07 10:19:28] SCORE pB (blue): Final=175.8, Time=79.8, Moves(10)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-07 10:19:29] MOVE 21: pD (red) 113->104 [0.00ms]
+[2026-05-07 10:19:29] SCORE pD (red): Final=180.9, Time=82.9, Moves(11)=0.0, Pins(0)=0.0, Dist=98.0, Win Bonus=0.0
+[2026-05-07 10:19:29] SCORE pB (blue): Final=175.8, Time=79.8, Moves(10)=0.0, Pins(0)=0.0, Dist=96.0, Win Bonus=0.0
+[2026-05-07 10:19:31] MOVE 22: pB (blue) 0->18 [0.01ms]
+[2026-05-07 10:19:31] SCORE pD (red): Final=180.9, Time=82.9, Moves(11)=0.0, Pins(0)=0.0, Dist=98.0, Win Bonus=0.0
+[2026-05-07 10:19:31] SCORE pB (blue): Final=178.3, Time=78.3, Moves(11)=0.0, Pins(0)=0.0, Dist=100.0, Win Bonus=0.0
+[2026-05-07 10:19:33] MOVE 23: pD (red) 119->112 [0.01ms]
+[2026-05-07 10:19:33] SCORE pD (red): Final=180.9, Time=80.9, Moves(12)=0.0, Pins(0)=0.0, Dist=100.0, Win Bonus=0.0
+[2026-05-07 10:19:33] SCORE pB (blue): Final=178.3, Time=78.3, Moves(11)=0.0, Pins(0)=0.0, Dist=100.0, Win Bonus=0.0
+[2026-05-07 10:19:35] MOVE 24: pB (blue) 6->14 [0.01ms]
+[2026-05-07 10:19:35] SCORE pD (red): Final=180.9, Time=80.9, Moves(12)=0.0, Pins(0)=0.0, Dist=100.0, Win Bonus=0.0
+[2026-05-07 10:19:35] SCORE pB (blue): Final=177.2, Time=76.2, Moves(12)=0.0, Pins(0)=0.0, Dist=101.0, Win Bonus=0.0
+[2026-05-07 10:19:37] MOVE 25: pD (red) 118->119 [0.01ms]
+[2026-05-07 10:19:37] SCORE pD (red): Final=178.8, Time=78.8, Moves(13)=0.0, Pins(0)=0.0, Dist=100.0, Win Bonus=0.0
+[2026-05-07 10:19:37] SCORE pB (blue): Final=177.2, Time=76.2, Moves(12)=0.0, Pins(0)=0.0, Dist=101.0, Win Bonus=0.0
+[2026-05-07 10:19:39] MOVE 26: pB (blue) 15->36 [0.01ms]
+[2026-05-07 10:19:39] SCORE pD (red): Final=178.8, Time=78.8, Moves(13)=0.0, Pins(0)=0.0, Dist=100.0, Win Bonus=0.0
+[2026-05-07 10:19:39] SCORE pB (blue): Final=177.1, Time=74.1, Moves(13)=0.0, Pins(0)=0.0, Dist=103.0, Win Bonus=0.0
+[2026-05-07 10:19:42] MOVE 27: pD (red) 89->68 [0.01ms]
+[2026-05-07 10:19:42] SCORE pD (red): Final=178.3, Time=76.3, Moves(14)=0.0, Pins(0)=0.0, Dist=102.0, Win Bonus=0.0
+[2026-05-07 10:19:42] SCORE pB (blue): Final=177.1, Time=74.1, Moves(13)=0.0, Pins(0)=0.0, Dist=103.0, Win Bonus=0.0
+[2026-05-07 10:19:44] MOVE 28: pB (blue) 9->8 [0.01ms]
+[2026-05-07 10:19:44] SCORE pD (red): Final=178.3, Time=76.3, Moves(14)=0.0, Pins(0)=0.0, Dist=102.0, Win Bonus=0.0
+[2026-05-07 10:19:44] SCORE pB (blue): Final=175.0, Time=72.0, Moves(14)=0.0, Pins(0)=0.0, Dist=103.0, Win Bonus=0.0
+[2026-05-07 10:19:46] MOVE 29: pD (red) 116->115 [0.01ms]
+[2026-05-07 10:19:46] SCORE pD (red): Final=176.3, Time=74.3, Moves(15)=0.0, Pins(0)=0.0, Dist=102.0, Win Bonus=0.0
+[2026-05-07 10:19:46] SCORE pB (blue): Final=175.0, Time=72.0, Moves(14)=0.0, Pins(0)=0.0, Dist=103.0, Win Bonus=0.0
+[2026-05-07 10:19:47] MOVE 30: pB (blue) 3->16 [0.00ms]
+[2026-05-07 10:19:47] SCORE pD (red): Final=176.3, Time=74.3, Moves(15)=0.0, Pins(0)=0.0, Dist=102.0, Win Bonus=0.0
+[2026-05-07 10:19:47] SCORE pB (blue): Final=176.0, Time=71.0, Moves(15)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-07 10:19:49] MOVE 31: pD (red) 112->103 [0.01ms]
+[2026-05-07 10:19:49] SCORE pD (red): Final=174.7, Time=71.7, Moves(16)=0.0, Pins(0)=0.0, Dist=103.0, Win Bonus=0.0
+[2026-05-07 10:19:49] SCORE pB (blue): Final=176.0, Time=71.0, Moves(15)=0.0, Pins(0)=0.0, Dist=105.0, Win Bonus=0.0
+[2026-05-07 10:19:51] MOVE 32: pB (blue) 2->29 [0.01ms]
+[2026-05-07 10:19:51] SCORE pD (red): Final=174.7, Time=71.7, Moves(16)=0.0, Pins(0)=0.0, Dist=103.0, Win Bonus=0.0
+[2026-05-07 10:19:51] SCORE pB (blue): Final=177.9, Time=68.9, Moves(16)=0.0, Pins(0)=0.0, Dist=109.0, Win Bonus=0.0
+[2026-05-07 10:19:52] SCORE pD (red): Final=174.7, Time=71.7, Moves(16)=0.0, Pins(0)=0.0, Dist=103.0, Win Bonus=0.0
+[2026-05-07 10:19:52] SCORE pB (blue): Final=177.9, Time=68.9, Moves(16)=0.0, Pins(0)=0.0, Dist=109.0, Win Bonus=0.0
+[2026-05-07 10:19:52] GAME TIME LIMIT REACHED.
+[2026-05-07 10:19:53] SCORE pD (red): Final=174.7, Time=71.7, Moves(16)=0.0, Pins(0)=0.0, Dist=103.0, Win Bonus=0.0
+[2026-05-07 10:19:53] SCORE pB (blue): Final=177.9, Time=68.9, Moves(16)=0.0, Pins(0)=0.0, Dist=109.0, Win Bonus=0.0
+[2026-05-07 10:19:53] GAME TIME LIMIT REACHED.
+[2026-05-07 10:19:54] SCORE pD (red): Final=174.7, Time=71.7, Moves(16)=0.0, Pins(0)=0.0, Dist=103.0, Win Bonus=0.0
+[2026-05-07 10:19:54] SCORE pB (blue): Final=177.9, Time=68.9, Moves(16)=0.0, Pins(0)=0.0, Dist=109.0, Win Bonus=0.0
+[2026-05-07 10:19:54] GAME TIME LIMIT REACHED.

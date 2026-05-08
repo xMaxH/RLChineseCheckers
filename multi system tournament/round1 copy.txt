@@ -1,0 +1,4 @@
+game_number,game_id,player1,player2,player3,player4,status,final_scores,time_scores,distance_scores,pin_scores,winner
+1,NA,pA,pB,NA,NA,NOT_CREATED,NA,NA,NA,NA,None
+2,NA,pC,pD,NA,NA,NOT_CREATED,NA,NA,NA,NA,None
+3,NA,pA,pD,NA,NA,NOT_CREATED,NA,NA,NA,NA,None

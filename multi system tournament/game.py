@@ -15,9 +15,10 @@ import random
 # Game logic imports
 from checkers_board import HexBoard
 from checkers_pins import Pin
+import pandas as pd
 
 
-
+round_number = 1  # Update this for each new round of the tournament to track games and players in the round data file
 # ==========================================================
 # Utilities
 # ==========================================================
@@ -26,8 +27,8 @@ def ts() -> str:
 
 
 def log_path(game_id: str) -> str:
-    os.makedirs("games", exist_ok=True)
-    return os.path.join("games", f"game_{game_id}.log")
+    os.makedirs(f"games_round_{round_number}", exist_ok=True)
+    return os.path.join(f"games_round_{round_number}", f"game_{game_id}.log")
 
 
 def write_log(game_id: str, msg: str):
@@ -47,10 +48,10 @@ def safe_json(obj: Any) -> str:
 # ==========================================================
 COLOUR_ORDER = ['red', 'lawn green', 'yellow', 'blue', 'gray0', 'purple']
 PRIMARY_COLOURS = ['red', 'lawn green', 'yellow']
-random.shuffle(PRIMARY_COLOURS)
+#random.shuffle(PRIMARY_COLOURS)
 COMPLEMENT = {'red': 'blue', 'lawn green': 'gray0', 'yellow': 'purple'}
 MAX_PLAYERS = 6
-TURN_TIMEOUT_SEC = 10
+TURN_TIMEOUT_SEC = 2
 GAME_TIME_LIMIT_SEC = 60
 
 
@@ -83,6 +84,7 @@ class Game:
         self.created_ts = ts()
         self.joined_primary_index = 0
         self.lock_joining = False
+        self.primary_colours=random.sample(PRIMARY_COLOURS, len(PRIMARY_COLOURS))  # Randomize primary colour assignment order for each game
 
         # Timing
         self.total_start_ns = None
@@ -111,9 +113,9 @@ class Game:
         if n % 2 == 1:  # primary
             if self.joined_primary_index >= len(PRIMARY_COLOURS):
                 return None
-            return PRIMARY_COLOURS[self.joined_primary_index]
+            return self.primary_colours[self.joined_primary_index]
         else:
-            primary = PRIMARY_COLOURS[self.joined_primary_index]
+            primary = self.primary_colours[self.joined_primary_index]
             self.joined_primary_index += 1
             return COMPLEMENT[primary]
 
@@ -233,7 +235,7 @@ class Game:
                     best = min(axial_dist(self.board.cells[p.axialindex], tgt)
                                for tgt in target_cells)
                     total_dist += best
-            distance_score = max(0.0, 200.0 - total_dist) if pl.move_count > 0 else 0
+            distance_score = max(0.0, 400.0 - 2*total_dist) if pl.move_count > 0 else 0
 
             final_score = time_score + move_score + pin_goal_score + distance_score
 
@@ -257,14 +259,32 @@ class Game:
                 "win_bonus": win_bonus
             }
 
-            
-
             write_log(
                 self.game_id,
                 f"SCORE {pl.name} ({colour}): Final={final_score:.1f}, "
                 f"Time={time_score:.1f}, Moves({pl.move_count})={move_score:.1f}, "
                 f"Pins({pins_in_goal})={pin_goal_score:.1f}, Dist={distance_score:.1f}, Win Bonus={win_bonus:.1f}"
             )
+
+        #update round_df with final score and status if this game is in the round data
+        if SESSION.round_df is not None:
+            idx = SESSION.round_df.index[SESSION.round_df['game_id'] == self.game_id].tolist()
+            if idx:
+                idx = idx[0]
+                final_scores_str = ';'.join([f"{pl.name}:{self.scores[pl.player_id]['final_score']:.1f}" for pl in self.players])
+                SESSION.round_df.at[idx, 'final_scores'] = final_scores_str
+                SESSION.round_df.at[idx, 'status'] = self.status
+                SESSION.round_df.at[idx, 'winner'] = next((pl.name for pl in self.players if pl.status == "WIN"), "None")
+                SESSION.round_df.at[idx, 'time_scores'] = ';'.join([f"{pl.name}:{self.scores[pl.player_id]['time_score']:.1f}" for pl in self.players]) 
+                SESSION.round_df.at[idx, 'distance_scores'] = ';'.join([f"{pl.name}:{self.scores[pl.player_id]['distance_score']:.1f}" for pl in self.players]) 
+                SESSION.round_df.at[idx, 'pin_scores'] = ';'.join([f"{pl.name}:{self.scores[pl.player_id]['pin_goal_score']:.1f}" for pl in self.players])  
+                
+                try:
+                    SESSION.round_df.to_csv(SESSION.round_path, sep=',', index=False)
+                except Exception as e:
+                    error_msg = f"Error occurred while saving round_df after score update: {e}"
+                    print(error_msg)
+                    write_log("SESSION", error_msg)
 
     # ----------------------------------
     # Public State
@@ -304,7 +324,50 @@ class Session:
         self.games: Dict[str, Game] = {}
         self.session_games: List[str] = []
         self.lock = threading.RLock()
+        self.round_path = f"round{round_number}.txt"
+        if os.path.exists(self.round_path):
+            with open(self.round_path, "r", encoding="utf-8") as f:
+                lines = f.readlines()
+                self.round_data = [line.strip().split(',') for line in lines]
+        else:
+            self.round_data = []
+        print(self.round_data)
+        self.round_headers = ["game_number", "game_id", "player1", "player2", "player3", "player4","player5","player6", "status", "final_scores", "time_scores", "distance_scores", "pin_scores", "winner"]
+        self.round_df = None
+        if self.round_data:
+            self.round_df = pd.DataFrame(self.round_data[1:], columns=self.round_headers) 
+        else:
+            error_msg = f"Round data file {self.round_path} not found. Round tracking disabled."
+            print(error_msg)
+            write_log("SESSION", error_msg)
 
+    # Create one game for each row in round_df that has status NOT_CREATED, and update round_df with the new game_id and status GAME_CREATED. This allows us to track which games correspond to which rows in the round data.
+    def create_round_games(self) -> str:
+        print ("Creating round games...")
+        if self.round_df is None:
+            return "No round data available."
+        with self.lock:
+            rowcnt=0
+            for idx, row in self.round_df.iterrows():
+                if row['status'] == 'NOT_CREATED':
+                    gid = self.create_game()
+                    self.round_df.at[idx, 'game_id'] = gid
+                    self.round_df.at[idx, 'status'] = 'GAME_CREATED'
+                    write_log("SESSION", f"Round game created: {gid} for row {idx}")
+                    rowcnt+=1
+            if rowcnt==0:
+                print("No games to be created. All games already created for this round.")
+            else:
+                print(f"{rowcnt} round games created for Round {round_number}.")
+            # Save updated round_df back to file
+            # try to save the round_df back to the round file, and log any errors that occur during saving without crashing the server
+            try:
+                self.round_df.to_csv(self.round_path, sep=',', index=False) 
+            except Exception as e:
+                error_msg = f"Error occurred while saving round_df: {e}"
+                print(error_msg)
+                write_log("SESSION", error_msg)
+            return "Round games created and round data updated."
     # ------------------------------
     def create_game(self) -> str:
         with self.lock:
@@ -324,6 +387,144 @@ class Session:
                     return g
         return None
 
+    ''' Search for a row in round_df where player_name is in player1/player2... and status is GAME_CREATED or WAITING_FOR_OTHER_PLAYER, and return "ok": True,
+                {"game_id": g.game_id,
+                "player_id": pid,
+                "colour": colour,
+                "status": g.status}
+        If multiple rows match, pick the one where status is WAITING_FOR_OTHER_PLAYER first. If a matching row is found, also add the player to the corresponding game, assign colour, and update game status to WAITING_FOR_OTHER_PLAYER or READY_TO_START as appropriate depending on how many players have joined.
+        If multiple rows match and have status WAITING_FOR_OTHER_PLAYER, pick the one with the maximum number of players already joined to try to fill up games.
+    Also update the round_df status to WAITING_FOR_OTHER_PLAYER if it was GAME_CREATED, and save the round_df back to the round file. This allows us to track which player joined which game and update the round data accordingly.
+    If no such row exists, return "ok": False with an error message.
+    '''
+    def find_round_game_for_player(self, player_name: str) -> Dict[str, Any]:
+        if self.round_df is None:
+            return {"ok": False, "error": "No round data available."}
+        with self.lock:
+            # Filter rows where player_name is in any of the player columns and status is GAME_CREATED or WAITING_FOR_OTHER_PLAYER and player has not already joined the game (to prevent joining multiple times if player refreshes)
+            candidate_rows = self.round_df[
+                (self.round_df[['player1', 'player2', 'player3', 'player4', 'player5', 'player6'].apply(lambda row: player_name in row.values, axis=1)) &
+                (self.round_df['status'].isin(['GAME_CREATED', 'WAITING_FOR_OTHER_PLAYER'])) ]
+            for row in candidate_rows.itertuples():
+                candidate_game_id = row.game_id
+                candidate_game_players = self.games[candidate_game_id].players
+                if any(p.name == player_name for p in candidate_game_players):
+                    candidate_rows = candidate_rows.drop(row.Index)
+            #print(f"Found {len(candidate_rows)} candidate rows for player {player_name} in round data.")
+
+            if candidate_rows.empty:
+                return {"ok": False, "error": f"No available game found for player {player_name}. Check if the player name is correct and if there are games waiting for players."}
+
+            # Prioritize rows with WAITING_FOR_OTHER_PLAYER status
+            waiting_rows = candidate_rows[candidate_rows['status'] == 'WAITING_FOR_OTHER_PLAYER']
+            #print(f"Found {len(waiting_rows)} candidate rows with WAITING_FOR_OTHER_PLAYER status for player {player_name}.")
+            if not waiting_rows.empty:
+                candidate_rows = waiting_rows
+
+            # Pick the row with the maximum number of players already joined
+            candidate_rows['joined_count'] = candidate_rows.apply(lambda row: sum(pd.notna(row[['player1', 'player2', 'player3', 'player4', 'player5', 'player6']])), axis=1)
+            selected_row = candidate_rows.sort_values(by='joined_count', ascending=False).iloc[0]
+
+            game_id = selected_row['game_id']
+            g = self.games.get(game_id)
+            if not g:
+                return {"ok": False, "error": "Game not found for the selected round row."}
+
+            colour = g.assign_colour()
+            if not colour:
+                return {"ok": False, "error": "Game full"}
+
+            pid = str(uuid.uuid4())
+            pl = Player(pid, player_name, colour)
+            g.players.append(pl)
+            g.init_pins(colour)
+
+            # Update game status based on how many players have joined compared to how many are expected from the round data
+            all_players_in_row = selected_row[['player1', 'player2', 'player3', 'player4', 'player5', 'player6']]
+            all_players_in_row = all_players_in_row[all_players_in_row != 'NA']
+            try:
+                with open(f"joined_{self.round_number}.txt", "w") as f:
+                    for gid in self.session_games:
+                        g = self.games[gid]
+                        for p in g.players:
+                            f.write(f"{p.name} joined game {gid} as {p.colour}\n")
+                    not_joined = [p for p in all_players_in_row if p != player_name and p not in joined_players]
+                    f.write(f"Players not joined yet for game {game_id}: {', '.join(not_joined) if not_joined else 'None'}\n")
+            except Exception as e:
+                error_msg = f"Error occurred while writing to joined_{self.round_number}.txt: {e}"
+                print(error_msg)
+                write_log("SESSION", error_msg)
+
+            if len(g.players) < len(all_players_in_row):
+                g.status = "waiting for other player"
+                self.round_df.at[selected_row.name, 'status'] = 'WAITING_FOR_OTHER_PLAYER'
+            else:
+                g.status = "READY_TO_START"
+                self.round_df.at[selected_row.name, 'status'] = 'READY_TO_START'
+            write_log(g.game_id, f"PLAYER JOINED: {player_name} as {colour}")
+            print(f"Player {player_name} joined game {g.game_id} as {colour}.")
+            # try to save the round_df back to the round file, and log any errors that occur during saving without crashing the server
+            try:
+                self.round_df.to_csv(self.round_path, sep=',', index=False) 
+            except Exception as e:
+                error_msg = f"Error occurred while saving round_df: {e}"
+                print(error_msg)
+                write_log("SESSION", error_msg)
+
+
+            return {
+                "ok": True,
+                "game_id": g.game_id,
+                "player_id": pid,
+                "colour": colour,
+                "status": g.status,
+            }
+        return {"ok": False, "error": "Unexpected error in finding round game for player."}
+    '''def find_round_game_for_player(self, player_name: str) -> Optional[Dict[str, Any]]:
+        if self.round_df is None:
+            return None
+        with self.lock:
+            for idx, row in self.round_df.iterrows():
+                if player_name in row[['player1', 'player2', 'player3', 'player4']].values and row['status'] in ('GAME_CREATED', 'WAITING_FOR_OTHER_PLAYER'):
+                    game_id = row['game_id']
+                    g = self.games.get(game_id)
+                    if g:
+                        colour = g.assign_colour()
+                        if colour:
+                            pid = str(uuid.uuid4())
+                            pl = Player(pid, player_name, colour)
+                            g.players.append(pl)
+                            g.init_pins(colour)
+
+                            #count number of non-NA player names in the row to determine how many players are expected in this game
+                            all_players_in_row = row[['player1', 'player2', 'player3', 'player4']]
+                            all_players_in_row = all_players_in_row[all_players_in_row != 'NA']
+                            if len(g.players) < len(all_players_in_row):
+                                g.status = "waiting for other player"
+                                self.round_df.at[idx, 'status'] = 'WAITING_FOR_OTHER_PLAYER'
+                            else:
+                                g.status = "READY_TO_START"
+                                self.round_df.at[idx, 'status'] = 'READY_TO_START'
+
+                            write_log(g.game_id, f"PLAYER JOINED: {player_name} as {colour}")
+                            print(f"Player {player_name} joined game {g.game_id} as {colour}.")
+
+                            # Save updated round_df back to file
+                            self.round_df.to_csv(self.round_path, sep=',', index=False)
+
+                            return {
+                                "ok": True,
+                                "game_id": g.game_id,
+                                "player_id": pid,
+                                "colour": colour,
+                                "status": g.status,
+                            }
+        return {
+            "ok": False,
+            "error": f"No available game found for player {player_name}. Check if the player name is correct and if there are games waiting for players."
+        }
+        #return None'''
+    
     # ------------------------------
     def join_request(self, player_name: str) -> Dict[str, Any]:
         with self.lock:
@@ -357,6 +558,45 @@ class Session:
                 "status": g.status,
             }
 
+    '''
+    If all players have joined a game, and the game status is READY_TO_START, then mark the player as ready. If all players are ready, change game status to PLAYING and compute turn order. This allows us to track when players are ready and when the game starts in the round data.
+    '''
+    def start_game(self, game_id: str) -> Dict[str, Any]:
+        with self.lock:
+            g = self.games.get(game_id)
+            if not g:
+                return {"ok": False, "error": "Game not found"}
+
+            for pl in g.players:
+                pl.ready = True
+                write_log(g.game_id, f"PLAYER START: {pl.name} ({pl.colour})")
+            
+
+            if g.status == "READY_TO_START":
+                g.lock_joining = True
+                if len(g.players) >= 2 and all(pl.ready for pl in g.players):
+                    g.status = "PLAYING"
+                    g.total_start_ns = time.perf_counter_ns()
+                    g.compute_turn_order()
+                    g.turn_started_ns = time.perf_counter_ns()
+                    write_log(g.game_id, f"GAME START — turn order {g.turn_order}")
+
+            # Update round_df status to PLAYING if this game is in the round data
+            if self.round_df is not None:
+                idx = self.round_df.index[self.round_df['game_id'] == game_id].tolist()
+                if idx:
+                    idx = idx[0]
+                    if g.status == "PLAYING":
+                        self.round_df.at[idx, 'status'] = 'PLAYING'
+                        # try to save the round_df back to the round file, and log any errors that occur during saving without crashing the server
+                        try:
+                            self.round_df.to_csv(self.round_path, sep=',', index=False) 
+                        except Exception as e:
+                            error_msg = f"Error occurred while saving round_df: {e}"
+                            print(error_msg)
+                            write_log("SESSION", error_msg)
+
+            return {"ok": True, "status": g.status}
     # ------------------------------
     def mark_start_ready(self, game_id: str, player_id: str) -> Dict[str, Any]:
         with self.lock:
@@ -523,11 +763,12 @@ def handle_request(req: Dict[str, Any]) -> Dict[str, Any]:
         )
 
     if op == "join":
-        return SESSION.join_request(req.get("player_name"))
+        #return SESSION.join_request(req.get("player_name"))
+        return SESSION.find_round_game_for_player(req.get("player_name"))
 
     if op == "start":
-        return SESSION.mark_start_ready(req.get("game_id"), req.get("player_id"))
-
+        #return SESSION.mark_start_ready(req.get("game_id"), req.get("player_id"))
+        return SESSION.start_game(req.get("game_id"))
     if op == "get_state":
         game_id = req.get("game_id")
         g = SESSION.games.get(game_id)
@@ -556,9 +797,9 @@ def handle_request(req: Dict[str, Any]) -> Dict[str, Any]:
 def server_loop():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    s.bind(("10.245.30.229", 50555))
+    s.bind(("0.0.0.0", 50555))
     s.listen(50)
-    print("[Server] Listening on 10.245.30.229:50555")
+    print("[Server] Listening on 0.0.0.0:50555")
 
     while True:
         conn, addr = s.accept()
@@ -596,8 +837,8 @@ def cli_loop():
     while True:
         cmd = input("Enter command: ").strip().lower()
         if cmd == "create":
-            gid = SESSION.create_game()
-            print("Game created:", gid)
+            SESSION.create_round_games()
+            #print("Game created:", gid)
         elif cmd == "status":
             for g in SESSION.game_status_list():
                 print(g)
