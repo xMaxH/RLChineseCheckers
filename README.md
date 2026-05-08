@@ -46,6 +46,54 @@ Use the defaults in `alphazero_multiplayer_method.py` to control the training se
 Press `Ctrl+C` to stop all launched processes.
 
 
+## Visualization
+
+### Live browser viewer (watch a game as it plays)
+
+Run this in a separate terminal **before or during** a game:
+
+```bash
+cd "RLChineseCheckers/multi system single machine minimal"
+python game_visualizer.py --live
+```
+
+Then open **http://127.0.0.1:8765/** in your browser.  
+The viewer polls the latest game log and animates moves in real time.  
+Use the Play/Pause, Step, and Catch-up buttons, or adjust replay speed with the slider.
+
+Custom port:
+```bash
+python game_visualizer.py --live --port 9000
+```
+
+### Post-game replay (PNG frames + HTML viewer)
+
+After a game finishes, render all moves to images and generate an interactive HTML viewer:
+
+```bash
+cd "RLChineseCheckers/multi system single machine minimal"
+
+# Pick from a list of recent games interactively
+python game_visualizer.py
+
+# Auto-select the most recent game
+python game_visualizer.py --latest
+
+# Specific log file
+python game_visualizer.py games/game_<id>.log
+
+# Only render every 5th move (faster for long games)
+python game_visualizer.py --latest --stride 5
+
+# Stop rendering after move 100
+python game_visualizer.py --latest --max-moves 100
+```
+
+Output is saved to `renders/<game_id>/`:
+- `move_NNN_*.png` — one image per rendered move
+- `viewer.html` — open this in a browser to step through frames with keyboard arrows or the scrubber
+
+
 # Rules
 - each player starts with their colored pieces on one of the six points or corners of the star and attempts to race them all home into the opposite corner
 - Players take turns moving a single piece,

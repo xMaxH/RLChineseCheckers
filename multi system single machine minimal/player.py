@@ -66,26 +66,59 @@ def render_json_board(state):
     print("===================")
 
 
+def normalize_alpha_mode(mode: str) -> str:
+    value = mode.strip().lower().replace("_", "-")
+    if value in ("", "auto"):
+        return "auto"
+    if value in ("2", "2p", "2-player", "two-player"):
+        return "2p"
+    if value in ("multi", "multiplayer", "mp"):
+        return "multiplayer"
+    raise RuntimeError(f"Unknown AlphaZero mode '{mode}'. Use auto, 2p, or multiplayer.")
+
+
+def resolve_alphazero_move_fn(player_count: int, requested_mode: str):
+    mode = normalize_alpha_mode(requested_mode)
+    if mode == "auto":
+        mode = "2p" if player_count <= 2 else "multiplayer"
+
+    if mode == "2p":
+        if player_count > 2:
+            raise RuntimeError(
+                f"2-player AlphaZero was requested, but the game has {player_count} players."
+            )
+        if choose_move_alphazero_2p is None:
+            raise RuntimeError("2-player AlphaZero implementation is unavailable.")
+        return choose_move_alphazero_2p, "2-player"
+
+    if choose_move_alphazero_multiplayer is None:
+        raise RuntimeError("multiplayer AlphaZero implementation is unavailable.")
+    return choose_move_alphazero_multiplayer, f"multiplayer ({player_count} players)"
+
+
 # =============================================================
 # Main client loop
 # =============================================================
 def main():
     timeoutnotice_move = -1
     selected_method = os.getenv("PLAYER_METHOD", "random").strip().lower()
+    alpha_mode_request = os.getenv("AZ_PLAYER_MODE", "auto")
     alpha_move_fn = None
     alpha_mode = None
     
     if selected_method not in ("random", "alphazero"):
-        print(f"Unknown PLAYER_METHOD '{selected_method}', falling back to random.")
-        selected_method = "random"
+        print(f"Unknown PLAYER_METHOD '{selected_method}'. Valid options are random or alphazero.")
+        return 2
 
     if selected_method == "alphazero":
         if choose_move_alphazero_2p is None and choose_move_alphazero_multiplayer is None:
-            print("alphazero modules not available, falling back to random.")
-            selected_method = "random"
+            print("AlphaZero modules are not available.")
+            return 2
 
     print("==== Player ====")
     print(f"Playing method: {selected_method}")
+    if selected_method == "alphazero":
+        print(f"AlphaZero requested mode: {normalize_alpha_mode(alpha_mode_request)}")
     name = input("Enter name: ").strip()
     if not name:
         return
@@ -110,24 +143,6 @@ def main():
         print("Waiting for players...")
         time.sleep(0.1)
 
-    if selected_method == "alphazero":
-        player_count = len(st.get("state", {}).get("players", []))
-        if player_count <= 2 and choose_move_alphazero_2p is not None:
-            alpha_move_fn = choose_move_alphazero_2p
-            alpha_mode = "2-player"
-        elif choose_move_alphazero_multiplayer is not None:
-            alpha_move_fn = choose_move_alphazero_multiplayer
-            alpha_mode = f"multiplayer ({player_count} players)"
-        elif choose_move_alphazero_2p is not None and player_count <= 2:
-            alpha_move_fn = choose_move_alphazero_2p
-            alpha_mode = "2-player"
-
-        if alpha_move_fn is None:
-            print("alphazero implementation unavailable for this game size, falling back to random.")
-            selected_method = "random"
-        else:
-            print(f"AlphaZero mode: {alpha_mode}")
-
     input("Press ENTER to send START...")
     rpc({"op": "start", "game_id": game_id, "player_id": player_id})
     print("Sent START")
@@ -138,6 +153,18 @@ def main():
         if st.get("state", {}).get("status") == "PLAYING":
             break
         time.sleep(0.1)
+
+    if selected_method == "alphazero":
+        player_count = len(st.get("state", {}).get("players", []))
+        try:
+            alpha_move_fn, alpha_mode = resolve_alphazero_move_fn(
+                player_count=player_count,
+                requested_mode=alpha_mode_request,
+            )
+        except RuntimeError as e:
+            print(f"AlphaZero unavailable: {e}")
+            return 2
+        print(f"AlphaZero mode: {alpha_mode}")
 
     print("=== GAME STARTED ===\n")
 
@@ -189,7 +216,7 @@ def main():
             last_move_seen = state["move_count"]
 
         
-        # If it's our turn, choose a random move
+        # If it's our turn, choose a move.
         if state.get("current_turn_colour") == colour and state["status"] == "PLAYING":
             print("\nMy turn")
             '''------------PLAYING LOGIC-----------'''
@@ -235,10 +262,8 @@ def main():
                         },
                     )
                 except Exception as e:
-                    print(f"Method '{selected_method}' failed ({e}), using random fallback.")
-                    pid, moves = random.choice(movable)
-                    to_index = random.choice(moves)
-                    delay = random.uniform(0.1, 0.2)
+                    print(f"Method '{selected_method}' failed: {e}")
+                    return 1
 
             print("Move delay:", delay)
             time.sleep(delay)
@@ -266,4 +291,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

@@ -121,6 +121,17 @@ class SimState:
             total += min(self._hex_distance(pin.axialindex, t) for t in target_idxs)
         return total
 
+    def pins_in_goal(self, colour: str) -> int:
+        opposite = self.board.colour_opposites[colour]
+        return sum(
+            1
+            for pin in self.pins_by_colour[colour]
+            if self.board.cells[pin.axialindex].postype == opposite
+        )
+
+    def position_score_proxy(self, colour: str) -> float:
+        return self.pins_in_goal(colour) * 100.0 + max(0.0, 200.0 - self.distance_to_goal(colour))
+
     def heuristic_value(self, perspective_colour: str) -> float:
         win = self.winner()
         if win == perspective_colour:
@@ -129,9 +140,9 @@ class SimState:
             return -1.0
 
         opp = self.opponent_colour(perspective_colour)
-        own_dist = self.distance_to_goal(perspective_colour)
-        opp_dist = self.distance_to_goal(opp)
-        raw = (opp_dist - own_dist) / 40.0
+        own_score = self.position_score_proxy(perspective_colour)
+        opp_score = self.position_score_proxy(opp)
+        raw = (own_score - opp_score) / 400.0
         return float(max(-0.99, min(0.99, math.tanh(raw))))
 
     def encode(self, perspective_colour: str) -> torch.Tensor:
@@ -538,15 +549,52 @@ def create_initial_two_player_state(
     )
 
 
+def _position_score_margin(state: SimState) -> float:
+    scores = sorted(
+        (float(state.position_score_proxy(colour)) for colour in state.turn_order),
+        reverse=True,
+    )
+    if len(scores) < 2:
+        return scores[0] if scores else 0.0
+    return scores[0] - scores[1]
+
+
+def _has_position_progress(
+    state: SimState,
+    best_scores: Dict[str, float],
+    min_delta: float,
+) -> bool:
+    improved = False
+    delta = max(0.0, float(min_delta))
+    for colour in state.turn_order:
+        score = float(state.position_score_proxy(colour))
+        previous_best = best_scores.get(colour, -float("inf"))
+        if score > previous_best + delta:
+            best_scores[colour] = score
+            improved = True
+    return improved
+
+
 def generate_self_play_game(
     agent: AlphaZeroAgent,
     num_simulations: int = 96,
     c_puct: float = 1.5,
     max_moves: int = 400,
     temperature_cutoff: int = 20,
+    adjudicate_stale_moves: int = 160,
+    adjudicate_min_moves: int = 80,
+    adjudicate_min_margin: float = 50.0,
+    adjudicate_progress_delta: float = 0.5,
 ) -> List[TrainingExample]:
     state = create_initial_two_player_state()
     raw_samples: List[Tuple[torch.Tensor, torch.Tensor, str]] = []
+    stale_plies = 2 * int(adjudicate_stale_moves) if int(adjudicate_stale_moves) > 0 else 0
+    min_plies = 2 * max(0, int(adjudicate_min_moves))
+    best_position_scores = {
+        colour: float(state.position_score_proxy(colour))
+        for colour in state.turn_order
+    }
+    last_progress_ply = 0
 
     for ply in range(max_moves):
         if state.is_terminal():
@@ -572,12 +620,24 @@ def generate_self_play_game(
         temperature = 1.0 if ply < temperature_cutoff else 0.15
         action = _sample_action_from_visits(visits, temperature)
         state.apply_action(action)
+        current_ply = ply + 1
+        if state.winner() is not None:
+            break
+        if _has_position_progress(state, best_position_scores, adjudicate_progress_delta):
+            last_progress_ply = current_ply
+        elif (
+            stale_plies > 0
+            and current_ply >= min_plies
+            and current_ply - last_progress_ply >= stale_plies
+            and _position_score_margin(state) >= float(adjudicate_min_margin)
+        ):
+            break
 
     winner = state.winner()
     samples: List[TrainingExample] = []
     for state_tensor, policy_target, to_play in raw_samples:
         if winner is None:
-            value = 0.0
+            value = state.heuristic_value(to_play)
         else:
             value = 1.0 if winner == to_play else -1.0
         samples.append(
@@ -598,6 +658,10 @@ def run_self_play_training(
     num_simulations: int = 96,
     c_puct: float = 1.5,
     max_moves: int = 500,
+    adjudicate_stale_moves: int = 160,
+    adjudicate_min_moves: int = 80,
+    adjudicate_min_margin: float = 50.0,
+    adjudicate_progress_delta: float = 0.5,
     model_path: Optional[Path] = None,
     verbose: bool = False,
 ) -> Dict[str, float]:
@@ -615,6 +679,10 @@ def run_self_play_training(
             num_simulations=num_simulations,
             c_puct=c_puct,
             max_moves=max_moves,
+            adjudicate_stale_moves=adjudicate_stale_moves,
+            adjudicate_min_moves=adjudicate_min_moves,
+            adjudicate_min_margin=adjudicate_min_margin,
+            adjudicate_progress_delta=adjudicate_progress_delta,
         )
         replay.extend(episode_samples)
         if verbose:
@@ -692,6 +760,30 @@ def _build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--temp-late", type=float, default=0.15, help="Temperature for late moves.")
     parser.add_argument("--temp-cutoff-move", type=int, default=20, help="Move number to switch temperatures.")
     parser.add_argument(
+        "--adjudicate-stale-moves",
+        type=int,
+        default=160,
+        help="Stop self-play when neither player improves board-position score for this many moves per player. Use 0 to disable.",
+    )
+    parser.add_argument(
+        "--adjudicate-min-moves",
+        type=int,
+        default=80,
+        help="Minimum moves per player before score adjudication can stop a stalled game.",
+    )
+    parser.add_argument(
+        "--adjudicate-min-margin",
+        type=float,
+        default=50.0,
+        help="Minimum leader score margin required for stalled-game score adjudication.",
+    )
+    parser.add_argument(
+        "--adjudicate-progress-delta",
+        type=float,
+        default=0.5,
+        help="Minimum board-position score increase counted as progress for adjudication.",
+    )
+    parser.add_argument(
         "--model-path",
         type=str,
         default=str(DEFAULT_MODEL_PATH),
@@ -739,6 +831,10 @@ def main() -> int:
             ("temp_opening", args.temp_opening),
             ("temp_late", args.temp_late),
             ("temp_cutoff_move", args.temp_cutoff_move),
+            ("adjudicate_stale_moves_per_player", args.adjudicate_stale_moves),
+            ("adjudicate_min_moves_per_player", args.adjudicate_min_moves),
+            ("adjudicate_min_margin", args.adjudicate_min_margin),
+            ("adjudicate_progress_delta", args.adjudicate_progress_delta),
             ("max_moves", args.max_moves),
             ("model_path", args.model_path),
             ("quiet", args.quiet),
@@ -758,6 +854,7 @@ def main() -> int:
         f"temp_late={args.temp_late}, "
         f"temp_cutoff={args.temp_cutoff_move}, "
         f"max_moves={args.max_moves}, "
+        f"adjudicate_stale_moves={args.adjudicate_stale_moves}, "
         f"model={args.model_path}",
         flush=True,
     )
@@ -770,6 +867,10 @@ def main() -> int:
         num_simulations=args.num_simulations,
         c_puct=args.c_puct,
         max_moves=args.max_moves,
+        adjudicate_stale_moves=args.adjudicate_stale_moves,
+        adjudicate_min_moves=args.adjudicate_min_moves,
+        adjudicate_min_margin=args.adjudicate_min_margin,
+        adjudicate_progress_delta=args.adjudicate_progress_delta,
         model_path=Path(args.model_path),
         verbose=not args.quiet,
     )

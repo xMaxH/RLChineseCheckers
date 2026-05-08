@@ -457,6 +457,10 @@ class Session:
             if pl.status == "WIN":
                 g.status = "FINISHED"
                 g.compute_scores()
+                write_log(
+                    g.game_id,
+                    f"FINISHED: {pl.name} ({pl.colour}) wins after {g.move_count} moves",
+                )
 
                 return {"ok": True, "status": "WIN", "state": g.to_public_state(),
                         "msg": f"{pl.name} Wins"}
@@ -469,6 +473,11 @@ class Session:
                     winner = next(p for p in live if p not in draws)
                     g.status = "FINISHED"
                     g.compute_scores()
+                    write_log(
+                        g.game_id,
+                        f"FINISHED: {winner.name} ({winner.colour}) "
+                        f"wins by draw after {g.move_count} moves",
+                    )
 
                     return {"ok": True, "status": "WIN", "state": g.to_public_state(),
                             "msg": f"{winner.name} Wins, others Draw."}

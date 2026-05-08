@@ -1,0 +1,145 @@
+
+=== TRAINING RUN START 2026-05-06T11:02:30 ===
+Command: alphazero_multiplayer_method.py --episodes 12 --max-moves 1500 --num-simulations 32 --train-interval 6 --update-epochs 1 --self-play-workers 6 --player-count-min 2 --player-count-max 2 --inference-server --inference-server-device cuda --train-device cuda --init-model-path checkpoints/alphazero_multi_750_check_ep96.pt --model-path checkpoints/alphazero_multi_smoke.pt --log-path training_smoke.log --eval-episodes 1 --eval-player-counts 2 --eval-baselines heuristic,probe --arena-interval-epochs 0 --fresh
+
+=== AlphaZero Multiplayer Parameters ===
+episodes                              : 12
+train_epochs                          : 8
+batch_size                            : 64
+lr                                    : 0.0003
+num_simulations                       : 32
+c_puct                                : 1.5
+temp_opening                          : 1.0
+temp_late                             : 0.15
+temp_cutoff_move                      : 20
+adjudicate_stale_moves_per_player     : 160
+adjudicate_min_moves_per_player       : 80
+train_interval                        : 6
+update_epochs                         : 1
+replay_cap                            : 50000
+train_sample_size                     : 4096
+train_device                          : cuda
+background_train_epochs               : 0
+background_train_until_self_play_done : False
+background_train_max_epochs           : 10
+self_play_workers                     : 6
+self_play_device                      : cpu
+worker_torch_threads                  : 1
+chunk_heartbeat_sec                   : 60.0
+inference_server                      : True
+inference_server_device               : cuda
+inference_max_batch                   : 128
+inference_max_wait_ms                 : 4.0
+player_count_min                      : 2
+player_count_max                      : 2
+fixed_player_count                    : None
+max_moves_per_player                  : 1500
+model_path                            : checkpoints/alphazero_multi_smoke.pt
+init_model_path                       : checkpoints/alphazero_multi_750_check_ep96.pt
+log_path                              : training_smoke.log
+eval_episodes                         : 1
+eval_player_counts                    : 2
+eval_max_moves_per_player             : 1500
+eval_num_simulations                  : 16
+eval_probe_path                       : checkpoints/alphazero_multi_probe.pt
+eval_baselines                        : heuristic,probe
+eval_checkpoint_paths                 : n/a
+eval_checkpoint_pool_size             : 4
+checkpoint_pool_dir                   : checkpoints/arena
+checkpoint_pool_size                  : 8
+arena_interval_epochs                 : 0
+arena_eval_episodes                   : 1
+fresh                                 : True
+quiet                                 : False
+[train] Starting multiplayer AlphaZero self-play training
+[setup] Created shuffled distribution: 12 2p
+[infer-server] started device=cuda max_batch=128 max_wait_ms=4.0 response_queues=6
+[self-play] parallel chunk episodes=1-6 workers=6 device=gpu-server
+[self-play:bg1-6] heartbeat completed=0/6 elapsed=60.0s
+[self-play:bg1-6] heartbeat completed=0/6 elapsed=120.0s
+[self-play:bg1-6] finished episode=1 players=2 plies=347/3000 terminal_reason=winner adjudicated=False completed=1/6 time=123.57s
+[self-play:bg1-6] finished episode=4 players=2 plies=426/3000 terminal_reason=winner adjudicated=False completed=2/6 time=147.60s
+[self-play:bg1-6] finished episode=5 players=2 plies=451/3000 terminal_reason=winner adjudicated=False completed=3/6 time=156.39s
+[self-play:bg1-6] finished episode=6 players=2 plies=483/3000 terminal_reason=winner adjudicated=False completed=4/6 time=166.25s
+[self-play:bg1-6] finished episode=3 players=2 plies=490/3000 terminal_reason=winner adjudicated=False completed=5/6 time=167.04s
+[self-play:bg1-6] finished episode=2 players=2 plies=527/3000 terminal_reason=winner adjudicated=False completed=6/6 time=179.57s
+[self-play] episode 1/12 players=2 plies=347/3000 terminal_reason=winner winner=red cutoff_hit=False adjudicated=False samples=694 total_samples=694 score_margin=748.00 time=123.57s
+[self-play:stats] episode 1/12 score_proxy={red=1200.0, purple=452.0} pins_in_goal={red=10, purple=3} distance_to_goal={red=0.0, purple=48.0} moves={red=174, purple=173}
+[self-play] episode 2/12 players=2 plies=527/3000 terminal_reason=winner winner=purple cutoff_hit=False adjudicated=False samples=1054 total_samples=1748 score_margin=846.00 time=179.57s
+[self-play:stats] episode 2/12 score_proxy={yellow=354.0, purple=1200.0} pins_in_goal={yellow=2, purple=10} distance_to_goal={yellow=46.0, purple=0.0} moves={yellow=263, purple=264}
+[self-play] episode 3/12 players=2 plies=490/3000 terminal_reason=winner winner=gray0 cutoff_hit=False adjudicated=False samples=980 total_samples=2728 score_margin=317.00 time=167.04s
+[self-play:stats] episode 3/12 score_proxy={gray0=1200.0, purple=883.0} pins_in_goal={gray0=10, purple=7} distance_to_goal={gray0=0.0, purple=17.0} moves={gray0=245, purple=245}
+[self-play] episode 4/12 players=2 plies=426/3000 terminal_reason=winner winner=lawn green cutoff_hit=False adjudicated=False samples=852 total_samples=3580 score_margin=755.00 time=147.60s
+[self-play:stats] episode 4/12 score_proxy={lawn_green=1200.0, blue=445.0} pins_in_goal={lawn_green=10, blue=3} distance_to_goal={lawn_green=0.0, blue=55.0} moves={lawn_green=213, blue=213}
+[self-play] episode 5/12 players=2 plies=451/3000 terminal_reason=winner winner=red cutoff_hit=False adjudicated=False samples=902 total_samples=4482 score_margin=102.00 time=156.39s
+[self-play:stats] episode 5/12 score_proxy={red=1200.0, gray0=1098.0} pins_in_goal={red=10, gray0=9} distance_to_goal={red=0.0, gray0=2.0} moves={red=226, gray0=225}
+[self-play] episode 6/12 players=2 plies=483/3000 terminal_reason=winner winner=gray0 cutoff_hit=False adjudicated=False samples=966 total_samples=5448 score_margin=857.00 time=166.25s
+[self-play:stats] episode 6/12 score_proxy={gray0=1200.0, purple=343.0} pins_in_goal={gray0=10, purple=2} distance_to_goal={gray0=0.0, purple=57.0} moves={gray0=242, purple=241}
+[train:ep6] epoch 1/1 samples=4096 loss=7.8881 policy=7.7080 value=0.1801 time=0.96s
+[self-play] parallel chunk episodes=7-12 workers=6 device=gpu-server
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=60.0s
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=120.0s
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=180.0s
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=240.0s
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=300.0s
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=360.0s
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=420.0s
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=480.0s
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=540.0s
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=600.0s
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=660.0s
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=720.0s
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=780.0s
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=840.0s
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=900.0s
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=960.0s
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=1020.0s
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=1080.0s
+[self-play:bg7-12] finished episode=12 players=2 plies=3000/3000 terminal_reason=max_moves adjudicated=False completed=1/6 time=1090.69s
+[self-play:bg7-12] finished episode=10 players=2 plies=3000/3000 terminal_reason=max_moves adjudicated=False completed=2/6 time=1100.50s
+[self-play:bg7-12] finished episode=8 players=2 plies=3000/3000 terminal_reason=max_moves adjudicated=False completed=3/6 time=1109.76s
+[self-play:bg7-12] finished episode=11 players=2 plies=3000/3000 terminal_reason=max_moves adjudicated=False completed=4/6 time=1111.54s
+[self-play:bg7-12] finished episode=9 players=2 plies=3000/3000 terminal_reason=max_moves adjudicated=False completed=5/6 time=1115.93s
+[self-play:bg7-12] finished episode=7 players=2 plies=3000/3000 terminal_reason=max_moves adjudicated=False completed=6/6 time=1140.17s
+[self-play] episode 7/12 players=2 plies=3000/3000 terminal_reason=max_moves winner=none cutoff_hit=True adjudicated=False samples=6000 total_samples=11448 score_margin=218.00 time=1140.17s
+[self-play:stats] episode 7/12 score_proxy={lawn_green=372.0, purple=154.0} pins_in_goal={lawn_green=2, purple=0} distance_to_goal={lawn_green=28.0, purple=46.0} moves={lawn_green=1500, purple=1500}
+[self-play] episode 8/12 players=2 plies=3000/3000 terminal_reason=max_moves winner=none cutoff_hit=True adjudicated=False samples=6000 total_samples=17448 score_margin=104.00 time=1109.76s
+[self-play:stats] episode 8/12 score_proxy={red=241.0, blue=345.0} pins_in_goal={red=1, blue=2} distance_to_goal={red=59.0, blue=55.0} moves={red=1500, blue=1500}
+[self-play] episode 9/12 players=2 plies=3000/3000 terminal_reason=max_moves winner=none cutoff_hit=True adjudicated=False samples=6000 total_samples=23448 score_margin=112.00 time=1115.93s
+[self-play:stats] episode 9/12 score_proxy={lawn_green=474.0, yellow=362.0} pins_in_goal={lawn_green=3, yellow=2} distance_to_goal={lawn_green=26.0, yellow=38.0} moves={lawn_green=1500, yellow=1500}
+[self-play] episode 10/12 players=2 plies=3000/3000 terminal_reason=max_moves winner=none cutoff_hit=True adjudicated=False samples=6000 total_samples=29448 score_margin=7.00 time=1100.50s
+[self-play:stats] episode 10/12 score_proxy={red=129.0, blue=136.0} pins_in_goal={red=0, blue=0} distance_to_goal={red=71.0, blue=64.0} moves={red=1500, blue=1500}
+[self-play] episode 11/12 players=2 plies=3000/3000 terminal_reason=max_moves winner=none cutoff_hit=True adjudicated=False samples=6000 total_samples=35448 score_margin=8.00 time=1111.54s
+[self-play:stats] episode 11/12 score_proxy={red=141.0, blue=133.0} pins_in_goal={red=0, blue=0} distance_to_goal={red=59.0, blue=67.0} moves={red=1500, blue=1500}
+[self-play] episode 12/12 players=2 plies=3000/3000 terminal_reason=max_moves winner=none cutoff_hit=True adjudicated=False samples=6000 total_samples=41448 score_margin=123.00 time=1090.69s
+[self-play:stats] episode 12/12 score_proxy={blue=233.0, purple=356.0} pins_in_goal={blue=1, purple=2} distance_to_goal={blue=67.0, purple=44.0} moves={blue=1500, purple=1500}
+[train:final] epoch 1/8 samples=4096 loss=5.6146 policy=5.1636 value=0.4510 time=0.30s
+[train:final] epoch 2/8 samples=4096 loss=5.0789 policy=5.0161 value=0.0628 time=0.29s
+[train:final] epoch 3/8 samples=4096 loss=4.9432 policy=4.9251 value=0.0181 time=0.28s
+[train:final] epoch 4/8 samples=4096 loss=4.8821 policy=4.8736 value=0.0085 time=0.28s
+[train:final] epoch 5/8 samples=4096 loss=4.8364 policy=4.8309 value=0.0055 time=0.28s
+[train:final] epoch 6/8 samples=4096 loss=4.7257 policy=4.7206 value=0.0051 time=0.28s
+[train:final] epoch 7/8 samples=4096 loss=4.6847 policy=4.6802 value=0.0045 time=0.28s
+[train:final] epoch 8/8 samples=4096 loss=4.6395 policy=4.6352 value=0.0043 time=0.29s
+[eval:heuristic] players=2 game=1/1 candidate_colour=red plies=3000/3000 terminal_reason=max_moves winner=none cutoff_hit=True adjudicated=False candidate_win=False candidate_advantage=False score_margin=-464.00 time=111.31s score_proxy={red=126.0, blue=590.0}
+[eval:probe] players=2 game=1/1 candidate_colour=red plies=3000/3000 terminal_reason=max_moves winner=none cutoff_hit=True adjudicated=False candidate_win=False candidate_advantage=True score_margin=1.00 time=148.51s score_proxy={red=123.0, blue=122.0}
+[checkpoint] Cleaned up checkpoint file
+
+=== TRAINING REVIEW ===
+Samples generated : 41448
+Final loss        : 4.6395
+Final policy loss : 4.6352
+Final value loss  : 0.0043
+Train time (sec)  : 1621.05
+Avg epoch (sec)   : 0.36
+Train epochs      : 9
+Model saved to    : checkpoints/alphazero_multi_smoke.pt
+Self-play summary : episodes=12 cutoff_rate=50.0% adjudication_rate=0.0% natural_finish_rate=50.0% avg_plies=1727.0 avg_score_margin=349.7 winners={'red': 2, 'purple': 1, 'gray0': 2, 'lawn green': 1}
+  2p: episodes=12 cutoff_rate=50.0% adjudication_rate=0.0% natural_finish_rate=50.0% avg_plies=1727.0 avg_score_margin=349.7
+Evaluation summary:
+  heuristic: games=1 win_rate=0.0% advantage_rate=0.0% finish_rate=0.0% cutoff_rate=100.0% adjudication_rate=0.0% avg_plies=3000.0 avg_score_margin=-464.0
+    2p: games=1 win_rate=0.0% advantage_rate=0.0% finish_rate=0.0% cutoff_rate=100.0% adjudication_rate=0.0% avg_plies=3000.0 avg_score_margin=-464.0
+  probe: games=1 win_rate=0.0% advantage_rate=100.0% finish_rate=0.0% cutoff_rate=100.0% adjudication_rate=0.0% avg_plies=3000.0 avg_score_margin=1.0
+    2p: games=1 win_rate=0.0% advantage_rate=100.0% finish_rate=0.0% cutoff_rate=100.0% adjudication_rate=0.0% avg_plies=3000.0 avg_score_margin=1.0
+=======================
+=== TRAINING RUN END 2026-05-06T11:29:33 ===

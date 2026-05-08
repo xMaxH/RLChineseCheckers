@@ -17,6 +17,7 @@ from alphazero_multiplayer_method import DEFAULT_MODEL_PATH as DEFAULT_MULTI_MOD
 
 DEFAULT_CREATE_DELAY_SEC = 1.0
 DEFAULT_PLAYER_STAGGER_SEC = 0.5
+DEFAULT_START_DELAY_SEC = 2.0
 
 
 def parse_args() -> argparse.Namespace:
@@ -57,6 +58,36 @@ def parse_args() -> argparse.Namespace:
         type=str,
         default="",
         help="Comma-separated playing methods per player, e.g. random,alphazero,random",
+    )
+    parser.add_argument(
+        "--alpha-mode",
+        choices=("auto", "2p", "multiplayer"),
+        default="auto",
+        help="AlphaZero implementation to use. auto resolves from --players. Default: auto",
+    )
+    parser.add_argument(
+        "--model-path",
+        type=str,
+        default="",
+        help="2-player AlphaZero model path. Sets AZ_MODEL_PATH for this run.",
+    )
+    parser.add_argument(
+        "--multiplayer-model-path",
+        type=str,
+        default="",
+        help="Multiplayer AlphaZero model path. Sets AZ_MP_MODEL_PATH for this run.",
+    )
+    parser.add_argument(
+        "--search-sims",
+        type=int,
+        default=None,
+        help="MCTS simulations per move for both AlphaZero modes.",
+    )
+    parser.add_argument(
+        "--start-delay",
+        type=float,
+        default=DEFAULT_START_DELAY_SEC,
+        help="Seconds to wait after launching players before sending START. Default: 2.0",
     )
     return parser.parse_args()
 
@@ -122,7 +153,15 @@ def main() -> int:
         return 2
 
     alpha_enabled = any(method == "alphazero" for method in player_methods)
-    alpha_mode = "multiplayer" if args.players > 2 else "2-player"
+    alpha_mode = args.alpha_mode
+    if alpha_mode == "auto":
+        alpha_mode = "2p" if args.players <= 2 else "multiplayer"
+    model_path = args.model_path or os.getenv("AZ_MODEL_PATH", str(DEFAULT_2P_MODEL_PATH))
+    multiplayer_model_path = args.multiplayer_model_path or os.getenv(
+        "AZ_MP_MODEL_PATH",
+        str(DEFAULT_MULTI_MODEL_PATH),
+    )
+    search_sims = str(args.search_sims) if args.search_sims is not None else os.getenv("AZ_MCTS_SIMS", "96")
 
     print(
         format_parameter_summary(
@@ -134,6 +173,7 @@ def main() -> int:
                 ("alpha_mode", alpha_mode if alpha_enabled else "n/a"),
                 ("create_delay", args.create_delay),
                 ("player_stagger", args.player_stagger),
+                ("start_delay", args.start_delay),
                 ("debug", args.debug),
             ],
         ),
@@ -145,13 +185,14 @@ def main() -> int:
             format_parameter_summary(
                 "AlphaZero Game Defaults",
                 [
-                    ("num_simulations", os.getenv("AZ_MCTS_SIMS", "96")),
+                    ("player_mode", alpha_mode),
+                    ("num_simulations", search_sims),
                     ("c_puct", os.getenv("AZ_C_PUCT", "1.5")),
                     ("temp_opening", os.getenv("AZ_TEMP_OPENING", "1.0")),
                     ("temp_late", os.getenv("AZ_TEMP_LATE", "0.15")),
                     ("temp_cutoff_move", os.getenv("AZ_TEMP_CUTOFF_MOVE", "20")),
-                    ("model_path", os.getenv("AZ_MODEL_PATH", str(DEFAULT_2P_MODEL_PATH))),
-                    ("multiplayer_model_path", os.getenv("AZ_MP_MODEL_PATH", str(DEFAULT_MULTI_MODEL_PATH))),
+                    ("model_path", model_path),
+                    ("multiplayer_model_path", multiplayer_model_path),
                 ],
             ),
             flush=True,
@@ -167,6 +208,13 @@ def main() -> int:
 
     env = os.environ.copy()
     env["PYTHONUNBUFFERED"] = "1"
+    if alpha_enabled:
+        env["AZ_PLAYER_MODE"] = alpha_mode
+        env["AZ_MODEL_PATH"] = model_path
+        env["AZ_MP_MODEL_PATH"] = multiplayer_model_path
+        if args.search_sims is not None:
+            env["AZ_MCTS_SIMS"] = str(args.search_sims)
+            env["AZ_MP_MCTS_SIMS"] = str(args.search_sims)
     if args.debug:
         env["DEBUG_NET"] = "1"
     else:
@@ -233,11 +281,21 @@ def main() -> int:
             pt.start()
             threads.append(pt)
 
-            # First line answers "Enter name"; second newline pre-answers "Press ENTER to send START...".
-            player.stdin.write(f"Player{i}\n\n")
+            # Answer "Enter name" now. START is sent after all requested players join.
+            player.stdin.write(f"Player{i}\n")
             player.stdin.flush()
             print(f"[launcher] Started player {i} with method '{method}'.")
             time.sleep(args.player_stagger)
+
+        if args.start_delay > 0:
+            print(f"[launcher] Waiting {args.start_delay:.1f}s before START.")
+            time.sleep(args.start_delay)
+
+        for player in processes[1:]:
+            if player.poll() is None and player.stdin:
+                player.stdin.write("\n")
+                player.stdin.flush()
+        print("[launcher] Sent START to all players.")
 
         print("[launcher] Game running. Press Ctrl+C to stop all processes.")
 

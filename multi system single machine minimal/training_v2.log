@@ -1,0 +1,154 @@
+
+=== TRAINING RUN START 2026-05-06T11:33:22 ===
+Command: alphazero_multiplayer_method.py --episodes 50 --max-moves 1000 --num-simulations 32 --train-interval 6 --update-epochs 2 --batch-size 4096 --train-sample-size 8192 --replay-cap 50000 --self-play-workers 6 --player-count-min 2 --player-count-max 2 --inference-server --inference-server-device cuda --train-device cuda --lr 1e-4 --init-model-path checkpoints/alphazero_multi_750_check_ep96.pt --model-path checkpoints/alphazero_multi_v2.pt --log-path training_v2.log --eval-episodes 1 --eval-player-counts 2 --eval-baselines heuristic,probe --eval-num-simulations 8 --fresh
+
+=== AlphaZero Multiplayer Parameters ===
+episodes                              : 50
+train_epochs                          : 8
+batch_size                            : 4096
+lr                                    : 0.0001
+num_simulations                       : 32
+c_puct                                : 1.5
+temp_opening                          : 1.0
+temp_late                             : 0.15
+temp_cutoff_move                      : 20
+adjudicate_stale_moves_per_player     : 160
+adjudicate_min_moves_per_player       : 80
+train_interval                        : 6
+update_epochs                         : 2
+replay_cap                            : 50000
+train_sample_size                     : 8192
+train_device                          : cuda
+background_train_epochs               : 0
+background_train_until_self_play_done : False
+background_train_max_epochs           : 10
+self_play_workers                     : 6
+self_play_device                      : cpu
+worker_torch_threads                  : 1
+chunk_heartbeat_sec                   : 60.0
+inference_server                      : True
+inference_server_device               : cuda
+inference_max_batch                   : 128
+inference_max_wait_ms                 : 4.0
+player_count_min                      : 2
+player_count_max                      : 2
+fixed_player_count                    : None
+max_moves_per_player                  : 1000
+model_path                            : checkpoints/alphazero_multi_v2.pt
+init_model_path                       : checkpoints/alphazero_multi_750_check_ep96.pt
+log_path                              : training_v2.log
+eval_episodes                         : 1
+eval_player_counts                    : 2
+eval_max_moves_per_player             : 1000
+eval_num_simulations                  : 8
+eval_probe_path                       : checkpoints/alphazero_multi_probe.pt
+eval_baselines                        : heuristic,probe
+eval_checkpoint_paths                 : n/a
+eval_checkpoint_pool_size             : 4
+checkpoint_pool_dir                   : checkpoints/arena
+checkpoint_pool_size                  : 8
+arena_interval_epochs                 : 0
+arena_eval_episodes                   : 1
+fresh                                 : True
+quiet                                 : False
+[train] Starting multiplayer AlphaZero self-play training
+[setup] Created shuffled distribution: 50 2p
+[infer-server] started device=cuda max_batch=128 max_wait_ms=4.0 response_queues=6
+[self-play] parallel chunk episodes=1-6 workers=6 device=gpu-server
+[self-play:bg1-6] heartbeat completed=0/6 elapsed=60.0s
+[self-play:bg1-6] heartbeat completed=0/6 elapsed=120.0s
+[self-play:bg1-6] finished episode=3 players=2 plies=418/2000 terminal_reason=winner adjudicated=False completed=1/6 time=146.89s
+[self-play:bg1-6] finished episode=6 players=2 plies=420/2000 terminal_reason=winner adjudicated=False completed=2/6 time=147.69s
+[self-play:bg1-6] finished episode=2 players=2 plies=475/2000 terminal_reason=winner adjudicated=False completed=3/6 time=166.38s
+[self-play:bg1-6] finished episode=1 players=2 plies=636/2000 terminal_reason=winner adjudicated=False completed=4/6 time=213.30s
+[self-play:bg1-6] finished episode=5 players=2 plies=697/2000 terminal_reason=winner adjudicated=False completed=5/6 time=233.75s
+[self-play:bg1-6] finished episode=4 players=2 plies=837/2000 terminal_reason=winner adjudicated=False completed=6/6 time=270.49s
+[self-play] episode 1/50 players=2 plies=636/2000 terminal_reason=winner winner=lawn green cutoff_hit=False adjudicated=False samples=1272 total_samples=1272 score_margin=852.00 time=213.30s
+[self-play:stats] episode 1/50 score_proxy={lawn_green=1200.0, blue=348.0} pins_in_goal={lawn_green=10, blue=2} distance_to_goal={lawn_green=0.0, blue=52.0} moves={lawn_green=318, blue=318}
+[self-play] episode 2/50 players=2 plies=475/2000 terminal_reason=winner winner=blue cutoff_hit=False adjudicated=False samples=950 total_samples=2222 score_margin=308.00 time=166.38s
+[self-play:stats] episode 2/50 score_proxy={lawn_green=892.0, blue=1200.0} pins_in_goal={lawn_green=7, blue=10} distance_to_goal={lawn_green=8.0, blue=0.0} moves={lawn_green=237, blue=238}
+[self-play] episode 3/50 players=2 plies=418/2000 terminal_reason=winner winner=purple cutoff_hit=False adjudicated=False samples=836 total_samples=3058 score_margin=422.00 time=146.89s
+[self-play:stats] episode 3/50 score_proxy={lawn_green=778.0, purple=1200.0} pins_in_goal={lawn_green=6, purple=10} distance_to_goal={lawn_green=22.0, purple=0.0} moves={lawn_green=209, purple=209}
+[self-play] episode 4/50 players=2 plies=837/2000 terminal_reason=winner winner=gray0 cutoff_hit=False adjudicated=False samples=1674 total_samples=4732 score_margin=313.00 time=270.49s
+[self-play:stats] episode 4/50 score_proxy={gray0=1200.0, purple=887.0} pins_in_goal={gray0=10, purple=7} distance_to_goal={gray0=0.0, purple=13.0} moves={gray0=419, purple=418}
+[self-play] episode 5/50 players=2 plies=697/2000 terminal_reason=winner winner=blue cutoff_hit=False adjudicated=False samples=1394 total_samples=6126 score_margin=750.00 time=233.75s
+[self-play:stats] episode 5/50 score_proxy={blue=1200.0, gray0=450.0} pins_in_goal={blue=10, gray0=3} distance_to_goal={blue=0.0, gray0=50.0} moves={blue=349, gray0=348}
+[self-play] episode 6/50 players=2 plies=420/2000 terminal_reason=winner winner=gray0 cutoff_hit=False adjudicated=False samples=840 total_samples=6966 score_margin=749.00 time=147.69s
+[self-play:stats] episode 6/50 score_proxy={red=451.0, gray0=1200.0} pins_in_goal={red=3, gray0=10} distance_to_goal={red=49.0, gray0=0.0} moves={red=210, gray0=210}
+[train:ep6] epoch 1/2 samples=6966 loss=10.5734 policy=9.5892 value=0.9841 time=0.84s
+[train:ep6] epoch 2/2 samples=6966 loss=10.4978 policy=9.5808 value=0.9170 time=0.54s
+[self-play] parallel chunk episodes=7-12 workers=6 device=gpu-server
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=60.0s
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=120.0s
+[self-play:bg7-12] heartbeat completed=0/6 elapsed=180.0s
+[self-play:bg7-12] finished episode=12 players=2 plies=609/2000 terminal_reason=winner adjudicated=False completed=1/6 time=207.92s
+[self-play:bg7-12] finished episode=11 players=2 plies=644/2000 terminal_reason=winner adjudicated=False completed=2/6 time=222.77s
+[self-play:bg7-12] finished episode=9 players=2 plies=676/2000 terminal_reason=winner adjudicated=False completed=3/6 time=233.93s
+[self-play:bg7-12] finished episode=8 players=2 plies=782/2000 terminal_reason=winner adjudicated=False completed=4/6 time=264.88s
+[self-play:bg7-12] finished episode=7 players=2 plies=848/2000 terminal_reason=winner adjudicated=False completed=5/6 time=284.80s
+[self-play:bg7-12] finished episode=10 players=2 plies=907/2000 terminal_reason=winner adjudicated=False completed=6/6 time=298.92s
+[self-play] episode 7/50 players=2 plies=848/2000 terminal_reason=winner winner=gray0 cutoff_hit=False adjudicated=False samples=1696 total_samples=8662 score_margin=641.00 time=284.80s
+[self-play:stats] episode 7/50 score_proxy={red=559.0, gray0=1200.0} pins_in_goal={red=4, gray0=10} distance_to_goal={red=41.0, gray0=0.0} moves={red=424, gray0=424}
+[self-play] episode 8/50 players=2 plies=782/2000 terminal_reason=winner winner=blue cutoff_hit=False adjudicated=False samples=1564 total_samples=10226 score_margin=203.00 time=264.88s
+[self-play:stats] episode 8/50 score_proxy={blue=1200.0, purple=997.0} pins_in_goal={blue=10, purple=8} distance_to_goal={blue=0.0, purple=3.0} moves={blue=391, purple=391}
+[self-play] episode 9/50 players=2 plies=676/2000 terminal_reason=winner winner=gray0 cutoff_hit=False adjudicated=False samples=1352 total_samples=11578 score_margin=535.00 time=233.93s
+[self-play:stats] episode 9/50 score_proxy={yellow=665.0, gray0=1200.0} pins_in_goal={yellow=5, gray0=10} distance_to_goal={yellow=35.0, gray0=0.0} moves={yellow=338, gray0=338}
+[self-play] episode 10/50 players=2 plies=907/2000 terminal_reason=winner winner=blue cutoff_hit=False adjudicated=False samples=1814 total_samples=13392 score_margin=426.00 time=298.92s
+[self-play:stats] episode 10/50 score_proxy={lawn_green=774.0, blue=1200.0} pins_in_goal={lawn_green=6, blue=10} distance_to_goal={lawn_green=26.0, blue=0.0} moves={lawn_green=453, blue=454}
+[self-play] episode 11/50 players=2 plies=644/2000 terminal_reason=winner winner=yellow cutoff_hit=False adjudicated=False samples=1288 total_samples=14680 score_margin=316.00 time=222.77s
+[self-play:stats] episode 11/50 score_proxy={yellow=1200.0, blue=884.0} pins_in_goal={yellow=10, blue=7} distance_to_goal={yellow=0.0, blue=16.0} moves={yellow=322, blue=322}
+[self-play] episode 12/50 players=2 plies=609/2000 terminal_reason=winner winner=gray0 cutoff_hit=False adjudicated=False samples=1218 total_samples=15898 score_margin=850.00 time=207.92s
+[self-play:stats] episode 12/50 score_proxy={lawn_green=350.0, gray0=1200.0} pins_in_goal={lawn_green=2, gray0=10} distance_to_goal={lawn_green=50.0, gray0=0.0} moves={lawn_green=304, gray0=305}
+[train:ep12] epoch 1/2 samples=8192 loss=10.4062 policy=9.5715 value=0.8347 time=0.67s
+[train:ep12] epoch 2/2 samples=8192 loss=10.3229 policy=9.5595 value=0.7634 time=0.65s
+[self-play] parallel chunk episodes=13-18 workers=6 device=gpu-server
+[self-play:bg13-18] heartbeat completed=0/6 elapsed=60.0s
+[self-play:bg13-18] heartbeat completed=0/6 elapsed=120.0s
+[self-play:bg13-18] heartbeat completed=0/6 elapsed=180.0s
+[self-play:bg13-18] finished episode=16 players=2 plies=501/2000 terminal_reason=winner adjudicated=False completed=1/6 time=177.42s
+[self-play:bg13-18] finished episode=13 players=2 plies=565/2000 terminal_reason=winner adjudicated=False completed=2/6 time=199.92s
+[self-play:bg13-18] heartbeat completed=2/6 elapsed=262.7s
+[self-play:bg13-18] finished episode=15 players=2 plies=901/2000 terminal_reason=winner adjudicated=False completed=3/6 time=307.64s
+[self-play:bg13-18] finished episode=18 players=2 plies=951/2000 terminal_reason=winner adjudicated=False completed=4/6 time=322.15s
+[self-play:bg13-18] finished episode=14 players=2 plies=1014/2000 terminal_reason=winner adjudicated=False completed=5/6 time=337.20s
+[self-play:bg13-18] heartbeat completed=5/6 elapsed=400.5s
+[self-play:bg13-18] finished episode=17 players=2 plies=1261/2000 terminal_reason=winner adjudicated=False completed=6/6 time=406.69s
+[self-play] episode 13/50 players=2 plies=565/2000 terminal_reason=winner winner=gray0 cutoff_hit=False adjudicated=False samples=1130 total_samples=17028 score_margin=422.00 time=199.92s
+[self-play:stats] episode 13/50 score_proxy={yellow=778.0, gray0=1200.0} pins_in_goal={yellow=6, gray0=10} distance_to_goal={yellow=22.0, gray0=0.0} moves={yellow=282, gray0=283}
+[self-play] episode 14/50 players=2 plies=1014/2000 terminal_reason=winner winner=gray0 cutoff_hit=False adjudicated=False samples=2028 total_samples=19056 score_margin=841.00 time=337.20s
+[self-play:stats] episode 14/50 score_proxy={lawn_green=359.0, gray0=1200.0} pins_in_goal={lawn_green=2, gray0=10} distance_to_goal={lawn_green=41.0, gray0=0.0} moves={lawn_green=507, gray0=507}
+[self-play] episode 15/50 players=2 plies=901/2000 terminal_reason=winner winner=yellow cutoff_hit=False adjudicated=False samples=1802 total_samples=20858 score_margin=310.00 time=307.64s
+[self-play:stats] episode 15/50 score_proxy={yellow=1200.0, purple=890.0} pins_in_goal={yellow=10, purple=7} distance_to_goal={yellow=0.0, purple=10.0} moves={yellow=451, purple=450}
+[self-play] episode 16/50 players=2 plies=501/2000 terminal_reason=winner winner=gray0 cutoff_hit=False adjudicated=False samples=1002 total_samples=21860 score_margin=1078.00 time=177.42s
+[self-play:stats] episode 16/50 score_proxy={red=122.0, gray0=1200.0} pins_in_goal={red=0, gray0=10} distance_to_goal={red=78.0, gray0=0.0} moves={red=250, gray0=251}
+[self-play] episode 17/50 players=2 plies=1261/2000 terminal_reason=winner winner=gray0 cutoff_hit=False adjudicated=False samples=2522 total_samples=24382 score_margin=1061.00 time=406.69s
+[self-play:stats] episode 17/50 score_proxy={red=139.0, gray0=1200.0} pins_in_goal={red=0, gray0=10} distance_to_goal={red=61.0, gray0=0.0} moves={red=630, gray0=631}
+[self-play] episode 18/50 players=2 plies=951/2000 terminal_reason=winner winner=purple cutoff_hit=False adjudicated=False samples=1902 total_samples=26284 score_margin=641.00 time=322.15s
+[self-play:stats] episode 18/50 score_proxy={lawn_green=559.0, purple=1200.0} pins_in_goal={lawn_green=4, purple=10} distance_to_goal={lawn_green=41.0, purple=0.0} moves={lawn_green=475, purple=476}
+[train:ep18] epoch 1/2 samples=8192 loss=10.1932 policy=9.5433 value=0.6499 time=0.61s
+[train:ep18] epoch 2/2 samples=8192 loss=10.1073 policy=9.5229 value=0.5844 time=0.59s
+[self-play] parallel chunk episodes=19-24 workers=6 device=gpu-server
+[self-play:bg19-24] heartbeat completed=0/6 elapsed=60.0s
+[self-play:bg19-24] heartbeat completed=0/6 elapsed=120.0s
+[self-play:bg19-24] finished episode=23 players=2 plies=373/2000 terminal_reason=winner adjudicated=False completed=1/6 time=129.90s
+[self-play:bg19-24] finished episode=19 players=2 plies=376/2000 terminal_reason=winner adjudicated=False completed=2/6 time=132.57s
+[self-play:bg19-24] finished episode=20 players=2 plies=527/2000 terminal_reason=winner adjudicated=False completed=3/6 time=179.80s
+[self-play:bg19-24] finished episode=21 players=2 plies=533/2000 terminal_reason=winner adjudicated=False completed=4/6 time=186.20s
+[self-play:bg19-24] finished episode=22 players=2 plies=568/2000 terminal_reason=winner adjudicated=False completed=5/6 time=192.61s
+[self-play:bg19-24] finished episode=24 players=2 plies=569/2000 terminal_reason=winner adjudicated=False completed=6/6 time=192.95s
+[self-play] episode 19/50 players=2 plies=376/2000 terminal_reason=winner winner=blue cutoff_hit=False adjudicated=False samples=752 total_samples=27036 score_margin=413.00 time=132.57s
+[self-play:stats] episode 19/50 score_proxy={yellow=787.0, blue=1200.0} pins_in_goal={yellow=6, blue=10} distance_to_goal={yellow=13.0, blue=0.0} moves={yellow=188, blue=188}
+[self-play] episode 20/50 players=2 plies=527/2000 terminal_reason=winner winner=blue cutoff_hit=False adjudicated=False samples=1054 total_samples=28090 score_margin=1061.00 time=179.80s
+[self-play:stats] episode 20/50 score_proxy={red=139.0, blue=1200.0} pins_in_goal={red=0, blue=10} distance_to_goal={red=61.0, blue=0.0} moves={red=263, blue=264}
+[self-play] episode 21/50 players=2 plies=533/2000 terminal_reason=winner winner=blue cutoff_hit=False adjudicated=False samples=1066 total_samples=29156 score_margin=1061.00 time=186.20s
+[self-play:stats] episode 21/50 score_proxy={red=139.0, blue=1200.0} pins_in_goal={red=0, blue=10} distance_to_goal={red=61.0, blue=0.0} moves={red=266, blue=267}
+[self-play] episode 22/50 players=2 plies=568/2000 terminal_reason=winner winner=blue cutoff_hit=False adjudicated=False samples=1136 total_samples=30292 score_margin=1054.00 time=192.61s
+[self-play:stats] episode 22/50 score_proxy={lawn_green=146.0, blue=1200.0} pins_in_goal={lawn_green=0, blue=10} distance_to_goal={lawn_green=54.0, blue=0.0} moves={lawn_green=284, blue=284}
+[self-play] episode 23/50 players=2 plies=373/2000 terminal_reason=winner winner=blue cutoff_hit=False adjudicated=False samples=746 total_samples=31038 score_margin=204.00 time=129.90s
+[self-play:stats] episode 23/50 score_proxy={blue=1200.0, gray0=996.0} pins_in_goal={blue=10, gray0=8} distance_to_goal={blue=0.0, gray0=4.0} moves={blue=187, gray0=186}
+[self-play] episode 24/50 players=2 plies=569/2000 terminal_reason=winner winner=purple cutoff_hit=False adjudicated=False samples=1138 total_samples=32176 score_margin=1064.00 time=192.95s
+[self-play:stats] episode 24/50 score_proxy={lawn_green=136.0, purple=1200.0} pins_in_goal={lawn_green=0, purple=10} distance_to_goal={lawn_green=64.0, purple=0.0} moves={lawn_green=284, purple=285}
+[train:ep24] epoch 1/2 samples=8192 loss=10.0238 policy=9.4970 value=0.5268 time=0.61s
+[train:ep24] epoch 2/2 samples=8192 loss=9.9432 policy=9.4655 value=0.4777 time=0.63s
+[self-play] parallel chunk episodes=25-30 workers=6 device=gpu-server
+=== TRAINING RUN END 2026-05-06T11:54:35 ===
