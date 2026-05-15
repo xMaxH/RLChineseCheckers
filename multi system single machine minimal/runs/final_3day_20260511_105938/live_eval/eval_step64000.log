@@ -1,0 +1,26 @@
+
+[eval] loading candidate: runs/final_3day_20260511_105938/snapshots/snap_step64000.pt
+[eval] candidate  2p win=83.3% margin=    949 max= 0.0% pool=100.0%
+[eval] candidate  3p win=75.0% margin=    586 max= 0.0% pool=100.0%
+[eval] candidate  4p win=50.0% margin=    -15 max= 0.0% pool=100.0%
+[eval] candidate  5p win=33.3% margin=   -386 max= 0.0% pool=100.0%
+[eval] candidate  6p win=25.0% margin=   -620 max= 0.0% pool=100.0%
+
+[eval] loading baseline: runs/final_reranker_pilot_12h_20260510_195708/final.pt
+[eval] baseline   2p win=90.0% margin=   1034 max= 0.0% pool=100.0%
+[eval] baseline   3p win=75.0% margin=    597 max= 0.0% pool=100.0%
+[eval] baseline   4p win=55.0% margin=    135 max= 0.0% pool=100.0%
+[eval] baseline   5p win=25.0% margin=   -611 max= 0.0% pool=100.0%
+[eval] baseline   6p win=25.0% margin=   -610 max= 0.0% pool=100.0%
+
+==================================================================================
+COUNT   CAND WIN  BASE WIN    DELTA    CAND M    BASE M   DELTA M
+----------------------------------------------------------------------------------
+2p        83.3%    90.0%   -6.7%       949      1034       -85
+3p        75.0%    75.0%   +0.0%       586       597       -11
+4p        50.0%    55.0%   -5.0%       -15       135      -151
+5p        33.3%    25.0%   +8.3%      -386      -611      +225
+6p        25.0%    25.0%   +0.0%      -620      -610        -9
+==================================================================================
+candidate_score=36.50
+baseline_score=34.94 delta=+1.56

@@ -1,0 +1,98 @@
+{
+  "candidate": {
+    "label": "candidate",
+    "ckpt": "runs/final_3day_20260511_105938/snapshots/snap_step52000.pt",
+    "step": 52000,
+    "rows": {
+      "2": {
+        "games": 30,
+        "win_rate": 0.9666666666666667,
+        "margin": 1243.0482900531133,
+        "exact": 0.48379078735183756,
+        "pool": 1.0,
+        "max_moves_pct": 0.0
+      },
+      "3": {
+        "games": 20,
+        "win_rate": 0.6,
+        "margin": 276.5217861957543,
+        "exact": 0.4774464909260104,
+        "pool": 1.0,
+        "max_moves_pct": 0.0
+      },
+      "4": {
+        "games": 20,
+        "win_rate": 0.7,
+        "margin": 455.0885157696487,
+        "exact": 0.5313504960698757,
+        "pool": 1.0,
+        "max_moves_pct": 0.0
+      },
+      "5": {
+        "games": 12,
+        "win_rate": 0.5,
+        "margin": -51.96645822602077,
+        "exact": 0.5536278301069819,
+        "pool": 1.0,
+        "max_moves_pct": 0.0
+      },
+      "6": {
+        "games": 12,
+        "win_rate": 0.5,
+        "margin": -25.787481357360093,
+        "exact": 0.6014104942676372,
+        "pool": 1.0,
+        "max_moves_pct": 0.0
+      }
+    }
+  },
+  "baseline": {
+    "label": "baseline",
+    "ckpt": "runs/final_reranker_pilot_12h_20260510_195708/final.pt",
+    "step": null,
+    "rows": {
+      "2": {
+        "games": 30,
+        "win_rate": 0.9,
+        "margin": 1033.9432143798147,
+        "exact": 0.47557822760569185,
+        "pool": 1.0,
+        "max_moves_pct": 0.0
+      },
+      "3": {
+        "games": 20,
+        "win_rate": 0.75,
+        "margin": 597.1445733600871,
+        "exact": 0.47709930971605197,
+        "pool": 1.0,
+        "max_moves_pct": 0.0
+      },
+      "4": {
+        "games": 20,
+        "win_rate": 0.55,
+        "margin": 135.38337100622266,
+        "exact": 0.5323464333040476,
+        "pool": 1.0,
+        "max_moves_pct": 0.0
+      },
+      "5": {
+        "games": 12,
+        "win_rate": 0.25,
+        "margin": -610.8156192701446,
+        "exact": 0.5298011387705117,
+        "pool": 1.0,
+        "max_moves_pct": 0.0
+      },
+      "6": {
+        "games": 12,
+        "win_rate": 0.25,
+        "margin": -610.3964902867816,
+        "exact": 0.5535271551061024,
+        "pool": 1.0,
+        "max_moves_pct": 0.0
+      }
+    }
+  },
+  "candidate_score": 64.9161949396725,
+  "baseline_score": 34.9394274643801
+}

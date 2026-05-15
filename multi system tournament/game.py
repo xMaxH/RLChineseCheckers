@@ -403,8 +403,10 @@ class Session:
         with self.lock:
             # Filter rows where player_name is in any of the player columns and status is GAME_CREATED or WAITING_FOR_OTHER_PLAYER and player has not already joined the game (to prevent joining multiple times if player refreshes)
             candidate_rows = self.round_df[
-                (self.round_df[['player1', 'player2', 'player3', 'player4', 'player5', 'player6'].apply(lambda row: player_name in row.values, axis=1)) &
-                (self.round_df['status'].isin(['GAME_CREATED', 'WAITING_FOR_OTHER_PLAYER'])) ]
+                self.round_df[['player1', 'player2', 'player3', 'player4', 'player5', 'player6']]
+                .apply(lambda row: player_name in row.values, axis=1)
+                & self.round_df['status'].isin(['GAME_CREATED', 'WAITING_FOR_OTHER_PLAYER'])
+            ]
             for row in candidate_rows.itertuples():
                 candidate_game_id = row.game_id
                 candidate_game_players = self.games[candidate_game_id].players
