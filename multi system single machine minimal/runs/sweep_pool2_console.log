@@ -1,0 +1,37 @@
+[alphazero_method] loaded /home/coder/IKT460/RLChineseCheckers/multi system single machine minimal/runs/best.pt on cuda
+# ROOT-ONLY MCTS_POOL SWEEP — started 2026-05-19 16:45:39
+
+## 1. REFERENCE  value_rollout
+  value_rollout 2p | winrate=0.950 (38/40)
+  value_rollout 4p | winrate=0.675 (27/40)
+  value_rollout 6p | winrate=0.500 (16/32)
+  value_rollout avg = 0.708
+
+## 2. ROOT-ONLY MCTS_POOL  (n_sim sweep)
+  root-only n_sim= 400 2p | winrate=0.875 (35/40) finished=40 maxmoves=0 | move_s mean=0.30 p95=0.41 max=0.57 | 681s
+  root-only n_sim= 400 4p | winrate=0.425 (17/40) finished=40 maxmoves=0 | move_s mean=0.33 p95=0.46 max=0.77 | 591s
+  root-only n_sim= 400 6p | winrate=0.312 (10/32) finished=32 maxmoves=0 | move_s mean=0.36 p95=0.48 max=0.77 | 450s
+
+  root-only n_sim= 600 2p | winrate=0.875 (35/40) finished=40 maxmoves=0 | move_s mean=0.48 p95=0.69 max=1.00 | 1063s
+  root-only n_sim= 600 4p | winrate=0.550 (22/40) finished=40 maxmoves=0 | move_s mean=0.52 p95=0.70 max=0.94 | 934s
+  root-only n_sim= 600 6p | winrate=0.125 (4/32) finished=32 maxmoves=0 | move_s mean=0.54 p95=0.70 max=0.91 | 666s
+
+  root-only n_sim= 800 2p | winrate=0.950 (38/40) finished=40 maxmoves=0 | move_s mean=0.65 p95=0.96 max=1.30 | 1411s
+  root-only n_sim= 800 4p | winrate=0.550 (22/40) finished=40 maxmoves=0 | move_s mean=0.71 p95=0.95 max=1.29 | 1258s
+  root-only n_sim= 800 6p | winrate=0.281 (9/32) finished=32 maxmoves=0 | move_s mean=0.74 p95=0.97 max=1.28 | 922s
+
+## 3. PICK  (strongest with worst-case move < 1.7s)
+   n_sim= 400 | avg winrate=0.537 | worst move=0.77s OK
+   n_sim= 600 | avg winrate=0.517 | worst move=1.00s OK
+   n_sim= 800 | avg winrate=0.594 | worst move=1.30s OK
+
+## 4. DEPLOY
+   DEPLOYED root-only mcts_pool n_sim=800  avg winrate=0.594  (value_rollout 0.708, gap +0.115)
+
+## 5. VERIFY
+   n_sim=800 2p: winrate=0.957 (67/70) finished=69 maxmoves=1 | move_s mean=0.67 p95=0.96 max=1.24 | 2656s
+   n_sim=800 4p: winrate=0.417 (25/60) finished=60 maxmoves=0 | move_s mean=0.68 p95=0.90 max=1.17 | 1796s
+   n_sim=800 6p: winrate=0.420 (21/50) finished=50 maxmoves=0 | move_s mean=0.70 p95=0.94 max=1.30 | 1353s
+
+# DONE  2026-05-19 20:47:58
+POOL2 SWEEP DONE

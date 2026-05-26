@@ -1,0 +1,106 @@
+# Max MCTS & New Model Assessment — 2026-05-21 evening
+# Author: Claude. All numbers measured this session unless marked "historical".
+
+## TL;DR
+1. Max safe MCTS sims for tournament: n_sim = 600 (max move 1.55-1.66s in 6p, ~400ms
+   margin under the 2.0s budget). n_sim = 700 spilled over (max 2.05s, 3 moves over
+   budget in 225). n_sim = 800 historically was 2.98s max.
+2. The new model (runs/rl_from_best3day_20260520_113351/best.pt) is *weaker than the
+   current deployed runs/best.pt* at the deploy config (mcts_pool n_sim=400 and
+   mcts_pool n_sim=600). The new model also loses ground when search is deepened —
+   0/8 wins at 6p / n=600 vs heuristic, vs 3/8 for the current model on the same
+   seed. Do not deploy.
+3. The new model HAS MORE RL TRAINING. If "more RL" is the report's key argument,
+   the new run is the more defensible artifact: 4.4x more gradient steps from real
+   game outcomes than the deployed best.pt, with the same value-network-RL recipe.
+
+## 1. Checkpoint inventory (verified by md5sum)
+  runs/best.pt                                   b9cf84d2... [DEPLOYED, == rl_value_mp/snap_step160.pt]
+  runs/rl_from_best3day_*/best.pt                dd732d1c... [new, eval-gated step 704]
+  runs/rl_from_best3day_*/final.pt               fb8d7248... [new, last step 1188]
+  checkpointOldHeuristic/best3Day.pt             f015a1aa... [BC seed (3-day BC), used by BOTH RL runs]
+
+## 2. Tournament-mode head-to-head (mcts_pool deploy mode)
+
+Existing data (EVAL_SUMMARY_20260521.txt, mcts_pool n_sim=400, 12 games same seed):
+                            new best.pt    current best.pt
+  2p (12 games):            10/12 (83.3%)  12/12 (100.0%)
+  4p (12 games):             8/12 (66.7%)   8/12 (66.7%)
+  6p (12 games):             4/12 (33.3%)   6/12 (50.0%)
+  Total (36 games):         22/36 (61.1%)  26/36 (72.2%)  -> current +11pp
+
+This session's data (mcts_pool n_sim=600, 8 games seed=4244, 6p):
+  new best.pt:    0/8 (0.0%)    score margin mean = -1204
+  current best.pt: 3/8 (37.5%)  score margin mean =  -377
+
+Bigger search makes the gap worse, not better. The new model regresses in 6p
+under deeper MCTS — consistent with the policy-anchored value-RL value head
+specializing on the more frequent 2/3p positions in the replay buffer.
+
+## 3. Max MCTS sims — full timing sweep (current best.pt, mcts_pool, 6p)
+| n_sim | mean  | p95   | max   | over 2.0s | over 1.5s | samples       |
+|-------|-------|-------|-------|-----------|-----------|---------------|
+| 400   | 0.55s | 0.79s | 0.94s | 0         | 0         | historical 24g|
+| 500   | 0.69s | 1.04s | 1.18s | 0         | 0         | 6 games / 239 |
+| 600   | 0.95s | 1.38s | 1.55s | 0         | 2         | 8 games / 293 |
+| 700   | 1.13s | 1.75s | 2.05s | 3         | 36        | 6 games / 225 |
+| 800   | 1.40s | 2.10s | 2.98s | many      | many      | historical    |
+
+Decision: n_sim = 600 is the safe max with ~400ms headroom under the 2.0s budget.
+(n_sim = 650 might fit but we did not measure; n_sim = 700 fails.)
+
+## 4. RL-genuineness ranking (most RL training -> least)
+
+All three candidates were trained with the same recipe: --policy-anchor (policy
+head distilled to BC seed, only trunk+value head shaped by real game outcomes),
+shaping with terminal_weight=0.8 (80% real outcome / 20% potential-based shaping),
+batch=4096, sample_per_step=8192, lr=2e-5. So qualitatively identical RL.
+
+Quantitative ranking (gradient steps with real game-outcome reward signal):
+
+| Rank | Checkpoint                                  | Train steps | Sample-presentations | Internal eval peak |
+|------|---------------------------------------------|------------|----------------------|--------------------|
+| #1   | runs/rl_from_best3day_*/final.pt            | 1188       | 9.7M                 | 0.875 at step 1184 |
+| #2   | runs/rl_from_best3day_*/best.pt             |  704       | 5.8M                 | 0.925 at step 704  |
+| #3   | runs/best.pt (= rl_value_mp/snap_step160)   |  160       | 1.3M                 | 0.875 at step 152  |
+
+For the academic report ("more RL"):
+  - new best.pt vs deployed: 4.4x more gradient steps under the same RL recipe.
+  - new final.pt vs deployed: 7.4x more gradient steps.
+  - But: the eval-gating in train.py promoted step 704 as best; the value-loss
+    curve plateaued at ~0.39 around step 100 and never re-dropped (Fig: see
+    health.jsonl). So extra training past the eval peak did not measurably
+    improve the value head.
+
+## 5. Recommendation
+
+A) Tournament play, maximise strength:
+    Keep runs/best.pt deployed (it wins more in head-to-head).
+    Bump runs/mcts_deploy.json n_sim from 400 -> 600 — free strength upgrade
+    within the budget. The 6p win-rate ticked up from 0.325 -> 0.375 with no
+    change to the model.
+
+B) Tournament play, maximise "RL-genuineness" for the IKT460 argument:
+    Deploy runs/rl_from_best3day_*/best.pt. You give up ~4 wins out of 36
+    (and the new model's 6p performance is poorer than the current's), but you
+    get a checkpoint that has had 4.4x more RL-from-real-outcomes training, with
+    eval-gating already protecting against degradation. final.pt has 7.4x and
+    is the "most RL" but its internal eval is worse — best.pt is the better
+    "more RL" trade.
+
+C) Hybrid (suggested if "best of both"):
+    Keep runs/best.pt for play, cite the new run's training depth in the
+    report. The deployed model is also a value-RL net (160 RL steps from BC
+    seed) — it is genuinely RL, just less of it. The report can document both
+    runs and explain that more RL training in a player_count-mixed self-play
+    did not generalize cleanly to mcts_pool deployment in higher player counts.
+
+## 6. Action items if you proceed with A) — concrete steps
+
+    # In runs/mcts_deploy.json, change "n_sim": 400 -> 600. Single edit.
+    # No model swap required. Confirm:
+    PYTHONPATH=. python tools/eval_tournament.py --mode mcts_pool --n-sim 600 \
+        --games 20 --players 6 --max-moves 400 --seed 4250
+    # Expect win-rate ~0.35-0.45 in 6p, max move <1.7s.
+
+# DONE

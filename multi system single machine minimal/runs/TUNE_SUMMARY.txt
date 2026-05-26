@@ -1,0 +1,25 @@
+# VALUE_ROLLOUT TUNING SWEEP — started 2026-05-19 10:17:01
+# agent: heuristic proposes the move pool; RL value net ranks; rollouts confirm
+
+## 1. SWEEP  (win-rate vs heuristic)
+  topk= 3 rollouts=2 2p | winrate=0.833 (50/60) finished=60 maxmoves=0 margin=854 | move_s mean=0.12 p95=0.30 max=0.50 | 409s
+  topk= 3 rollouts=2 4p | winrate=0.583 (35/60) finished=60 maxmoves=0 margin=182 | move_s mean=0.15 p95=0.45 max=0.55 | 393s
+  topk= 3 rollouts=2 6p | winrate=0.220 (11/50) finished=50 maxmoves=0 margin=-669 | move_s mean=0.18 p95=0.58 max=0.70 | 360s
+
+  topk= 5 rollouts=2 2p | winrate=0.933 (56/60) finished=59 maxmoves=1 margin=1180 | move_s mean=0.16 p95=0.47 max=0.73 | 572s
+  topk= 5 rollouts=2 4p | winrate=0.650 (39/60) finished=60 maxmoves=0 margin=359 | move_s mean=0.20 p95=0.74 max=0.95 | 512s
+  topk= 5 rollouts=2 6p | winrate=0.560 (28/50) finished=50 maxmoves=0 margin=111 | move_s mean=0.24 p95=0.93 max=1.12 | 479s
+
+  topk= 8 rollouts=1 2p | winrate=0.883 (53/60) finished=59 maxmoves=1 margin=1056 | move_s mean=0.12 p95=0.36 max=0.75 | 420s
+  topk= 8 rollouts=1 4p | winrate=0.667 (40/60) finished=60 maxmoves=0 margin=391 | move_s mean=0.13 p95=0.49 max=0.76 | 350s
+  topk= 8 rollouts=1 6p | winrate=0.500 (25/50) finished=50 maxmoves=0 margin=-33 | move_s mean=0.15 p95=0.59 max=0.90 | 300s
+
+  topk=12 rollouts=1 2p | winrate=0.817 (49/60) finished=59 maxmoves=1 margin=882 | move_s mean=0.13 p95=0.42 max=0.77 | 455s
+  topk=12 rollouts=1 4p | winrate=0.567 (34/60) finished=60 maxmoves=0 margin=143 | move_s mean=0.15 p95=0.54 max=0.87 | 394s
+  topk=12 rollouts=1 6p | winrate=0.420 (21/50) finished=50 maxmoves=0 margin=-212 | move_s mean=0.15 p95=0.60 max=1.08 | 301s
+
+  topk= 5 rollouts=3 2p | winrate=0.933 (56/60) finished=60 maxmoves=0 margin=1181 | move_s mean=0.22 p95=0.70 max=1.00 | 738s
+  topk= 5 rollouts=3 4p | winrate=0.700 (42/60) finished=60 maxmoves=0 margin=471 | move_s mean=0.29 p95=1.09 max=1.29 | 750s
+  topk= 5 rollouts=3 6p | winrate=0.520 (26/50) finished=50 maxmoves=0 margin=29 | move_s mean=0.35 p95=1.37 max=1.76 | 685s
+
+  topk= 8 rollouts=2 2p | winrate=0.900 (54/60) finished=59 maxmoves=1 margin=1117 | move_s mean=0.20 p95=0.62 max=1.19 | 688s

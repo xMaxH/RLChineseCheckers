@@ -1,0 +1,28 @@
+RUN: rl_from_best3day_20260520_113351
+SEED: checkpointOldHeuristic/best3Day.pt
+ACTIVE TOURNAMENT BASELINE: runs/best.pt
+
+Monitor:
+  tmux attach -t rl_best3day_20260520_113351
+  tail -F runs/rl_from_best3day_20260520_113351/progress.log
+  tail -F runs/rl_from_best3day_20260520_113351/health.jsonl
+
+Stop safely if needed:
+  tmux send-keys -t rl_best3day_20260520_113351 C-c
+
+Compare the trained checkpoint against the current deployed checkpoint:
+  PYTHONPATH=. python tools/eval_checkpoint_sweep.py \
+    --ckpt runs/rl_from_best3day_20260520_113351/best.pt \
+    --baseline-ckpt runs/best.pt \
+    --games 2:30,3:20,4:20,5:12,6:12 \
+    --out runs/rl_from_best3day_20260520_113351/compare_vs_current.json
+
+Test tournament-style MCTS_POOL timing/strength with the candidate checkpoint:
+  ALPHAZERO_CKPT=runs/rl_from_best3day_20260520_113351/best.pt \
+  PYTHONPATH=. python tools/eval_tournament.py \
+    --mode mcts_pool --n-sim 400 --games 12 --players 4 --max-moves 500
+
+Deploy only after evaluation:
+  cp runs/best.pt runs/best_before_rl_from_best3day_20260520_113351.pt
+  cp runs/rl_from_best3day_20260520_113351/best.pt runs/best.pt
+  cp runs/best.pt "../multi system tournament/runs/best.pt"

@@ -1,6 +1,0 @@
-game_number,game_id,player1,player2,player3,player4,player5,player6,status,final_scores,time_scores,distance_scores,pin_scores,winner
-R2G1,NA,RL,The bandits,Group 7,Hexagram,NA,NA,NOT_CREATED,NA,NA,NA,NA,None
-R2G2,NA,Gruppe 69,Group 16,LosTurcos,group 99,Gruppe 10,NA,NOT_CREATED,NA,NA,NA,NA,None
-R2G3,NA,SP,Gruppe 2,Dandori,Tiefes Verstarkendes Lernen,Gruppe 67,S&S,NOT_CREATED,NA,NA,NA,NA,None
-R2G4,NA,Deepseekers,jat,NA,NA,NA,NA,NOT_CREATED,NA,NA,NA,NA,None
-R2G5,NA,CybSec,PCS,Erlend Og Linor,NA,NA,NA,NOT_CREATED,NA,NA,NA,NA,None

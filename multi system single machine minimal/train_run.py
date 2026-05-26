@@ -75,12 +75,53 @@ def main():
     # Self-play
     p.add_argument("--games-per-chunk", type=int, default=10)
     p.add_argument("--bootstrap-chunks", type=int, default=8,
-                   help="First N chunks use heuristic-clone bootstrap (cold start)")
+                   help="First N cold-start chunks. With --shaping: Phi-only-leaf "
+                        "MCTS (genuine self-play that races pins, no imitation). "
+                        "Without --shaping: legacy heuristic-clone BC bootstrap.")
+    p.add_argument("--no-auto-bootstrap", action="store_true",
+                   help="Disable the cold-start bootstrap fallback. Use this for "
+                        "warm-started RL fine-tuning when bootstrap-chunks=0 "
+                        "must enter MCTS self-play immediately.")
     p.add_argument("--candidate-frac", type=float, default=0.5)
     p.add_argument("--heuristic-frac", type=float, default=0.25)
     p.add_argument("--snapshot-frac", type=float, default=0.25)
     p.add_argument("--snapshot-pool-size", type=int, default=10)
     p.add_argument("--snapshot-every-train-steps", type=int, default=5)
+    p.add_argument("--may10-ckpt", default=None,
+                   help="Frozen opponent model (e.g. runs/best.pt). Fills 'may10' "
+                        "opponent slots so games reach terminal states. The learner "
+                        "trains only on its own search — May-10 is environment, "
+                        "never a policy target.")
+    p.add_argument("--may10-frac", type=float, default=0.0,
+                   help="Fraction of slots filled by the May-10 opponent model. "
+                        "0 disables it; ~0.3 for genuine-RL runs.")
+
+    # Reward shaping (genuine-RL value targets — see az/shaping.py)
+    p.add_argument("--shaping", dest="shaping_enabled", action="store_true",
+                   help="Enable potential-based progress shaping: the value target "
+                        "becomes T_c + Phi_end - Phi_now, a dense signal that "
+                        "un-sticks the value head without imitation.")
+    p.add_argument("--no-shaping", dest="shaping_enabled", action="store_false")
+    p.set_defaults(shaping_enabled=False)
+    p.add_argument("--shaping-scale", type=float, default=0.15,
+                   help="Max magnitude of the progress potential Phi. Keep <=0.15 "
+                        "so shaped targets stay inside the tanh value head range.")
+    p.add_argument("--shaping-goal-weight", type=float, default=0.5,
+                   help="Weight of pins-in-goal vs goal-distance inside Phi (0..1).")
+    p.add_argument("--terminal-weight", type=float, default=1.0,
+                   help="Magnitude of the real win/loss reward. Use ~0.8 with "
+                        "--shaping so terminal + shaping stays within (-1, 1).")
+    p.add_argument("--value-head-only", action="store_true",
+                   help="RL-train ONLY the value head; freeze the trunk + policy "
+                        "head so the MCTS policy prior stays byte-identical to "
+                        "the seed model and cannot degrade. Use for value-network "
+                        "RL fine-tuning of a strong supervised checkpoint.")
+    p.add_argument("--policy-anchor", action="store_true",
+                   help="Value-network RL: RL-train the trunk + value head on real "
+                        "game outcomes while distilling the policy head to the "
+                        "frozen seed policy every step. Lets the value network "
+                        "genuinely learn (trunk can adapt) without the AlphaZero "
+                        "policy-iteration collapse.")
     p.add_argument("--dagger-in-bootstrap", action="store_true",
                    help="During bootstrap, let the candidate play its greedy policy "
                         "while recording heuristic labels. Default is pure BC: "
@@ -136,6 +177,7 @@ def main():
         candidate_slot_frac=args.candidate_frac,
         heuristic_slot_frac=args.heuristic_frac,
         snapshot_slot_frac=args.snapshot_frac,
+        may10_slot_frac=args.may10_frac,
         snapshot_pool_size=args.snapshot_pool_size,
         snapshot_every_train_steps=args.snapshot_every_train_steps,
         dagger_in_bootstrap=args.dagger_in_bootstrap,
@@ -171,7 +213,11 @@ def main():
     device = torch.device(args.device)
     print(f"[launch] stage={stage_name} out={args.out} hours={args.hours} "
           f"player_counts={args.player_counts} weights={weights} "
-          f"bootstrap_chunks={args.bootstrap_chunks} device={device}")
+          f"bootstrap_chunks={args.bootstrap_chunks} "
+          f"auto_bootstrap={not args.no_auto_bootstrap} device={device}")
+    print(f"[launch] shaping={args.shaping_enabled} scale={args.shaping_scale} "
+          f"terminal_weight={args.terminal_weight} "
+          f"may10_ckpt={args.may10_ckpt} may10_frac={args.may10_frac}")
     train_one_stage(
         stage, args.out,
         seed_ckpt=args.seed_ckpt,
@@ -181,6 +227,14 @@ def main():
         max_chunks=args.max_chunks,
         num_workers=args.num_workers,
         mcts_sims=args.mcts_sims,
+        auto_bootstrap=not args.no_auto_bootstrap,
+        may10_ckpt=args.may10_ckpt,
+        shaping_enabled=args.shaping_enabled,
+        shaping_scale=args.shaping_scale,
+        shaping_goal_weight=args.shaping_goal_weight,
+        terminal_weight=args.terminal_weight,
+        value_head_only=args.value_head_only,
+        policy_anchor=args.policy_anchor,
     )
 
 

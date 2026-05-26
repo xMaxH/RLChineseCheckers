@@ -1,0 +1,18 @@
+cd "/home/coder/IKT460/RLChineseCheckers/multi system single machine minimal"
+python train_run.py \
+  --out "runs/rl_from_best3day_20260520_113351" \
+  --name "rl_from_best3day_20260520_113351" \
+  --hours 30 \
+  --seed-ckpt checkpointOldHeuristic/best3Day.pt \
+  --policy-anchor --shaping --terminal-weight 0.8 \
+  --num-workers 5 --mcts-sims 500 \
+  --bootstrap-chunks 0 --no-auto-bootstrap \
+  --player-counts 2,3,4,5,6 \
+  --player-weights 0.3,0.2,0.2,0.15,0.15 \
+  --games-per-chunk 20 \
+  --max-moves-2p 200 --max-moves-multi 600 \
+  --lr 2e-5 --batch-size 4096 --sample-per-step 8192 \
+  --min-train-steps 4 --entropy-bonus 0.0 \
+  --replay-capacity 300000 \
+  --min-samples-to-train 8000 \
+  --eval-every-steps 32

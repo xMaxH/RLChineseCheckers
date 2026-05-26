@@ -1,0 +1,39 @@
+[alphazero_method] loaded /home/coder/IKT460/RLChineseCheckers/multi system single machine minimal/runs/best.pt on cuda
+# MCTS_POOL SWEEP — started 2026-05-19 12:30:30
+# mcts_pool = AlphaZero MCTS over the heuristic candidate pool; RL value net evaluates leaves
+
+## 1. REFERENCE  value_rollout (vs heuristic)
+  value_rollout 2p | winrate=1.000 (36/36) | move_s max=0.42
+  value_rollout 4p | winrate=0.700 (21/30) | move_s max=0.58
+  value_rollout 6p | winrate=0.542 (13/24) | move_s max=0.71
+  value_rollout avg win-rate = 0.747
+
+## 2. MCTS_POOL  (n_sim sweep, vs heuristic)
+  mcts_pool n_sim= 200 2p | winrate=0.917 (33/36) finished=35 maxmoves=1 margin=1110 | move_s mean=0.18 p95=0.23 max=0.35 | 393s
+  mcts_pool n_sim= 200 4p | winrate=0.367 (11/30) finished=29 maxmoves=1 margin=-301 | move_s mean=0.21 p95=0.30 max=0.41 | 317s
+  mcts_pool n_sim= 200 6p | winrate=0.167 (4/24) finished=24 maxmoves=0 margin=-815 | move_s mean=0.22 p95=0.31 max=0.40 | 214s
+
+  mcts_pool n_sim= 400 2p | winrate=0.972 (35/36) finished=35 maxmoves=1 margin=1284 | move_s mean=0.43 p95=0.60 max=0.77 | 909s
+  mcts_pool n_sim= 400 4p | winrate=0.667 (20/30) finished=30 maxmoves=0 margin=340 | move_s mean=0.52 p95=0.77 max=0.94 | 703s
+  mcts_pool n_sim= 400 6p | winrate=0.333 (8/24) finished=24 maxmoves=0 margin=-444 | move_s mean=0.55 p95=0.79 max=0.94 | 528s
+
+  mcts_pool n_sim= 800 2p | winrate=0.972 (35/36) finished=35 maxmoves=1 margin=1330 | move_s mean=1.02 p95=1.51 max=1.83 | 2054s
+  mcts_pool n_sim= 800 4p | winrate=0.700 (21/30) finished=30 maxmoves=0 margin=485 | move_s mean=1.27 p95=1.96 max=2.59 | 1600s
+  mcts_pool n_sim= 800 6p | winrate=0.500 (12/24) finished=24 maxmoves=0 margin=-30 | move_s mean=1.40 p95=2.10 max=2.98 | 1309s
+
+## 3. PICK
+   n_sim= 200 | avg winrate=0.483 | max move=0.41s OK
+   n_sim= 400 | avg winrate=0.657 | max move=0.94s OK
+   n_sim= 800 | avg winrate=0.724 | max move=2.98s TOO SLOW
+
+## 4. DEPLOY DECISION
+   best mcts_pool: n_sim=400  avg winrate=0.657  (value_rollout 0.747, gap +0.090; budget 0.1)
+   within budget -> DEPLOYED mcts_pool n_sim=400 (the more-defensible RL agent).
+
+## 5. VERIFY  (mcts_pool, large samples)
+   mcts_pool 2p: winrate=0.967 (58/60) finished=59 maxmoves=1 | move_s mean=0.44 p95=0.59 max=0.74 | 1468s
+   mcts_pool 4p: winrate=0.520 (26/50) finished=50 maxmoves=0 | move_s mean=0.52 p95=0.75 max=1.25 | 1148s
+   mcts_pool 6p: winrate=0.325 (13/40) finished=40 maxmoves=0 | move_s mean=0.56 p95=0.81 max=0.96 | 881s
+
+# DONE  2026-05-19 15:52:55  deployed=mcts_pool
+POOL SWEEP DONE

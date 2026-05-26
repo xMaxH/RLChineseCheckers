@@ -4,10 +4,11 @@
 
 import os
 import json
-import random
 import socket
 import time
 from typing import Dict, Any
+
+from alphazero_method import choose_move_alphazero
 
 HOST = "127.0.0.1"
 PORT = 50555
@@ -17,6 +18,18 @@ DEBUG_NET = os.getenv("DEBUG_NET", "0") not in ("0", "", "false", "False")
 def debug(*args):
     if DEBUG_NET:
         print("[NET]", *args)
+
+
+def deployed_policy_mode() -> str:
+    override = os.getenv("ALPHAZERO_POLICY_MODE")
+    if override:
+        return override
+    try:
+        here = os.path.dirname(os.path.abspath(__file__))
+        with open(os.path.join(here, "runs", "mcts_deploy.json"), encoding="utf-8") as f:
+            return json.load(f).get("mode", "heuristic_rollout")
+    except Exception:
+        return "heuristic_rollout"
 
 
 def rpc(payload: Dict[str, Any]) -> Dict[str, Any]:
@@ -62,6 +75,7 @@ def render_json_board(state):
 def main():
     timeoutnotice_move = -1
     print("==== Player ====")
+    print(f"Playing method: alphazero ({deployed_policy_mode()})")
     name = input("Enter name: ").strip()
     if not name:
         return
@@ -147,7 +161,7 @@ def main():
             last_move_seen = state["move_count"]
 
         
-        # If it's our turn, choose a random move
+        # If it's our turn, pick a move with the RL agent
         if state.get("current_turn_colour") == colour and state["status"] == "PLAYING":
             print("\nMy turn")
             '''------------PLAYING LOGIC-----------'''
@@ -174,11 +188,18 @@ def main():
                 time.sleep(0.5)
                 continue
 
-            pid, moves = random.choice(movable)
-            to_index = random.choice(moves)
+            pid, to_index, delay = choose_move_alphazero(
+                legal_moves=legal_moves,
+                state=state,
+                player_context={
+                    "game_id": game_id,
+                    "player_id": player_id,
+                    "colour": colour,
+                    "name": name,
+                },
+            )
 
-            delay = random.randint(1, 2)
-            print("Randomized delay:", delay)
+            print("Move delay:", delay)
             time.sleep(delay)
             '''-----------------PLAYING LOGIC----------------'''
 
