@@ -1,0 +1,9 @@
+{
+  "mode": "mcts_pool",
+  "n_sim": 400,
+  "c_puct": 1.5,
+  "shaping": true,
+  "root_only": false,
+  "note": "More-defensible RL: AlphaZero MCTS over a heuristic-bounded action pool; RL value net evaluates leaves and visit counts choose the move.",
+  "written": "2026-05-20"
+}

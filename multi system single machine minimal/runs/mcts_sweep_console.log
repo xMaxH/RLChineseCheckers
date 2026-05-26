@@ -1,0 +1,6 @@
+# MCTS sweep started 2026-05-18 21:26:47  vrl=runs/rl_value_mp/snapshots/snap_step160.pt
+[ 1/17] net=VRL 2p sims= 256 cpuct=1.5 games=24 | winrate=0.875 (21/24) finished=24 maxmoves=0 margin=906 | move_s mean=0.16 p95=0.20 max=0.48 | 223s
+[ 2/17] net=VRL 2p sims= 400 cpuct=1.5 games=24 | winrate=0.833 (20/24) finished=23 maxmoves=1 margin=906 | move_s mean=0.27 p95=0.36 max=0.52 | 403s
+[ 3/17] net=VRL 2p sims= 600 cpuct=1.5 games=24 | winrate=0.708 (17/24) finished=23 maxmoves=1 margin=589 | move_s mean=0.42 p95=0.60 max=0.75 | 652s
+[ 4/17] net=VRL 2p sims= 800 cpuct=1.5 games=24 | winrate=0.792 (19/24) finished=21 maxmoves=3 margin=864 | move_s mean=0.59 p95=0.85 max=1.10 | 981s
+[ 5/17] net=VRL 2p sims=1200 cpuct=1.5 games=24 | winrate=0.833 (20/24) finished=20 maxmoves=4 margin=1070 | move_s mean=0.93 p95=1.35 max=1.86 | 1646s

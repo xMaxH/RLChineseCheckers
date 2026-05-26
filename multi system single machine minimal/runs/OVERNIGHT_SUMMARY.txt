@@ -1,0 +1,41 @@
+# OVERNIGHT MCTS PIPELINE  —  started 2026-05-18 23:25:51
+# device=cuda  VRL=runs/rl_value_mp/snapshots/snap_step160.pt  BC=runs/final_3day_20260511_105938/best.pt
+
+## 1. SWEEP  (winrate vs heuristic, per-move timing)
+[ 1/14] BC+plain     2p sims= 200 games=30 | winrate=0.667 (20/30) finished=30 maxmoves=0 | move_s mean=0.12 p95=0.15 max=0.45 | 211s
+[ 2/14] BC+plain     2p sims= 400 games=30 | winrate=0.733 (22/30) finished=30 maxmoves=0 | move_s mean=0.26 p95=0.35 max=0.51 | 465s
+[ 3/14] BC+plain     2p sims= 800 games=30 | winrate=0.833 (25/30) finished=30 maxmoves=0 | move_s mean=0.60 p95=0.82 max=1.11 | 1054s
+[ 4/14] BC+plain     2p sims=1200 games=24 | winrate=0.750 (18/24) finished=24 maxmoves=0 | move_s mean=0.95 p95=1.39 max=1.90 | 1324s
+[ 5/14] VRL+shaping  2p sims= 200 games=30 | winrate=0.833 (25/30) finished=29 maxmoves=1 | move_s mean=0.12 p95=0.15 max=0.28 | 227s
+[ 6/14] VRL+shaping  2p sims= 400 games=30 | winrate=0.833 (25/30) finished=30 maxmoves=0 | move_s mean=0.27 p95=0.36 max=0.56 | 485s
+[ 7/14] VRL+shaping  2p sims= 800 games=30 | winrate=0.900 (27/30) finished=30 maxmoves=0 | move_s mean=0.60 p95=0.88 max=1.16 | 1029s
+[ 8/14] VRL+shaping  2p sims=1200 games=24 | winrate=0.917 (22/24) finished=24 maxmoves=0 | move_s mean=0.95 p95=1.44 max=1.91 | 1314s
+[ 9/14] BC+plain     6p sims= 200 games=16 | winrate=0.000 (0/16) finished=16 maxmoves=0 | move_s mean=0.14 p95=0.18 max=0.27 | 89s
+[10/14] VRL+shaping  6p sims= 200 games=16 | winrate=0.000 (0/16) finished=16 maxmoves=0 | move_s mean=0.14 p95=0.18 max=0.32 | 93s
+[11/14] BC+plain     6p sims= 600 games=16 | winrate=0.125 (2/16) finished=16 maxmoves=0 | move_s mean=0.48 p95=0.62 max=0.85 | 316s
+[12/14] VRL+shaping  6p sims= 600 games=16 | winrate=0.000 (0/16) finished=16 maxmoves=0 | move_s mean=0.49 p95=0.62 max=0.87 | 325s
+[13/14] BC+plain     4p sims= 400 games=20 | winrate=0.100 (2/20) finished=19 maxmoves=1 | move_s mean=0.28 p95=0.38 max=0.56 | 312s
+[14/14] VRL+shaping  4p sims= 400 games=20 | winrate=0.200 (4/20) finished=20 maxmoves=0 | move_s mean=0.30 p95=0.39 max=0.55 | 282s
+
+## 2. PICK  (best 2p winrate among configs with max move-time < 1.6s)
+   candidate: VRL+shaping  sims= 800 2p winrate=0.900  max move=1.16s
+   candidate: BC+plain     sims= 800 2p winrate=0.833  max move=1.11s
+   -> PICK: VRL+shaping  sims=800  shaping=True  (2p winrate 0.900)
+
+## 3. DEPLOY
+   copied runs/rl_value_mp/snapshots/snap_step160.pt -> runs/best.pt
+   wrote runs/mcts_deploy.json: {'mode': 'mcts', 'n_sim': 800, 'shaping': True, 'c_puct': 1.5, 'net_source': 'runs/rl_value_mp/snapshots/snap_step160.pt', 'written': '2026-05-19 01:31:18'}
+   tournament will now run MCTS mode (the real RL agent).
+
+## 4. VERIFY  (deployed config, more games)
+   2p: winrate=0.925 (37/40) finished=39 maxmoves=1 | move_s mean=0.60 p95=0.88 max=1.18 | 1425s
+   4p: winrate=0.250 (6/24) finished=24 maxmoves=0 | move_s mean=0.66 p95=0.86 max=1.09 | 741s
+   6p: winrate=0.083 (2/24) finished=24 maxmoves=0 | move_s mean=0.65 p95=0.84 max=1.05 | 630s
+
+## 5. NOTES
+   Hybrid baseline (heuristic_rollout, measured earlier): 2p=1.00  4p=1.00  6p=0.50 vs heuristic, all moves <1.1s.
+   Revert to the hybrid: delete runs/mcts_deploy.json, OR run with
+     ALPHAZERO_POLICY_MODE=heuristic_rollout
+   Backups: runs/best_prev.pt, runs/best_may10_backup.pt, runs/best_beforedeploy.pt, alphazero_method_prefnl.bak
+
+# DONE  2026-05-19 02:17:54

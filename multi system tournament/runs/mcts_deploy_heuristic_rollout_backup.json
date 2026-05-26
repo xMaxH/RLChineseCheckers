@@ -1,0 +1,9 @@
+{
+  "mode": "heuristic_rollout",
+  "value_topk": 5,
+  "rollouts_per_move": 2,
+  "rollout_max_moves": 500,
+  "shaping": false,
+  "note": "Old non-RL/BC-style fallback: heuristic pool plus heuristic rollout decision. Uses the active checkpoint only for tie ranking.",
+  "written": "2026-05-20"
+}

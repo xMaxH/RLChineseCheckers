@@ -1,0 +1,37 @@
+[alphazero_method] loaded /home/coder/IKT460/RLChineseCheckers/multi system single machine minimal/runs/best.pt on cuda
+# MODE SWEEP — started 2026-05-19 09:24:32
+# net = runs/best.pt (the value-RL net); value_* modes use its RL-trained value head
+
+## 1. SWEEP  (win-rate vs heuristic)
+  heuristic_rollout  2p | winrate=0.967 (29/30) finished=30 maxmoves=0 margin=1253 | move_s mean=0.14 max=0.93 | 241s
+  heuristic_rollout  4p | winrate=0.583 (14/24) finished=24 maxmoves=0 margin=205 | move_s mean=0.20 max=0.84 | 207s
+  heuristic_rollout  6p | winrate=0.650 (13/20) finished=20 maxmoves=0 margin=330 | move_s mean=0.22 max=1.05 | 171s
+
+  value_pool         2p | winrate=0.600 (18/30) finished=30 maxmoves=0 margin=261 | move_s mean=0.03 max=0.14 | 54s
+  value_pool         4p | winrate=0.333 (8/24) finished=24 maxmoves=0 margin=-396 | move_s mean=0.02 max=0.13 | 25s
+  value_pool         6p | winrate=0.250 (5/20) finished=20 maxmoves=0 margin=-603 | move_s mean=0.02 max=0.11 | 18s
+
+  value_rollout      2p | winrate=0.833 (25/30) finished=30 maxmoves=0 margin=867 | move_s mean=0.12 max=0.50 | 205s
+  value_rollout      4p | winrate=0.583 (14/24) finished=24 maxmoves=0 margin=213 | move_s mean=0.16 max=0.67 | 165s
+  value_rollout      6p | winrate=0.450 (9/20) finished=20 maxmoves=0 margin=-147 | move_s mean=0.19 max=1.13 | 154s
+
+## 2. PICK  (strongest of value_pool / value_rollout — both defensible RL)
+   value_pool: avg winrate over 2/4/6p = 0.394
+   value_rollout: avg winrate over 2/4/6p = 0.622
+   -> PICK: value_rollout
+
+## 3. DEPLOY
+   wrote runs/mcts_deploy.json: mode=value_rollout
+   tournament now fields the value-network RL agent.
+
+## 4. VERIFY  (deployed mode, more games)
+   value_rollout 2p: winrate=0.950 (38/40) finished=40 maxmoves=0 | move_s mean=0.13 p95=0.34 max=0.59 | 289s
+   value_rollout 4p: winrate=0.700 (21/30) finished=30 maxmoves=0 | move_s mean=0.17 p95=0.50 max=0.76 | 221s
+   value_rollout 6p: winrate=0.633 (19/30) finished=30 maxmoves=0 | move_s mean=0.21 p95=0.71 max=0.93 | 257s
+
+## 5. NOTES
+   heuristic_rollout above is the non-RL reference ceiling (heuristic + rollouts, net not meaningfully used).
+   Deployed agent is a value-based RL agent: the heuristic proposes candidate moves, the RL-trained value network selects.
+   Revert: delete runs/mcts_deploy.json (-> heuristic_rollout hybrid).
+# DONE  2026-05-19 09:57:58
+MODE SWEEP DONE

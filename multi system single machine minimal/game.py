@@ -158,7 +158,7 @@ class Game:
         # Game time limit
         if self.total_start_ns:
             elapsed = (time.perf_counter_ns() - self.total_start_ns) / 1e9
-            if elapsed > GAME_TIME_LIMIT_SEC:
+            if elapsed > GAME_TIME_LIMIT_SEC * len(self.players):
                 self.status = "FINISHED"
                 self.turn_timeout_notice = "GAME TIME LIMIT REACHED."
                 self.compute_scores()
@@ -215,7 +215,7 @@ class Game:
             # Move score — asymmetric Gaussian
             move_score_func = lambda x: math.exp(-((x - 45) ** 2) /
                                                  (2 * ((4 if x < 45 else 18) ** 2)))
-            move_score = move_score_func(pl.move_count) if pl.move_count > 0 else 0
+            move_score = 100 * move_score_func(pl.move_count) if pl.move_count > 0 else 0
 
             # Pins in goal
             pins_in_goal = sum(
@@ -233,7 +233,7 @@ class Game:
                     best = min(axial_dist(self.board.cells[p.axialindex], tgt)
                                for tgt in target_cells)
                     total_dist += best
-            distance_score = max(0.0, 200.0 - total_dist) if pl.move_count > 0 else 0
+            distance_score = max(0.0, 400.0 - 2 * total_dist) if pl.move_count > 0 else 0
 
             final_score = time_score + move_score + pin_goal_score + distance_score
 

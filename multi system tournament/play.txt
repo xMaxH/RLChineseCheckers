@@ -1,0 +1,76 @@
+RUNNING THE TOURNAMENT AGENT
+============================
+
+Working directory:
+    cd "/home/coder/IKT460/RLChineseCheckers/multi system tournament"
+
+The agent ALWAYS uses our RL method (no random fallback).
+Default mode = mcts_pool (AlphaZero MCTS + RL value net; heuristic only bounds the action pool).
+Stronger fallback = value_rollout (heuristic pool + RL value net + short rollouts).
+
+-----------------------------------------------------------------
+LOCAL PLAY (server + clients on this machine)
+-----------------------------------------------------------------
+
+1) Start the server in one terminal:
+       python game.py
+
+2) Connect each player in its own terminal (one per slot):
+       python player.py
+   - It will prompt "Enter name:" — type a player name listed in the
+     round file (e.g. round11.txt).
+   - Each terminal joins one game slot, the server pairs them up.
+
+3) Admin commands at the server prompt:
+       list                # show open games
+       start <game_id>     # force-start a game with current players
+       quit                # stop the server
+
+-----------------------------------------------------------------
+CONNECTING TO THE TOURNAMENT SERVER (professor's machine)
+-----------------------------------------------------------------
+
+Edit player.py and change HOST/PORT at the top to the tournament
+server's address, then:
+       python player.py
+
+-----------------------------------------------------------------
+SWITCHING POLICY MODES
+-----------------------------------------------------------------
+
+Default (mcts_pool — more defensible RL, about a 10% accepted strength tradeoff):
+       python player.py
+
+Force a specific mode without touching runs/mcts_deploy.json:
+       ALPHAZERO_POLICY_MODE=mcts_pool         python player.py   # more RL
+       ALPHAZERO_POLICY_MODE=value_rollout    python player.py
+       ALPHAZERO_POLICY_MODE=heuristic_rollout python player.py   # BC-style
+       ALPHAZERO_POLICY_MODE=heuristic_pool    python player.py
+
+Persistent mode change — edit:
+       runs/mcts_deploy.json
+
+-----------------------------------------------------------------
+SWITCHING WEIGHTS (best.pt vs the 3-day BC checkpoint)
+-----------------------------------------------------------------
+
+Current weights file the agent loads:
+       runs/best.pt          (value-RL net — defensible default)
+
+Swap in the 3-day BC checkpoint:
+       cp runs/best.pt runs/best_active_backup.pt
+       cp runs/best_beforedeploy.pt runs/best.pt
+       # restart player.py
+
+Restore the RL net:
+       cp runs/best_active_backup.pt runs/best.pt
+
+-----------------------------------------------------------------
+DEBUG / LOGGING
+-----------------------------------------------------------------
+
+       DEBUG_NET=1 python player.py            # log RPC frames
+
+Per-game logs land in:
+       games/                       (one .log per game)
+       games_round_<N>/             (when SESSION is bound to a round)

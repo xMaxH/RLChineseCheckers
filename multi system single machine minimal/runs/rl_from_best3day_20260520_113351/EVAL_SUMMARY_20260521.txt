@@ -1,0 +1,41 @@
+Evaluation summary, 2026-05-21
+================================
+
+Run status:
+  Completed cleanly. final.pt and best.pt exist.
+
+Training artifacts:
+  best.pt  = eval-gated checkpoint from chunk 177, internal eval win_rate=0.925
+  final.pt = last checkpoint after 30h budget, train_step=1188
+
+Training stats:
+  chunks: 299
+  self-play games: 5980
+  terminal wins: 5919
+  max-move games: 61
+  replay final: 300000
+  value loss: 0.5778 -> 0.3915, minimum 0.3824
+
+Partial broad checkpoint check, candidate best.pt:
+  2p: 100.0% win, margin +1265
+  3p: 70.0% win, margin +481
+  4p: 65.0% win, margin +361
+  5p: 66.7% win, margin +377
+  6p: 33.3% win, margin -400
+  Note: baseline side was interrupted because the full comparison was too slow.
+
+Tournament-style MCTS_POOL n_sim=400 check, candidate best.pt:
+  2p: 0.833 winrate, mean move 0.415s, max 0.740s
+  4p: 0.667 winrate, mean move 0.530s, max 0.946s
+  6p: 0.333 winrate, mean move 0.555s, max 0.910s
+
+Same tournament-style check, current deployed runs/best.pt:
+  2p: 1.000 winrate, mean move 0.445s, max 0.712s
+  4p: 0.667 winrate, mean move 0.513s, max 0.839s
+  6p: 0.500 winrate, mean move 0.536s, max 0.944s
+
+Decision:
+  Do not deploy this run over the current model based on this small same-seed
+  tournament-style check. Current deployed model is safer, especially in 2p and
+  6p. Keep this run as report evidence and as a backup candidate, but leave
+  tournament/runs/best.pt unchanged.

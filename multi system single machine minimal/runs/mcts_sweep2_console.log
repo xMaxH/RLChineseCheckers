@@ -1,0 +1,2 @@
+# MCTS sweep2 started 2026-05-18 22:47:48
+[ 1/14] BC+plain  2p sims= 200 cpuct=1.5 games=30 | winrate=0.733 (22/30) finished=30 maxmoves=0 margin=554 | move_s mean=0.11 p95=0.14 max=0.43 | 211s

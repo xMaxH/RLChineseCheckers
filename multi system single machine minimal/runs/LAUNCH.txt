@@ -1,0 +1,74 @@
+DEFENSIBLE RL TRAINING RUN — 2026-05-20 → 2026-05-21
+====================================================
+
+Goal: continue from current best.pt; only replace it if eval beats current.
+Method: genuine value-network RL (no policy-head imitation), AlphaZero-style
+self-play with MCTS at 500 sims for deeper search than the previous 256.
+
+Pre-flight (verify before launching):
+    ls runs/best.pt                              # 12 MB, must exist
+    nvidia-smi                                   # V100 visible & idle
+    df -h .                                      # >5 GB free for run dir + snapshots
+
+Optional safety: archive current best.pt before launch
+    cp runs/best.pt runs/best_before_v2.pt
+
+Launch in a tmux/screen session so disconnecting won't kill it:
+    tmux new -s rl_v2
+    (inside tmux:)
+
+cd "/home/coder/IKT460/RLChineseCheckers/multi system single machine minimal"
+
+python train_run.py \
+    --out runs/rl_value_v2 \
+    --name rl_value_v2 \
+    --hours 10 \
+    --seed-ckpt runs/best.pt \
+    --policy-anchor --shaping --terminal-weight 0.8 \
+    --num-workers 5 --mcts-sims 500 \
+    --bootstrap-chunks 0 --no-auto-bootstrap \
+    --player-counts 2,3,4,5,6 \
+    --player-weights 0.3,0.2,0.2,0.15,0.15 \
+    --games-per-chunk 20 \
+    --max-moves-2p 200 --max-moves-multi 600 \
+    --lr 2e-5 --batch-size 4096 --sample-per-step 8192 \
+    --min-train-steps 4 --entropy-bonus 0.0 \
+    --replay-capacity 300000 \
+    --min-samples-to-train 8000 \
+    --eval-every-steps 32 \
+    2>&1 | tee runs/rl_value_v2.console.log
+
+Detach tmux: Ctrl-b then d
+Re-attach:   tmux attach -t rl_v2
+
+Monitoring (in another terminal):
+    tail -F runs/rl_value_v2/progress.log
+    # or structured:
+    tail -F runs/rl_value_v2/health.jsonl | jq -r '. | "\(.kind // "?") \(.chunk // "") wr=\(.eval_winrate // "")"'
+
+What "healthy" looks like (per CLAUDE.md):
+    - terminal_reason=winner in most self-play games
+    - mean_pins_in_goal_winner = 10.0
+    - eval winrate vs heuristic increasing across chunks
+    - score_margin_unique > 30
+KILL IT IF (auto-kill should catch most of these but watch):
+    - terminal_reason=max_moves for 10+ consecutive chunks
+    - eval bitwise-identical margins
+    - value loss diverging >2x rolling min
+    - replay buffer not growing for 5+ chunks
+
+When done (or to test mid-run):
+    - The training loop only overwrites runs/best.pt if eval beats current.
+    - Verify what changed:
+          md5sum runs/best.pt
+          # if different from b9cf84d28885ae5e12b4954fd4c5bfd2, candidate won.
+    - If best.pt was replaced, copy to tournament dir:
+          cp runs/best.pt "../multi system tournament/runs/best.pt"
+    - Sanity-check the new agent picks moves in <2s on the V100 with value_rollout.
+
+Rollback if the new model is suspect:
+    cp runs/best_before_v2.pt runs/best.pt
+    cp runs/best_before_v2.pt "../multi system tournament/runs/best.pt"
+
+Tournament agent is value_rollout (runs/mcts_deploy.json mode in tournament dir);
+training mcts-sims=500 does NOT change tournament inference timing.
